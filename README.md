@@ -310,7 +310,7 @@ UI 规范检查报告
 .claude/skills/ui-design-workflow/
 ├── SKILL.md                           # 主 Skill 文件（核心逻辑）
 ├── README.md                          # 本文件（使用说明）
-└── templates/
+└── assets/
     ├── design-principles.md           # UI 设计基本原则（demo 阶段参考）
     └── spec-template.md               # 规范文档模板（spec 阶段使用）
 ```

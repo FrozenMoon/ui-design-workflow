@@ -43,7 +43,7 @@ description: >
 - Next.js: `app/ui-showcase/page.tsx`
 - Vite: `src/pages/UIShowcase.tsx`
 
-**详细模板**: 见 [templates/website.md](templates/website.md) 和 [templates/components.md](templates/components.md)
+**详细模板**: 见 [assets/website.md](assets/website.md) 和 [assets/components.md](assets/components.md)
 
 ---
 
@@ -138,7 +138,7 @@ description: >
 ui-design-workflow/
 ├── SKILL.md              # 本文件（概览）
 ├── README.md             # 用户文档
-├── templates/
+├── assets/
 │   ├── website.md        # 官网模板结构
 │   └── components.md     # 组件库模板
 └── references/
