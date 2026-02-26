@@ -2,8 +2,8 @@
   "name": "ui-design-workflow",
   "version": "1.0.0",
   "description": "UI 设计工作流 Skill - 从 Demo 到规范到实现的完整流程管理",
-  "author": "",
-  "repository": "",
+  "author": "FrozenMoon",
+  "repository": "https://github.com/FrozenMoon/ui-design-workflow",
   "license": "MIT",
   "keywords": [
     "ui",

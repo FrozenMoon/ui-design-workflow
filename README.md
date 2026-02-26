@@ -19,10 +19,8 @@
 在 Claude Code 中运行：
 
 ```bash
-/install-skill https://github.com/YOUR_USERNAME/claude-skill-ui-design-workflow
+/install-skill https://github.com/FrozenMoon/ui-design-workflow
 ```
-
-将 `YOUR_USERNAME` 替换为你的 GitHub 用户名。
 
 ### 方式二：手动安装到项目
 
@@ -30,10 +28,10 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/YOUR_USERNAME/claude-skill-ui-design-workflow.git
+git clone https://github.com/FrozenMoon/ui-design-workflow.git
 
 # 复制到项目
-cp -r claude-skill-ui-design-workflow/skills/ui-design-workflow YOUR_PROJECT/.claude/skills/
+cp -r ui-design-workflow/skills/ui-design-workflow YOUR_PROJECT/.claude/skills/
 ```
 
 ### 方式三：全局安装
@@ -42,7 +40,7 @@ cp -r claude-skill-ui-design-workflow/skills/ui-design-workflow YOUR_PROJECT/.cl
 
 ```bash
 # 复制到全局 skills 目录
-cp -r claude-skill-ui-design-workflow/skills/ui-design-workflow ~/.claude/skills/
+cp -r ui-design-workflow/skills/ui-design-workflow ~/.claude/skills/
 ```
 
 ## 快速开始
@@ -110,7 +108,7 @@ cp -r claude-skill-ui-design-workflow/skills/ui-design-workflow ~/.claude/skills
 ## 文件结构
 
 ```
-claude-skill-ui-design-workflow/
+ui-design-workflow/
 ├── plugin.json                          # 插件配置
 ├── README.md                            # 本文件
 ├── LICENSE                              # MIT 协议
