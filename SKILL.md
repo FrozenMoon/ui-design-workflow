@@ -154,6 +154,12 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
 
 ## Design Principles (General)
 
+### Less is More (Core Principle)
+- Default to the minimum viable set of design tokens
+- Fewer named levels: border-radius 3, spacing 4, shadows 3, font weights 2
+- Do not create tokens "just in case" — add more through `iterate` when genuinely needed
+- Applies to all dimensions: colors, typography, component variants, sizes
+
 ### Component Solution
 - **Custom components**: Hand-write all UI components, full control
 - **Component library**: Use an existing library (shadcn/ui, Ant Design, Element Plus, etc.)
@@ -171,8 +177,8 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
 - Clear type scale hierarchy (Display → H1 → H2 → Body → Small)
 
 ### Component Styles
-- Unified border radius system (e.g., xl, 2xl, 3xl, full)
-- Consistent spacing rhythm (multiples of 4px)
+- Unified border radius (3 levels: default, large, full)
+- Consistent spacing rhythm (4 named levels, multiples of 4px)
 - Consistent transition animations
 
 ### Responsive

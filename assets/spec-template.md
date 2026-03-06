@@ -6,6 +6,8 @@
 
 This document defines the visual and interaction standards for [Project Name]. All UI-related development must comply with this spec.
 
+> **Core principle — Less is More**: This spec defines the minimum viable set of design tokens. Each dimension (spacing, border-radius, shadows, etc.) uses the fewest levels necessary. Additional levels can be added through the `iterate` workflow when a genuine need arises. Do not add tokens "just in case."
+
 ---
 
 ## 1. Design Philosophy
@@ -133,29 +135,27 @@ Use sparingly; only for status feedback.
 
 | Level | Font Style | CSS Class | Size / Line Height | Weight | Usage |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Display** | Sans-serif | `text-4xl lg:text-6xl` | 48-60px / 1.1 | 700 | Landing page slogan |
-| **H1** | Sans-serif | `text-3xl` | 30px / 1.2 | 600 | Page title |
-| **H2** | Sans-serif | `text-2xl` | 24px / 1.3 | 600 | Section heading |
-| **H3** | Sans-serif | `text-xl` | 20px / 1.4 | 600 | Card heading |
+| **Display** | Sans-serif | `text-4xl lg:text-6xl` | 48-60px / 1.1 | 700 | Landing page hero |
+| **H1** | Sans-serif | `text-3xl` | 30px / 1.2 | 600 | Page / section title |
+| **H2** | Sans-serif | `text-xl` | 20px / 1.4 | 600 | Card heading, sub-section |
 | **Body** | Sans-serif | `text-base` | 16px / 1.5 | 400 | Default body text |
 | **Small** | Sans-serif | `text-sm` | 14px / 1.5 | 400 | Buttons, inputs, secondary info |
-| **Caption** | Sans-serif | `text-xs` | 12px / 1.5 | 400 | Labels, Badges, supplementary notes |
+
+> Add more levels (e.g., H3, Caption) through the `iterate` workflow when needed.
 
 ### 3.3 Font Weight Standards
 
 | Weight Name | Value | Usage |
 | :--- | :--- | :--- |
 | Regular | 400 | Body text, descriptions |
-| Medium | 500 | Emphasized text |
-| Semibold | 600 | Headings, buttons |
-| Bold | 700 | Strong emphasis |
+| Semibold | 600 | Headings, buttons, emphasis |
 
 ### 3.4 Typography Principles
 
 - ✅ Use heavier font weights (600+) for headings
 - ✅ Use Regular (400) for body text
 - ✅ Line height should be at least 1.5 (readability)
-- ❌ Avoid using more than 3 font weights
+- ❌ Avoid using more than 2 font weights by default
 - ❌ Avoid all-caps text (UPPERCASE); it reduces readability
 
 ---
@@ -168,23 +168,22 @@ Based on a **[4px / 8px] grid system**.
 
 | Token | Value | Tailwind Class | Usage |
 | :--- | :--- | :--- | :--- |
-| **XS** | 4px | `p-1`, `m-1`, `gap-1` | Spacing between icons and text |
-| **S** | 8px | `p-2`, `m-2`, `gap-2` | Internal padding for small components |
-| **M** | 16px | `p-4`, `m-4`, `gap-4` | Standard component padding |
-| **L** | 24px | `p-6`, `m-6`, `gap-6` | Card padding |
-| **XL** | 32px | `p-8`, `m-8`, `gap-8` | Section spacing |
-| **XXL** | 48px | `p-12`, `m-12`, `gap-12` | Large section spacing |
+| **S** | 8px | `p-2`, `m-2`, `gap-2` | Component internal spacing |
+| **M** | 16px | `p-4`, `m-4`, `gap-4` | Standard padding |
+| **L** | 24px | `p-6`, `m-6`, `gap-6` | Card padding, component gaps |
+| **XL** | 48px | `p-12`, `m-12`, `gap-12` | Section spacing |
+
+> Finer values (e.g., 4px for icon-text gaps) can be used directly from the grid without a named token. Add more levels through `iterate` when needed.
 
 ### 4.2 Border Radius
 
 | Token | Value | Tailwind Class | Usage |
 | :--- | :--- | :--- | :--- |
-| **Small** | 4px | `rounded` | Badge, Tag |
-| **Medium** | 8px | `rounded-lg` | Button, Input |
-| **Large** | 12px | `rounded-xl` | Card (small) |
-| **XLarge** | 16px | `rounded-2xl` | Card (medium) |
-| **XXLarge** | 24px | `rounded-3xl` | Card (large), Modal |
+| **Default** | 8px | `rounded-lg` | Button, Input, Badge, Card |
+| **Large** | 16px | `rounded-2xl` | Modal, Dialog, large containers |
 | **Full** | 9999px | `rounded-full` | Pill button, Avatar |
+
+> Most components should share a single border-radius. Add more levels through `iterate` only when needed.
 
 ### 4.3 Spacing & Border Radius Principles
 
@@ -203,10 +202,10 @@ Based on a **[4px / 8px] grid system**.
 | Level | Tailwind Class | Box Shadow Value | Usage |
 | :--- | :--- | :--- | :--- |
 | **None** | `shadow-none` | `none` | No elevation needed |
-| **Small** | `shadow-sm` | `0 1px 2px rgba(0,0,0,0.05)` | Subtle elevation |
-| **Medium** | `shadow` | `0 4px 6px rgba(0,0,0,0.1)` | Cards, buttons |
-| **Large** | `shadow-lg` | `0 10px 15px rgba(0,0,0,0.1)` | Dropdown, Popover |
-| **XLarge** | `shadow-xl` | `0 20px 25px rgba(0,0,0,0.1)` | Modal, large cards |
+| **Default** | `shadow` | `0 4px 6px rgba(0,0,0,0.1)` | Cards, elevated surfaces |
+| **Large** | `shadow-lg` | `0 10px 15px rgba(0,0,0,0.1)` | Dropdown, Modal, Popover |
+
+> Avoid over-using shadows. Most elements need no shadow; reserve them for clear elevation changes.
 
 ### 5.2 Animation Standards
 
@@ -249,8 +248,8 @@ transition: all 0.3s ease-out; /* Slower, for larger elements */
 | Size | Class Name | Padding | Font Size |
 | :--- | :--- | :--- | :--- |
 | **Small** | `btn-sm` | `px-3 py-1.5` | `text-sm` |
-| **Medium** | `btn` | `px-4 py-2` | `text-base` |
-| **Large** | `btn-lg` | `px-6 py-3` | `text-lg` |
+| **Default** | `btn` | `px-4 py-2` | `text-sm` |
+| **Large** | `btn-lg` | `px-6 py-3` | `text-base` |
 
 **States**:
 - Normal: Default styles
@@ -434,11 +433,13 @@ The following practices should be **avoided**:
 - ❌ Using spacing values that don't conform to the grid (e.g., 7px, 13px)
 - ❌ Spacing too small, causing crowded elements
 - ❌ Inconsistent spacing (different spacing between elements at the same level)
+- ❌ Over-specifying: defining more than 4 named spacing tokens when fewer suffice
 
 ### Border Radius
 - ❌ Border radius too small (< 4px)
 - ❌ Inconsistent border radius for components of the same type
 - ❌ Mixing sharp and rounded corners (maintain a unified style)
+- ❌ Over-specifying: defining more than 3 border-radius levels when fewer suffice
 
 ### Animations
 - ❌ Animation duration too long (> 500ms)

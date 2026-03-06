@@ -4,6 +4,8 @@
 
 When producing UI demos, the spec document does not yet exist. At this stage, follow these general UI design principles to ensure design quality and maintainability.
 
+> **Core principle — Less is More**: Default to the minimum viable set of design tokens and component variants. Provide only what is clearly needed. Resist the urge to over-specify — every additional token adds cognitive overhead and maintenance burden. Users will request more through `iterate` when a genuine need arises.
+
 ---
 
 ## 1. Visual Hierarchy
@@ -143,26 +145,26 @@ Pure black (headings):         #000000
 - 4px grid: All spacing values are multiples of 4 (4, 8, 12, 16, 20, 24, 32, 48, 64...)
 - Or 8px grid: All spacing values are multiples of 8 (8, 16, 24, 32, 40, 48, 64...)
 
-**Define semantic spacing**:
+**Define semantic spacing** (4 levels):
 ```
-XS: 4px  - Space between icons and text
-S:  8px  - Inner padding for small components
-M:  16px - Standard component inner padding
-L:  24px - Card inner padding
-XL: 32px - Spacing between sections
-XXL: 48px - Spacing between major sections
+S:  8px  - Component internal spacing
+M:  16px - Standard padding
+L:  24px - Card padding, component gaps
+XL: 48px - Section spacing
 ```
+
+> Finer values (e.g., 4px) can be used directly from the grid without a named token. Add more levels only when needed.
 
 ### Border Radius Consistency
 
-**Unified border radius specification**:
+**Unified border radius specification** (3 levels):
 ```
-Small:      4px  - Badge, Tag
-Medium:     8px  - Button, Input
-Large:      12px - Card
-Extra-large: 16px-24px - Modal, large cards
-Full:       9999px - Pill buttons
+Default:    8px     - Most components (Button, Input, Card, Badge)
+Large:      16px    - Modal, Dialog, large containers
+Full:       9999px  - Pill buttons, Avatar
 ```
+
+> Most components should share a single border-radius value. Add more levels only when needed.
 
 ---
 
