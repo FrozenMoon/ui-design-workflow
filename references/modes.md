@@ -11,9 +11,10 @@ Detailed execution flows and output formats for each command.
 **Flow A: From Scratch**
 - User has no existing spec
 - **Step 1**: Analyze the project (package.json, code structure, tech stack, project type)
+- **Step 1.5**: Scan existing components (see "Existing Component Scan" below)
 - **Step 2**: Recommend a component solution based on the analysis; user selects or specifies one
 - Step 3: Confirm style preferences with the user
-- Step 4: Generate a complete UI showcase page
+- Step 4: Generate a complete UI showcase page (including existing project components)
 
 **Flow B: Based on Existing Spec**
 - User has an existing spec document
@@ -51,6 +52,44 @@ Please select a component solution:
 
 Analysis criteria can be found in [assets/library-guide.md](../assets/library-guide.md).
 
+### Existing Component Scan
+
+For projects that already have code, scan for existing components and present the findings to the user:
+
+**What to scan**:
+- Component directories (e.g., `src/components/`, `src/ui/`, `components/`)
+- Pages that use custom or library components
+- Shared utilities, hooks, or wrappers related to UI
+
+**Present scan results to the user**:
+
+```
+🔍 Existing Components Found:
+
+Components (N total):
+- Button (src/components/Button.tsx) — 3 variants
+- Modal (src/components/Modal.tsx)
+- DataTable (src/components/DataTable.tsx)
+- ...
+
+Assessment:
+✅ Consistent: [list components with consistent styling]
+⚠️ Inconsistent: [list components with style drift — e.g., mixed border-radius, hardcoded colors]
+❌ Severe issues: [list components with major problems — e.g., accessibility violations, broken responsiveness]
+
+Recommendation:
+- Existing components will be preserved as-is and included in the showcase
+- [If inconsistencies found]: Suggest unifying [specific aspects] in future iterations
+- [If severe issues found]: Recommend fixing [specific components] — [reason]
+```
+
+**Key principles**:
+- **Do not modify existing components** during the demo phase
+- Include all existing components in the Tab 2 showcase alongside the template components
+- Only suggest modifications for severe issues (accessibility violations, broken layouts); present as recommendations, not automatic changes
+- Record existing component inventory in the showcase for the spec phase to reference
+- Style the new template components to match the existing project's visual patterns (not the other way around)
+
 ### Questions to Confirm with User
 
 1. **Component Solution**: Recommend based on project analysis; user confirms or specifies another
@@ -73,7 +112,12 @@ Contents:
 🎨 Tab 2: Component Library
 - Color system, Typography
 - [Solution Name] component showcase (Buttons, Forms, Feedback, Cards, etc.)
+- Existing project components: [list from scan]
 - Custom components: [list, if any]
+
+Existing Components:
+- [N] components found and included in showcase
+- [Assessment summary: consistent / needs attention]
 
 Preview: Visit /ui-showcase after starting the dev server
 

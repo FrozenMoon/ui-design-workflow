@@ -27,6 +27,20 @@ During the demo phase, **before generating UI**, analyze the user's project:
    - Vue project → Element Plus or Naive UI
    - Mobile-first → Custom components or a dedicated mobile library
 
+### Step 1.5: Scan Existing Components
+
+For projects with existing code, scan for components already in use:
+
+1. **Search component directories** — `src/components/`, `src/ui/`, `components/`, etc.
+2. **Identify each component** — name, file path, variants, states
+3. **Assess consistency** — check if existing components follow a unified style (colors, spacing, border-radius, transitions)
+4. **Classify findings**:
+   - Consistent: no action needed
+   - Minor inconsistencies: note for future iteration
+   - Severe issues (broken accessibility, broken layouts): recommend fixing, but **do not auto-modify**
+
+**Key principle**: Existing components are preserved as-is. The demo showcase should include them alongside the template components. New template components should match the existing project's visual patterns.
+
 ### Step 2: Present the Analysis to the User
 
 ```
@@ -36,6 +50,10 @@ Tech stack: [Next.js 14 / Vite + React / Vue 3 / ...]
 Styling solution: [Tailwind CSS / CSS Modules / SCSS / ...]
 Existing UI library: [None / shadcn/ui / Ant Design / ...]
 Project type: [Marketing site / Admin panel / SaaS / E-commerce / ...]
+
+Existing Components: [N] found
+- [Component list with file paths]
+- Assessment: [Consistent / Minor inconsistencies in X / Severe issues in Y]
 
 Recommended component solution: [Solution name]
 Reason: [One-line explanation]

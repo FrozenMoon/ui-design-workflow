@@ -41,17 +41,26 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
    - Read `package.json` to identify framework and existing dependencies
    - Scan code directory to identify existing patterns and tech stack
    - Determine project type (landing page, admin panel, SaaS, e-commerce, etc.)
-2. **Recommend Component Solution**:
-   - Suggest a solution based on analysis (custom / shadcn/ui / Ant Design / other)
+   - **Scan existing components**: Find all components in the project, assess their consistency
+2. **Present findings and recommend**:
+   - Show existing component inventory and consistency assessment to user
+   - Suggest a component solution based on analysis (custom / shadcn/ui / Ant Design / other)
    - Auto-detect existing library dependencies and suggest continuing with them
    - User can accept the recommendation or specify another
    - If user already specified a library in the command, skip recommendation
 3. Confirm with user: theme mode (single / light-dark toggle), style preferences
 4. Design color system, typography, component styles
 5. Generate UI showcase based on the component solution:
-   - **Custom components**: Hand-write all component implementations
+   - **Include existing project components** in the showcase (do not modify them)
+   - **Custom components**: Hand-write all new component implementations
    - **Component library**: Use library components + project theme configuration
+   - New components should match the existing project's visual style
 6. Iterate with user
+
+**Existing component handling**:
+- Preserve existing components as-is; do not modify during demo phase
+- Only suggest fixes for severe issues (accessibility violations, broken layouts)
+- Minor inconsistencies are noted for future `iterate` updates
 
 **Output location**:
 - Next.js: `app/ui-showcase/page.tsx`

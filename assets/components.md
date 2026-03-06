@@ -2,7 +2,37 @@
 
 Template structure for Demo mode Tab 2 (Component Library). Applicable to both custom components and component library approaches.
 
-## Required Component Sections
+## Existing Project Components
+
+For projects that already have components, **scan and include them first** before adding template components.
+
+### Scan Strategy
+
+1. Search component directories (`src/components/`, `src/ui/`, `components/`, etc.)
+2. Identify each component's variants, states, and usage patterns
+3. Include all existing components in the showcase
+
+### Display Rules
+
+- **Preserve existing components as-is** — do not modify their code during the demo phase
+- Display existing components in a dedicated "Project Components" section at the top of Tab 2
+- Label each as "Existing" to distinguish from newly generated template components
+- If an existing component overlaps with a template component below (e.g., project already has a Button), show the existing version and skip the template version
+- New template components should match the existing project's visual style
+
+### Assessment Notes
+
+After displaying existing components, include a brief assessment:
+- Components with consistent styling: no action needed
+- Components with minor inconsistencies (e.g., mixed border-radius): note for future `iterate` updates
+- Components with severe issues (e.g., broken accessibility): recommend fixing, but do not auto-modify
+
+---
+
+## Template Component Sections
+
+The following sections define the **minimum set** of components for a complete showcase. Skip any section where the project already has an equivalent component (shown above).
+
 
 ### 1. Color System
 - Primary colors (Primary, Secondary, Background)
