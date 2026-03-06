@@ -15,6 +15,8 @@
 
 支持 Claude Code、Codex、Cursor、Cline、Gemini CLI 等 40+ AI 编程工具。
 
+**实际案例**：[Input Translator](https://www.inputtranslator.com/) — 完全使用本 Skill 开发。
+
 ## 安装
 
 ### 推荐：npx skills（支持多 Agent）

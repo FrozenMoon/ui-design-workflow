@@ -15,6 +15,8 @@ Auto-analyzes your tech stack and recommends the best component solution.
 
 Compatible with Claude Code, Codex, Cursor, Cline, Gemini CLI, and 40+ AI coding tools.
 
+**Real-world example**: [Input Translator](https://www.inputtranslator.com/) — built entirely with this skill.
+
 ## Installation
 
 ### Recommended: npx skills (multi-agent support)
