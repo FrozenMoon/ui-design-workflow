@@ -1,197 +1,280 @@
-# 模式详细说明
+# Mode Details
 
-各命令的详细执行流程和输出格式。
+Detailed execution flows and output formats for each command.
 
 ---
 
-## demo 模式
+## demo Mode
 
-### 两种入口
+### Three Entry Points
 
-**流程 A: 从零开始**
-- 用户没有现有规范
-- 需要与用户确认风格偏好
-- 生成完整的 UI 展示页面
+**Flow A: From Scratch**
+- User has no existing spec
+- **Step 1**: Analyze the project (package.json, code structure, tech stack, project type)
+- **Step 2**: Recommend a component solution based on the analysis; user selects or specifies one
+- Step 3: Confirm style preferences with the user
+- Step 4: Generate a complete UI showcase page
 
-**流程 B: 基于现有规范**
-- 用户有现有规范文档
-- 读取规范，生成对应的 Demo
-- 标注规范中缺失的组件
+**Flow B: Based on Existing Spec**
+- User has an existing spec document
+- Read the spec and identify the component solution
+- Generate the corresponding Demo
+- Flag components missing from the spec
 
-### 与用户确认的问题
+**Flow C: Specified Component Library**
+- User specifies a library directly in the command (e.g., "use shadcn/ui")
+- Skip the recommendation step and use the specified library directly
+- Style preferences still need to be confirmed
 
-1. **主题模式**：单一主题 / 明暗切换 / 多主题？
-2. **风格偏好**：简约 / 科技感 / 温暖 / 专业？
-3. **圆角偏好**：方正 / 圆润 / 完全圆角？
+### Project Analysis (Flow A)
 
-### 输出完成提示
+Analyze the user's project and present the results:
 
 ```
-✅ UI 展示页面已生成：[文件路径]
+📋 Project Analysis:
 
-包含内容：
-📱 Tab 1: 成品展示（官网 Demo）
+Tech Stack: [Next.js 14 / Vite + React / Vue 3 / ...]
+Styling Solution: [Tailwind CSS / CSS Modules / SCSS / ...]
+Existing UI Library: [None / shadcn/ui / Ant Design / ...]
+Project Type: [Landing Page / Admin Dashboard / SaaS / E-commerce / ...]
+
+Recommended Component Solution: [Solution Name]
+Recommendation Reason: [One-sentence explanation]
+
+Other Available Options:
+1. [Option A] - [Description]
+2. [Option B] - [Description]
+3. Custom Components - Fully hand-written, maximum flexibility
+
+Please select a component solution:
+```
+
+Analysis criteria can be found in [assets/library-guide.md](../assets/library-guide.md).
+
+### Questions to Confirm with User
+
+1. **Component Solution**: Recommend based on project analysis; user confirms or specifies another
+2. **Theme Mode**: Single theme / Light-dark toggle / Multi-theme?
+3. **Style Preference**: Minimal / Techy / Warm / Professional?
+4. **Border Radius Preference**: Sharp / Rounded / Fully rounded?
+
+### Output Completion Prompt
+
+```
+✅ UI showcase page generated: [file path]
+
+Component Solution: [Custom / shadcn/ui / ...]
+
+Contents:
+📱 Tab 1: Finished Product Showcase (Landing Page Demo)
 - Hero, Features, Use Cases, CTA, Footer
+- Uses [Solution Name] components
 
-🎨 Tab 2: 组件库
-- 颜色系统、排版、按钮、表单、反馈组件等
+🎨 Tab 2: Component Library
+- Color system, Typography
+- [Solution Name] component showcase (Buttons, Forms, Feedback, Cards, etc.)
+- Custom components: [list, if any]
 
-预览：启动开发服务器后访问 /ui-showcase
+Preview: Visit /ui-showcase after starting the dev server
 
-可以继续调整配色、圆角、间距等。
-满意后使用 /ui-design-workflow spec 生成规范文档。
+You can continue adjusting colors, border radius, spacing, etc.
+When satisfied, use /ui-design-workflow spec to generate the spec document.
 ```
 
 ---
 
-## spec 模式
+## spec Mode
 
-### 输入
+### Input
 
-已确认的 Demo 代码
+Confirmed Demo code
 
-### 输出
+### Output
 
-1. **规范文档**：`doc/UI设计规范.md`
-2. **项目集成**：更新 CLAUDE.md
+1. **Spec Document**: `doc/UI设计规范.md` (includes component solution section)
+2. **Project Integration**: Update CLAUDE.md
 
-### 规范文档结构
+### Spec Document Structure
 
 ```markdown
-# [项目名称] UI 设计规范
+# [Project Name] UI Design Spec
 
-## 1. 设计原则
-- 整体风格描述
+## 1. Design Philosophy
 
-## 2. 颜色系统
-- 主色调
-- 文本颜色
-- 功能色
+## 2. Component Solution ← Records the chosen component solution
+- Solution type (Custom / Library name)
+- Library version (if applicable)
+- Theme configuration method and file path
+- Usage rules
+- Custom component list
+- Component mapping table
 
-## 3. 排版系统
-- 字体
-- 字号层级
+## 3. Color System
 
-## 4. 组件规范
-- 按钮
-- 输入框
-- 卡片
-- ...
+## 4. Typography System
 
-## 5. 间距和布局
-- 间距规律
-- 响应式断点
+## 5. Spacing & Border Radius
+
+## 6. Shadows & Animations
+
+## 7. Component Spec
+
+## 8. Don'ts List
+
+## 9. Code Examples
+
+## 10. Responsive Design
+
+## 11. Accessibility
+
+## 12. Changelog
 ```
 
-### CLAUDE.md 更新
+Detailed template available at [assets/spec-template.md](../assets/spec-template.md).
 
-添加以下内容：
+### CLAUDE.md Update
+
+Add the following content:
 ```markdown
-## UI 设计规范
+## UI Design Spec
 
-本项目遵循 `doc/UI设计规范.md` 中定义的设计规范。
+This project follows the design spec defined in `doc/UI设计规范.md`.
 
-开发 UI 相关功能时，必须：
-1. 先阅读 UI 设计规范
-2. 使用规范中定义的颜色、间距、组件样式
-3. 新组件风格需与现有规范保持一致
+When developing UI-related features, you must:
+1. Read the UI Design Spec first
+2. Use the colors, spacing, and component styles defined in the spec
+3. Use the component solution specified in the spec (Custom / Component library)
+4. New component styles must be consistent with the existing spec
 ```
 
 ---
 
-## implement 模式
+## implement Mode
 
-### 关键流程
+### Key Flow
 
 ```
-1. 检查项目是否有 UI 规范
+1. Check whether the project has a UI spec
    ↓
-2. 如有，先读取规范文档
+2. If yes, read the spec document first
    ↓
-3. 按规范实现用户请求的功能
+3. Identify the component solution (Custom vs. Component library)
    ↓
-4. 确保样式符合规范
+4. If using a component library:
+   - Use library components; do not hand-write equivalents
+   - Customize styles through the library's theming system
+   - For components not available in the library, create custom ones following the library's style
+   If using custom components:
+   - Hand-write all components according to the spec
+   ↓
+5. Implement the user's requested feature according to the spec
+   ↓
+6. Ensure styles comply with the spec
 ```
 
-### 必须遵守
+### Mandatory Rules
 
-- **先读规范，再写代码**
-- 使用规范中定义的颜色变量
-- 使用规范中定义的圆角、间距
-- 新组件参考规范中类似组件的风格
+- **Read the spec before writing code**
+- Use the color variables defined in the spec
+- Use the border radius and spacing defined in the spec
+- Reference the style of similar components in the spec for new components
+- **Additional requirements for component library mode**:
+  - Prefer library components; consult the component mapping table
+  - Customize styles through the library's theme/configuration system
+  - When a component not available in the library is needed, follow the library's extension patterns
+  - When necessary, look up correct library usage via Context7 or documentation
 
 ---
 
-## check 模式
+## check Mode
 
-### 输入
+### Input
 
-文件路径或目录
+File path or directory
 
-### 检查项
+### Checks
 
-1. 颜色是否使用规范定义的值
-2. 间距是否符合规范
-3. 组件样式是否一致
-4. 是否有未定义的组件
+**General Checks**:
+1. Whether colors use spec-defined values
+2. Whether spacing conforms to the spec
+3. Whether component styles are consistent
+4. Whether there are undefined components
 
-### 输出格式
+**Component Library-Specific Checks** (only when using a component library):
+5. Whether library components are used instead of hand-written equivalents
+6. Whether styles are customized through the theming system rather than direct overrides
+7. Whether library component APIs are used correctly
+8. Whether there are unnecessary className overrides on library component default styles
+
+### Output Format
 
 ```markdown
-## UI 规范检查报告
+## UI Spec Check Report
 
-检查范围：[路径]
-检查时间：[时间]
+Scope: [path]
+Check Time: [time]
+Component Solution: [Custom / shadcn/ui / ...]
 
-### 违规项（共 N 项）
+### Violations (N total)
 
-#### 颜色违规
-- `src/components/Button.tsx:15` 使用 `#333` 应改为 `zinc-900`
+#### Color Violations
+- `src/components/Button.tsx:15` uses `#333`, should be `zinc-900`
 
-#### 间距违规
-- `src/pages/Home.tsx:42` padding 使用 `13px` 应改为 `12px`（3*4）
+#### Component Library Violations (if applicable)
+- `src/pages/Home.tsx:23` hand-writes a Button component, should use {library}'s Button
+- `src/components/Card.tsx:8` directly overrides component className, should customize through variants
 
-### 建议
-1. 统一替换硬编码颜色值
-2. 检查间距是否为 4px 倍数
+#### Spacing Violations
+- `src/pages/Home.tsx:42` padding uses `13px`, should be `12px` (3*4)
 
-### 总结
-- 检查文件数：X
-- 违规项数：Y
-- 严重程度：低/中/高
+### Recommendations
+1. Replace hardcoded color values uniformly
+2. Check that spacing values are multiples of 4px
+3. Replace hand-written components with library components (if applicable)
+
+### Summary
+- Files checked: X
+- Violations found: Y
+- Severity: Low / Medium / High
+- Library component usage rate: Z% (if applicable)
 ```
 
 ---
 
-## iterate 模式
+## iterate Mode
 
-### 触发场景
+### Trigger Scenarios
 
-- 发现规范缺失某组件
-- 需要新增组件类型
-- 需要调整现有规范
+- A missing component is discovered in the spec
+- A new component type needs to be added
+- An existing spec needs adjustment
+- **Switching component solutions** (e.g., from custom to a component library)
 
-### 流程
-
-```
-1. 确认要补充/修改的内容
-   ↓
-2. 更新规范文档
-   ↓
-3. 更新 Demo 展示页面（如需要）
-   ↓
-4. 同步更新相关实现代码（如需要）
-```
-
-### 输出
+### Flow
 
 ```
-✅ 规范已更新
+1. Confirm the content to add/modify
+   ↓
+2. If a component solution change is involved:
+   - List the components that need to be migrated
+   - Update the component mapping table
+   ↓
+3. Update the spec document
+   ↓
+4. Update the Demo showcase page (if needed)
+   ↓
+5. Synchronize updates to related implementation code (if needed)
+```
 
-更新内容：
-- [新增/修改] 组件名：具体内容
+### Output
 
-已同步更新：
+```
+✅ Spec updated
+
+Changes:
+- [Added/Modified/Migrated] Component Name: Details
+
+Files updated:
 - doc/UI设计规范.md
-- app/ui-showcase/page.tsx（如适用）
+- app/ui-showcase/page.tsx (if applicable)
 ```

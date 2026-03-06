@@ -1,102 +1,102 @@
-# UI 设计基本原则
+# UI Design Principles
 
-**适用阶段**：Demo 阶段（规范尚未形成时）
+**Applicable phase**: Demo phase (before the spec has been defined)
 
-在产出 UI Demo 时，规范文档尚未存在。此时应遵循通用的 UI 设计原则，确保设计质量和可维护性。
-
----
-
-## 1. 视觉层次清晰 (Visual Hierarchy)
-
-### 原则
-信息应该有明显的层级区分，引导用户的注意力。
-
-### 实践方法
-
-**字号层级**：
-- 使用至少 3 个层级的字号：标题、正文、辅助信息
-- 层级之间的差距要明显（建议比例 1.5-2 倍）
-- 例如：H1: 32px, H2: 24px, Body: 16px, Small: 12px
-
-**字重层级**：
-- 标题使用较粗字重（Semibold 600, Bold 700）
-- 正文使用中等字重（Regular 400, Medium 500）
-- 辅助信息使用细字重或降低颜色对比度
-
-**颜色对比**：
-- 主要内容：高对比度（如黑色文字 #000000）
-- 次要内容：中等对比度（如深灰 #333333 或 #555555）
-- 辅助信息：低对比度（如浅灰 #999999 或 #AAAAAA）
-
-**间距层级**：
-- 相关元素间距小（4-8px）
-- 组件内间距中等（12-16px）
-- 模块间间距大（24-48px）
+When producing UI demos, the spec document does not yet exist. At this stage, follow these general UI design principles to ensure design quality and maintainability.
 
 ---
 
-## 2. 组件化思维 (Component-Based Design)
+## 1. Visual Hierarchy
 
-### 原则
-识别和设计可复用的 UI 模式，避免重复劳动。
+### Principle
+Information should have clear hierarchical differentiation to guide the user's attention.
 
-### 核心组件清单
+### Best Practices
 
-**基础组件**：
-- Button（按钮）
-- Input（输入框）
-- Checkbox / Radio / Switch（选择器）
-- Select / Dropdown（下拉菜单）
+**Font size hierarchy**:
+- Use at least 3 levels of font size: headings, body text, auxiliary information
+- The difference between levels should be noticeable (recommended ratio of 1.5-2x)
+- For example: H1: 32px, H2: 24px, Body: 16px, Small: 12px
 
-**反馈组件**：
-- Toast（轻提示）
-- Alert（警告提示）
-- Modal（模态框）
-- Tooltip（工具提示）
+**Font weight hierarchy**:
+- Use heavier weights for headings (Semibold 600, Bold 700)
+- Use medium weights for body text (Regular 400, Medium 500)
+- Use lighter weights or reduced color contrast for auxiliary information
 
-**布局组件**：
-- Card（卡片）
-- Container（容器）
-- Divider（分割线）
+**Color contrast**:
+- Primary content: High contrast (e.g., black text #000000)
+- Secondary content: Medium contrast (e.g., dark gray #333333 or #555555)
+- Auxiliary information: Low contrast (e.g., light gray #999999 or #AAAAAA)
 
-### 实践方法
-
-1. **统一组件风格**：
-   - 所有按钮使用相同的圆角、padding、字体
-   - 所有卡片使用相同的阴影、圆角、背景
-
-2. **定义组件变体**：
-   - 按钮：Primary, Secondary, Ghost, Outline
-   - 尺寸：Small, Medium, Large
-   - 状态：Normal, Hover, Active, Disabled
-
-3. **保持一致性**：
-   - 同类组件的相同状态应该视觉效果一致
-   - 例如：所有组件的 Hover 状态都应有相同的过渡效果
+**Spacing hierarchy**:
+- Tight spacing between related elements (4-8px)
+- Medium spacing within components (12-16px)
+- Large spacing between sections (24-48px)
 
 ---
 
-## 3. 一致性 (Consistency)
+## 2. Component-Based Design
 
-### 原则
-整个设计系统应该有统一的视觉语言。
+### Principle
+Identify and design reusable UI patterns to avoid redundant work.
 
-### 主题系统设计（重要架构决策）
+### Core Component Checklist
 
-在开始设计之前，必须先确定主题策略：
+**Basic components**:
+- Button
+- Input
+- Checkbox / Radio / Switch
+- Select / Dropdown
 
-**选项 1：单一主题（明亮或深色）**
-- 优点：简单，开发成本低，设计一致性容易保证
-- 缺点：无法满足用户对不同环境的需求
-- 适合：功能明确、用户场景单一的工具型产品
+**Feedback components**:
+- Toast (brief notification)
+- Alert (alert message)
+- Modal (dialog)
+- Tooltip
 
-**选项 2：明暗双主题切换（推荐）**
-- 优点：满足不同用户偏好，现代应用标配
-- 缺点：需要维护两套颜色，设计和测试工作量加倍
-- 适合：大多数面向大众用户的产品
-- 实现方式：
+**Layout components**:
+- Card
+- Container
+- Divider
+
+### Best Practices
+
+1. **Unify component styles**:
+   - All buttons should use the same border-radius, padding, and font
+   - All cards should use the same shadow, border-radius, and background
+
+2. **Define component variants**:
+   - Buttons: Primary, Secondary, Ghost, Outline
+   - Sizes: Small, Medium, Large
+   - States: Normal, Hover, Active, Disabled
+
+3. **Maintain consistency**:
+   - The same state of similar components should have a consistent visual appearance
+   - For example: All components' Hover states should have the same transition effect
+
+---
+
+## 3. Consistency
+
+### Principle
+The entire design system should have a unified visual language.
+
+### Theme System Design (Critical Architecture Decision)
+
+Before starting the design, the theme strategy must be determined:
+
+**Option 1: Single theme (light or dark)**
+- Pros: Simple, low development cost, easy to maintain design consistency
+- Cons: Cannot accommodate user preferences for different environments
+- Best for: Utility products with a clear purpose and single-use-case scenarios
+
+**Option 2: Light/dark theme toggle (Recommended)**
+- Pros: Accommodates different user preferences; standard for modern applications
+- Cons: Requires maintaining two sets of colors; doubles design and testing effort
+- Best for: Most consumer-facing products
+- Implementation:
   ```css
-  /* 使用 CSS 变量 */
+  /* Using CSS variables */
   :root {
     --color-bg: #FFFFFF;
     --color-text: #000000;
@@ -108,270 +108,270 @@
   }
   ```
 
-**选项 3：多主题系统**
-- 优点：高度定制化，品牌差异化
-- 缺点：设计和维护成本最高
-- 适合：需要白标（White Label）或多品牌的产品
+**Option 3: Multi-theme system**
+- Pros: Highly customizable, brand differentiation
+- Cons: Highest design and maintenance cost
+- Best for: Products requiring white-labeling or multi-brand support
 
-**主题切换的注意事项**：
-- 不仅仅是"反色"：深色模式需要重新设计对比度、阴影、透明度
-- 图片和插图：可能需要两套资源
-- 测试工作量：所有组件都需要在两个主题下测试
+**Theme switching considerations**:
+- It is not just about inverting colors: Dark mode requires redesigned contrast, shadows, and opacity
+- Images and illustrations: May require separate assets for each theme
+- Testing effort: All components need to be tested under both themes
 
-### 颜色一致性
+### Color Consistency
 
-**限制颜色数量**：
-- 主色：1-2 种（Primary, Secondary）
-- 中性色：灰度系统（5-7 个层级）
-- 功能色：Success, Error, Warning, Info（各 1 种）
-- 总计不超过 15 种颜色
-- **如果支持多主题**：每个主题都需要定义这些颜色
+**Limit the number of colors**:
+- Primary: 1-2 colors (Primary, Secondary)
+- Neutrals: A grayscale system (5-7 levels)
+- Functional colors: Success, Error, Warning, Info (1 each)
+- No more than 15 colors total
+- **If supporting multiple themes**: Each theme needs its own set of these colors
 
-**建立灰度系统**：
+**Establish a grayscale system**:
 ```
-极浅灰（背景）: #F9F9F9, #F5F5F5
-浅灰（分割线）: #E5E5E5, #DDDDDD
-中灰（辅助文本）: #999999, #888888
-深灰（次要文本）: #666666, #555555
-极深灰（主要文本）: #333333, #222222
-纯黑（标题）: #000000
-```
-
-### 间距一致性
-
-**使用栅格系统**：
-- 4px 栅格：所有间距都是 4 的倍数（4, 8, 12, 16, 20, 24, 32, 48, 64...）
-- 或 8px 栅格：所有间距都是 8 的倍数（8, 16, 24, 32, 40, 48, 64...）
-
-**定义间距语义**：
-```
-XS: 4px  - 图标与文字间距
-S:  8px  - 小组件内间距
-M:  16px - 标准组件内间距
-L:  24px - 卡片内间距
-XL: 32px - 模块间间距
-XXL: 48px - 大模块间间距
+Very light gray (background): #F9F9F9, #F5F5F5
+Light gray (dividers):        #E5E5E5, #DDDDDD
+Medium gray (auxiliary text):  #999999, #888888
+Dark gray (secondary text):    #666666, #555555
+Very dark gray (primary text): #333333, #222222
+Pure black (headings):         #000000
 ```
 
-### 圆角一致性
+### Spacing Consistency
 
-**统一圆角规范**：
+**Use a grid system**:
+- 4px grid: All spacing values are multiples of 4 (4, 8, 12, 16, 20, 24, 32, 48, 64...)
+- Or 8px grid: All spacing values are multiples of 8 (8, 16, 24, 32, 40, 48, 64...)
+
+**Define semantic spacing**:
 ```
-小圆角: 4px  - Badge, Tag
-中圆角: 8px  - Button, Input
-大圆角: 12px - Card
-巨大圆角: 16px-24px - Modal, 大卡片
-全圆: 9999px - Pill 按钮
+XS: 4px  - Space between icons and text
+S:  8px  - Inner padding for small components
+M:  16px - Standard component inner padding
+L:  24px - Card inner padding
+XL: 32px - Spacing between sections
+XXL: 48px - Spacing between major sections
+```
+
+### Border Radius Consistency
+
+**Unified border radius specification**:
+```
+Small:      4px  - Badge, Tag
+Medium:     8px  - Button, Input
+Large:      12px - Card
+Extra-large: 16px-24px - Modal, large cards
+Full:       9999px - Pill buttons
 ```
 
 ---
 
-## 4. 响应式设计 (Responsive Design)
+## 4. Responsive Design
 
-### 原则
-在不同设备和屏幕尺寸上都应该有良好的体验。
+### Principle
+The experience should be good across different devices and screen sizes.
 
-### 实践方法
+### Best Practices
 
-**使用断点**：
+**Use breakpoints**:
 ```
-Mobile: < 768px
-Tablet: 768px - 1024px
+Mobile:  < 768px
+Tablet:  768px - 1024px
 Desktop: > 1024px
 ```
 
-**布局适配**：
-- Mobile: 单列布局，Stack 垂直排列
-- Tablet: 2 列布局
-- Desktop: 3-4 列布局
+**Layout adaptation**:
+- Mobile: Single-column layout, vertical stacking
+- Tablet: 2-column layout
+- Desktop: 3-4 column layout
 
-**组件适配**：
-- 按钮在移动端应该更大（更容易点击）
-- 导航在移动端使用 Drawer（抽屉）或 Bottom Nav
-- 表单在移动端应该全宽
+**Component adaptation**:
+- Buttons should be larger on mobile (easier to tap)
+- Navigation should use a Drawer or Bottom Nav on mobile
+- Forms should be full-width on mobile
 
-**字号适配**：
-- 移动端字号可以略小（但不小于 14px）
-- 标题在移动端可以使用更小的层级
-
----
-
-## 5. 可访问性 (Accessibility)
-
-### 原则
-设计应该对所有用户友好，包括有障碍的用户。
-
-### 实践方法
-
-**颜色对比度**：
-- 正文文字与背景对比度 ≥ 4.5:1
-- 大号文字（≥18px）与背景对比度 ≥ 3:1
-- 使用在线工具检查：https://webaim.org/resources/contrastchecker/
-
-**焦点状态**：
-- 所有交互元素（按钮、链接、输入框）都应该有明显的焦点状态
-- 推荐：2-3px 的外轮廓（outline）或 ring
-
-**点击区域**：
-- 移动端的点击区域至少 44x44px
-- 桌面端的点击区域至少 32x32px
-- 图标按钮应该有足够的 padding
-
-**语义化 HTML**：
-- 使用正确的 HTML 标签（button, input, nav, header, main）
-- 图片添加 alt 属性
-- 表单输入添加 label
-
-**键盘导航**：
-- 确保所有功能都可以通过键盘操作
-- Tab 顺序应该符合逻辑
-- Enter 和 Space 应该能触发按钮
+**Font size adaptation**:
+- Font sizes can be slightly smaller on mobile (but no smaller than 14px)
+- Headings can use a smaller scale on mobile
 
 ---
 
-## 6. 性能优化 (Performance)
+## 5. Accessibility
 
-### 原则
-避免过度设计，保持页面流畅。
+### Principle
+Designs should be user-friendly for all users, including those with disabilities.
 
-### 实践方法
+### Best Practices
 
-**避免过度阴影**：
-- 不要给所有元素都加阴影
-- 阴影应该用于突出层级关系
-- 使用浅而柔和的阴影，避免生硬的深色阴影
+**Color contrast**:
+- Body text to background contrast ratio >= 4.5:1
+- Large text (>= 18px) to background contrast ratio >= 3:1
+- Use online tools to verify: https://webaim.org/resources/contrastchecker/
 
-**合理使用动画**：
-- 动画时长控制在 150-300ms
-- 避免复杂的关键帧动画
-- 优先使用 transform 和 opacity（性能好）
-- 避免动画 width, height, margin 等（性能差）
+**Focus states**:
+- All interactive elements (buttons, links, inputs) should have a clearly visible focus state
+- Recommended: 2-3px outline or ring
 
-**图片优化**：
-- 使用合适的图片格式（WebP > JPEG > PNG）
-- 响应式图片：不同屏幕加载不同尺寸
-- 懒加载非首屏图片
+**Tap/click targets**:
+- Minimum tap target size on mobile: 44x44px
+- Minimum click target size on desktop: 32x32px
+- Icon buttons should have sufficient padding
 
-**减少 DOM 复杂度**：
-- 避免过深的嵌套
-- 复用组件而不是重复创建
+**Semantic HTML**:
+- Use correct HTML elements (button, input, nav, header, main)
+- Add alt attributes to images
+- Add labels to form inputs
 
----
-
-## 7. 交互反馈 (Interactive Feedback)
-
-### 原则
-用户的操作应该有即时、明确的反馈。
-
-### 实践方法
-
-**Hover 状态**（桌面端）：
-- 改变颜色（变深或变亮）
-- 轻微放大或上浮（transform: scale(1.05) 或 translateY(-2px)）
-- 改变阴影（增强或扩散）
-- 添加过渡效果（transition: all 0.2s）
-
-**Active 状态**（点击时）：
-- 轻微缩小（transform: scale(0.95)）
-- 或轻微下沉（translateY(1px)）
-- 降低亮度
-
-**Disabled 状态**：
-- 降低透明度（opacity: 0.5）
-- 或使用浅灰色
-- 鼠标 cursor: not-allowed
-
-**Loading 状态**：
-- 显示 Spinner 或骨架屏
-- 禁用交互（防止重复提交）
-- 提供进度指示（如果知道进度）
-
-**成功/错误反馈**：
-- 使用 Toast 轻提示
-- 或在表单下方显示提示信息
-- 使用合适的颜色（绿色表示成功，红色表示错误）
+**Keyboard navigation**:
+- Ensure all functionality is accessible via keyboard
+- Tab order should follow a logical sequence
+- Enter and Space should trigger buttons
 
 ---
 
-## 8. 留白和呼吸感 (Whitespace)
+## 6. Performance Optimization
 
-### 原则
-不要害怕留白，适当的空间让设计更清晰。
+### Principle
+Avoid over-engineering; keep the page smooth and responsive.
 
-### 实践方法
+### Best Practices
 
-**组件内留白**：
-- 按钮内边距：水平 16-24px，垂直 8-12px
-- 卡片内边距：24-32px
-- 输入框内边距：水平 12-16px，垂直 8-12px
+**Avoid excessive shadows**:
+- Do not apply shadows to every element
+- Shadows should be used to convey elevation and layering
+- Use subtle, soft shadows; avoid harsh, dark shadows
 
-**组件间留白**：
-- 同组元素：8-12px
-- 不同组元素：24-32px
-- 页面模块：48-64px
+**Use animations judiciously**:
+- Keep animation duration between 150-300ms
+- Avoid complex keyframe animations
+- Prefer transform and opacity (better performance)
+- Avoid animating width, height, margin, etc. (poor performance)
 
-**不要过度拥挤**：
-- 宁可多留白，不要挤在一起
-- 内容密集的页面可以用卡片分组
-- 使用分割线划分区域
+**Image optimization**:
+- Use appropriate image formats (WebP > JPEG > PNG)
+- Responsive images: Load different sizes for different screens
+- Lazy-load images below the fold
 
----
-
-## 9. 渐进增强 (Progressive Enhancement)
-
-### 原则
-核心功能在任何环境下都应该可用，高级功能作为增强。
-
-### 实践方法
-
-**基础版本**：
-- 不依赖 JavaScript 的基本功能
-- 简单的 CSS 样式
-- 纯 HTML 表单
-
-**增强版本**：
-- JavaScript 交互（如实时验证）
-- CSS 动画和过渡
-- 高级 UI 组件
-
-**优雅降级**：
-- 旧浏览器显示简化版本
-- 不支持的特性有 fallback
-- 功能缺失不应该导致崩溃
+**Reduce DOM complexity**:
+- Avoid deeply nested elements
+- Reuse components instead of duplicating them
 
 ---
 
-## 10. 文案和微交互 (Copy & Microinteractions)
+## 7. Interactive Feedback
 
-### 原则
-文字和细节决定了用户体验的质量。
+### Principle
+User actions should receive immediate and clear feedback.
 
-### 文案原则
+### Best Practices
 
-**清晰简洁**：
-- 按钮文案动词开头："保存"、"删除"、"取消"
-- 避免模糊："确定"（确定什么？）
-- 错误提示说明原因和解决方案
+**Hover state** (desktop):
+- Change color (darken or lighten)
+- Slight scale-up or lift (transform: scale(1.05) or translateY(-2px))
+- Change shadow (intensify or expand)
+- Add transition effects (transition: all 0.2s)
 
-**友好礼貌**：
-- 错误提示不要责怪用户
-- 使用积极的语言
-- 例如：❌ "你输入的密码太短" → ✅ "密码至少需要 8 个字符"
+**Active state** (on click):
+- Slight scale-down (transform: scale(0.95))
+- Or slight downward shift (translateY(1px))
+- Reduce brightness
 
-### 微交互
+**Disabled state**:
+- Reduce opacity (opacity: 0.5)
+- Or use light gray
+- Cursor: not-allowed
 
-**细节决定质量**：
-- 按钮点击有轻微弹跳
-- Modal 打开有淡入 + 缩放动画
-- Toast 从侧边滑入
-- 输入框聚焦时有呼吸效果（ring 动画）
+**Loading state**:
+- Display a Spinner or Skeleton
+- Disable interaction (prevent duplicate submissions)
+- Provide progress indication (if progress is known)
+
+**Success/error feedback**:
+- Use Toast notifications
+- Or display inline messages below the form
+- Use appropriate colors (green for success, red for error)
 
 ---
 
-## 总结
+## 8. Whitespace and Breathing Room
 
-这些原则是通用的 UI 设计最佳实践，在 Demo 阶段（规范尚未形成）应该遵循。
+### Principle
+Do not be afraid of whitespace; proper spacing makes designs clearer.
 
-当 Demo 确定后，通过 `spec` 模式将这些原则具体化为项目的 UI 设计规范文档，形成项目特定的约束和标准。
+### Best Practices
 
-**记住**：好的设计是 80% 的基本原则 + 20% 的创意和个性。先打好基础，再追求独特性。
+**Inner padding for components**:
+- Button padding: 16-24px horizontal, 8-12px vertical
+- Card padding: 24-32px
+- Input padding: 12-16px horizontal, 8-12px vertical
+
+**Spacing between components**:
+- Elements within the same group: 8-12px
+- Elements in different groups: 24-32px
+- Page sections: 48-64px
+
+**Avoid overcrowding**:
+- When in doubt, add more whitespace rather than cramming elements together
+- Use cards to group content on dense pages
+- Use dividers to separate regions
+
+---
+
+## 9. Progressive Enhancement
+
+### Principle
+Core functionality should work in any environment; advanced features serve as enhancements.
+
+### Best Practices
+
+**Baseline version**:
+- Basic functionality that does not depend on JavaScript
+- Simple CSS styles
+- Plain HTML forms
+
+**Enhanced version**:
+- JavaScript interactions (e.g., real-time validation)
+- CSS animations and transitions
+- Advanced UI components
+
+**Graceful degradation**:
+- Older browsers display a simplified version
+- Unsupported features have fallbacks
+- Missing features should not cause crashes
+
+---
+
+## 10. Copy and Microinteractions
+
+### Principle
+Text and details determine the quality of the user experience.
+
+### Copy Guidelines
+
+**Clear and concise**:
+- Button labels should start with a verb: "Save", "Delete", "Cancel"
+- Avoid vagueness: "OK" (OK to do what?)
+- Error messages should explain the cause and provide a solution
+
+**Friendly and polite**:
+- Error messages should not blame the user
+- Use positive language
+- For example: "Your password is too short" --> "Password must be at least 8 characters"
+
+### Microinteractions
+
+**Details define quality**:
+- Buttons have a subtle bounce on click
+- Modals open with a fade-in + scale animation
+- Toasts slide in from the side
+- Inputs have a breathing effect on focus (ring animation)
+
+---
+
+## Summary
+
+These principles represent general UI design best practices that should be followed during the Demo phase (before the spec has been defined).
+
+Once the demo is finalized, use the `spec` mode to codify these principles into a project-specific UI design spec document, establishing concrete constraints and standards for the project.
+
+**Remember**: Good design is 80% fundamental principles + 20% creativity and personality. Master the basics first, then pursue uniqueness.

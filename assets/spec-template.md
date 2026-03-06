@@ -1,213 +1,264 @@
-# [项目名称] UI 设计规范
+# [Project Name] UI Design Spec
 
-> **版本**: 1.0
-> **状态**: 正式生效
-> **最后更新**: [当前日期]
+> **Version**: 1.0
+> **Status**: Active
+> **Last Updated**: [Current Date]
 
-本文档定义了 [项目名称] 的视觉与交互标准，所有 UI 相关开发必须遵守本规范。
-
----
-
-## 1. 设计理念 (Design Philosophy)
-
-[从 Demo 中提取的核心设计语言]
-
-### 核心关键词
-- **[关键词1]**: [说明]
-- **[关键词2]**: [说明]
-- **[关键词3]**: [说明]
-
-### 设计目标
-- [目标1：例如：提供简洁直观的用户体验]
-- [目标2：例如：保持视觉一致性和品牌识别度]
-- [目标3：例如：确保可访问性和包容性设计]
+This document defines the visual and interaction standards for [Project Name]. All UI-related development must comply with this spec.
 
 ---
 
-## 2. 颜色系统 (Color System)
+## 1. Design Philosophy
 
-### 2.1 核心色板
+[Core design language extracted from the Demo]
 
-| 角色 | 变量名 | 色值 / CSS 类 | 说明 |
-| :--- | :--- | :--- | :--- |
-| **Primary** | `primary` | `#000000` / `bg-primary` | 主要行动点（按钮、链接） |
-| **Secondary** | `secondary` | `#666666` / `bg-secondary` | 次要行动点 |
-| **Background** | `background` | `#FFFFFF` / `bg-background` | 全局背景色 |
-| **Card** | `card` | `#FAFAFA` / `bg-card` | 卡片/容器背景 |
+### Core Keywords
+- **[Keyword 1]**: [Description]
+- **[Keyword 2]**: [Description]
+- **[Keyword 3]**: [Description]
 
-### 2.2 文本颜色
+### Design Goals
+- [Goal 1: e.g., Provide a clean and intuitive user experience]
+- [Goal 2: e.g., Maintain visual consistency and brand recognition]
+- [Goal 3: e.g., Ensure accessibility and inclusive design]
 
-| 角色 | 变量名 | 色值 / CSS 类 | 说明 |
-| :--- | :--- | :--- | :--- |
-| **Heading** | `foreground` | `#000000` / `text-foreground` | 标题、重要文本 |
-| **Body** | `text-body` | `#333333` / `text-body` | 正文内容 |
-| **Muted** | `muted-foreground` | `#999999` / `text-muted-foreground` | 辅助信息、次要文本 |
-| **Disabled** | `text-disabled` | `#CCCCCC` / `text-disabled` | 禁用状态文本 |
+---
 
-### 2.3 功能色 (Functional Colors)
+## 2. Component Solution
 
-保持克制，仅在状态反馈中使用。
+### Solution Details
 
-| 角色 | 色值 / CSS 类 | 说明 |
+| Property | Value |
+| :--- | :--- |
+| **Solution** | [Custom / shadcn/ui / Ant Design / Element Plus / Other] |
+| **Library Version** | [Version, e.g., "antd@5.x"; enter "N/A" for custom solutions] |
+| **Installation Method** | [e.g., "npx shadcn@latest add"; enter "N/A" for custom] |
+
+### Theme Configuration
+
+| Property | Value |
+| :--- | :--- |
+| **Config File** | [Path, e.g., "tailwind.config.ts"; enter "N/A" for custom] |
+| **Configuration Method** | [CSS Variables / ConfigProvider / SCSS Variables / Hand-written styles] |
+
+### Usage Rules
+
+- ✅ Prefer library components; do not reinvent the wheel
+- ✅ Customize styles through the library's theming system
+- ✅ Follow the library's component API and props naming conventions
+- ❌ Do not directly override library component internal styles with CSS
+- ❌ Do not hand-write equivalents of components already available in the library
+
+> The rules above do not apply when using a **custom solution**; all components are hand-written according to this spec.
+
+### Custom Component List
+
+The following components are not provided by the library and use custom implementations:
+
+| Component Name | Description | Reference Style |
 | :--- | :--- | :--- |
-| **Success** | `#10B981` / `text-green-600` | 成功状态、确认操作 |
-| **Error** | `#EF4444` / `text-red-600` | 错误状态、破坏性操作 |
-| **Warning** | `#F59E0B` / `text-amber-600` | 警告状态、需注意的信息 |
-| **Info** | `#3B82F6` / `text-blue-600` | 提示信息、普通通知 |
+| [Component Name] | [Purpose] | [Reference library component style] |
 
-### 2.4 颜色使用原则
+### Component Mapping Table
 
-- ✅ **优先使用**核心色板中的颜色
-- ✅ 使用功能色时保持一致性（成功=绿色，错误=红色）
-- ❌ **禁止**在核心 UI 中使用彩色（除非是功能色）
-- ❌ **禁止**使用超过 3 种主色
+| Common Name | Library Component | Import Path |
+| :--- | :--- | :--- |
+| Button | [e.g., `<Button>`] | [e.g., `@/components/ui/button`] |
+| Input | [e.g., `<Input>`] | [e.g., `@/components/ui/input`] |
+| Card | [e.g., `<Card>`] | [e.g., `@/components/ui/card`] |
+| Modal | [e.g., `<Dialog>`] | [e.g., `@/components/ui/dialog`] |
+| Toast | [e.g., `<Sonner>`] | [e.g., `@/components/ui/sonner`] |
+| Select | [e.g., `<Select>`] | [e.g., `@/components/ui/select`] |
+| ... | ... | ... |
+
+> The mapping table is not required for **custom solutions**.
 
 ---
 
-## 3. 字体与排版 (Typography)
+## 3. Color System
 
-### 3.1 字体家族
+### 2.1 Core Palette
 
-**标题字体**：
-- 西文：[字体名称，例如：Inter, -apple-system, system-ui]
-- 中文：[字体名称，例如：PingFang SC, Microsoft YaHei, 微软雅黑]
-- Font Stack: `[完整 font-family 定义]`
+| Role | Variable Name | Value / CSS Class | Description |
+| :--- | :--- | :--- | :--- |
+| **Primary** | `primary` | `#000000` / `bg-primary` | Primary action points (buttons, links) |
+| **Secondary** | `secondary` | `#666666` / `bg-secondary` | Secondary action points |
+| **Background** | `background` | `#FFFFFF` / `bg-background` | Global background color |
+| **Card** | `card` | `#FAFAFA` / `bg-card` | Card/container background |
 
-**正文字体**：
-- 西文：[字体名称]
-- 中文：[字体名称]
-- Font Stack: `[完整 font-family 定义]`
+### 2.2 Text Colors
 
-### 3.2 排版层级表
+| Role | Variable Name | Value / CSS Class | Description |
+| :--- | :--- | :--- | :--- |
+| **Heading** | `foreground` | `#000000` / `text-foreground` | Headings, important text |
+| **Body** | `text-body` | `#333333` / `text-body` | Body content |
+| **Muted** | `muted-foreground` | `#999999` / `text-muted-foreground` | Supporting info, secondary text |
+| **Disabled** | `text-disabled` | `#CCCCCC` / `text-disabled` | Disabled state text |
 
-| 层级 | 字体风格 | CSS 类名 | 字号/行高 | 字重 | 场景 |
+### 2.3 Functional Colors
+
+Use sparingly; only for status feedback.
+
+| Role | Value / CSS Class | Description |
+| :--- | :--- | :--- |
+| **Success** | `#10B981` / `text-green-600` | Success state, confirmation actions |
+| **Error** | `#EF4444` / `text-red-600` | Error state, destructive actions |
+| **Warning** | `#F59E0B` / `text-amber-600` | Warning state, items requiring attention |
+| **Info** | `#3B82F6` / `text-blue-600` | Informational messages, general notifications |
+
+### 2.4 Color Usage Principles
+
+- ✅ **Prefer** colors from the core palette
+- ✅ Use functional colors consistently (success = green, error = red)
+- ❌ **Do not** use bright colors in core UI (except functional colors)
+- ❌ **Do not** use more than 3 primary colors
+
+---
+
+## 4. Typography
+
+### 3.1 Font Families
+
+**Heading Font**:
+- Latin: [Font name, e.g., Inter, -apple-system, system-ui]
+- CJK: [Font name, e.g., PingFang SC, Microsoft YaHei]
+- Font Stack: `[Full font-family definition]`
+
+**Body Font**:
+- Latin: [Font name]
+- CJK: [Font name]
+- Font Stack: `[Full font-family definition]`
+
+### 3.2 Type Scale
+
+| Level | Font Style | CSS Class | Size / Line Height | Weight | Usage |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Display** | Sans-serif | `text-4xl lg:text-6xl` | 48-60px / 1.1 | 700 | 落地页 Slogan |
-| **H1** | Sans-serif | `text-3xl` | 30px / 1.2 | 600 | 页面主标题 |
-| **H2** | Sans-serif | `text-2xl` | 24px / 1.3 | 600 | 模块标题 |
-| **H3** | Sans-serif | `text-xl` | 20px / 1.4 | 600 | 卡片标题 |
-| **Body** | Sans-serif | `text-base` | 16px / 1.5 | 400 | 默认正文 |
-| **Small** | Sans-serif | `text-sm` | 14px / 1.5 | 400 | 按钮、输入框、二级信息 |
-| **Caption** | Sans-serif | `text-xs` | 12px / 1.5 | 400 | 标签、Badge、辅助说明 |
+| **Display** | Sans-serif | `text-4xl lg:text-6xl` | 48-60px / 1.1 | 700 | Landing page slogan |
+| **H1** | Sans-serif | `text-3xl` | 30px / 1.2 | 600 | Page title |
+| **H2** | Sans-serif | `text-2xl` | 24px / 1.3 | 600 | Section heading |
+| **H3** | Sans-serif | `text-xl` | 20px / 1.4 | 600 | Card heading |
+| **Body** | Sans-serif | `text-base` | 16px / 1.5 | 400 | Default body text |
+| **Small** | Sans-serif | `text-sm` | 14px / 1.5 | 400 | Buttons, inputs, secondary info |
+| **Caption** | Sans-serif | `text-xs` | 12px / 1.5 | 400 | Labels, Badges, supplementary notes |
 
-### 3.3 字重标准
+### 3.3 Font Weight Standards
 
-| 字重名称 | 数值 | 使用场景 |
+| Weight Name | Value | Usage |
 | :--- | :--- | :--- |
-| Regular | 400 | 正文、描述 |
-| Medium | 500 | 强调文本 |
-| Semibold | 600 | 标题、按钮 |
-| Bold | 700 | 特别强调 |
+| Regular | 400 | Body text, descriptions |
+| Medium | 500 | Emphasized text |
+| Semibold | 600 | Headings, buttons |
+| Bold | 700 | Strong emphasis |
 
-### 3.4 排版原则
+### 3.4 Typography Principles
 
-- ✅ 标题使用较粗字重（600+）
-- ✅ 正文使用 Regular（400）
-- ✅ 行高至少 1.5（可读性）
-- ❌ 避免使用超过 3 种字重
-- ❌ 避免全大写文本（UPPERCASE），可读性差
+- ✅ Use heavier font weights (600+) for headings
+- ✅ Use Regular (400) for body text
+- ✅ Line height should be at least 1.5 (readability)
+- ❌ Avoid using more than 3 font weights
+- ❌ Avoid all-caps text (UPPERCASE); it reduces readability
 
 ---
 
-## 4. 间距与圆角 (Spacing & Radius)
+## 5. Spacing & Border Radius
 
-### 4.1 间距体系 (Spacing Scale)
+### 4.1 Spacing Scale
 
-基于 **[4px / 8px] 栅格系统**。
+Based on a **[4px / 8px] grid system**.
 
-| Token | 值 | Tailwind 类 | 使用场景 |
+| Token | Value | Tailwind Class | Usage |
 | :--- | :--- | :--- | :--- |
-| **XS** | 4px | `p-1`, `m-1`, `gap-1` | 图标与文字间距 |
-| **S** | 8px | `p-2`, `m-2`, `gap-2` | 小组件内间距 |
-| **M** | 16px | `p-4`, `m-4`, `gap-4` | 标准组件内间距 |
-| **L** | 24px | `p-6`, `m-6`, `gap-6` | 卡片内间距 |
-| **XL** | 32px | `p-8`, `m-8`, `gap-8` | 模块间间距 |
-| **XXL** | 48px | `p-12`, `m-12`, `gap-12` | 大模块间间距 |
+| **XS** | 4px | `p-1`, `m-1`, `gap-1` | Spacing between icons and text |
+| **S** | 8px | `p-2`, `m-2`, `gap-2` | Internal padding for small components |
+| **M** | 16px | `p-4`, `m-4`, `gap-4` | Standard component padding |
+| **L** | 24px | `p-6`, `m-6`, `gap-6` | Card padding |
+| **XL** | 32px | `p-8`, `m-8`, `gap-8` | Section spacing |
+| **XXL** | 48px | `p-12`, `m-12`, `gap-12` | Large section spacing |
 
-### 4.2 圆角规范 (Border Radius)
+### 4.2 Border Radius
 
-| Token | 值 | Tailwind 类 | 使用场景 |
+| Token | Value | Tailwind Class | Usage |
 | :--- | :--- | :--- | :--- |
 | **Small** | 4px | `rounded` | Badge, Tag |
 | **Medium** | 8px | `rounded-lg` | Button, Input |
-| **Large** | 12px | `rounded-xl` | Card（小） |
-| **XLarge** | 16px | `rounded-2xl` | Card（中） |
-| **XXLarge** | 24px | `rounded-3xl` | Card（大）, Modal |
-| **Full** | 9999px | `rounded-full` | Pill 按钮, Avatar |
+| **Large** | 12px | `rounded-xl` | Card (small) |
+| **XLarge** | 16px | `rounded-2xl` | Card (medium) |
+| **XXLarge** | 24px | `rounded-3xl` | Card (large), Modal |
+| **Full** | 9999px | `rounded-full` | Pill button, Avatar |
 
-### 4.3 间距和圆角原则
+### 4.3 Spacing & Border Radius Principles
 
-- ✅ 所有间距值应符合栅格系统（[4/8]px 的倍数）
-- ✅ 相关元素间距小，不相关元素间距大
-- ✅ 保持圆角一致性（同类组件使用相同圆角）
-- ❌ 避免使用奇数间距（如 7px, 13px）
-- ❌ 避免圆角过小（< 4px），视觉不明显
+- ✅ All spacing values should conform to the grid system (multiples of [4/8]px)
+- ✅ Use smaller spacing between related elements, larger spacing between unrelated ones
+- ✅ Maintain consistent border radius (same radius for components of the same type)
+- ❌ Avoid odd spacing values (e.g., 7px, 13px)
+- ❌ Avoid border radius too small (< 4px); visually insignificant
 
 ---
 
-## 5. 阴影与动效 (Shadows & Animations)
+## 6. Shadows & Animations
 
-### 5.1 阴影系统
+### 5.1 Shadow System
 
-| 层级 | Tailwind 类 | Box Shadow 值 | 使用场景 |
+| Level | Tailwind Class | Box Shadow Value | Usage |
 | :--- | :--- | :--- | :--- |
-| **None** | `shadow-none` | `none` | 无需层级分离 |
-| **Small** | `shadow-sm` | `0 1px 2px rgba(0,0,0,0.05)` | 轻微层级 |
-| **Medium** | `shadow` | `0 4px 6px rgba(0,0,0,0.1)` | 卡片、按钮 |
+| **None** | `shadow-none` | `none` | No elevation needed |
+| **Small** | `shadow-sm` | `0 1px 2px rgba(0,0,0,0.05)` | Subtle elevation |
+| **Medium** | `shadow` | `0 4px 6px rgba(0,0,0,0.1)` | Cards, buttons |
 | **Large** | `shadow-lg` | `0 10px 15px rgba(0,0,0,0.1)` | Dropdown, Popover |
-| **XLarge** | `shadow-xl` | `0 20px 25px rgba(0,0,0,0.1)` | Modal, 大卡片 |
+| **XLarge** | `shadow-xl` | `0 20px 25px rgba(0,0,0,0.1)` | Modal, large cards |
 
-### 5.2 动效标准
+### 5.2 Animation Standards
 
-**Transition 配置**：
+**Transition Configuration**:
 ```css
-transition: all 0.2s ease-out; /* 默认 */
-transition: all 0.3s ease-out; /* 较慢，适用于大型元素 */
+transition: all 0.2s ease-out; /* Default */
+transition: all 0.3s ease-out; /* Slower, for larger elements */
 ```
 
-**常用动效**：
-- **Hover Lift**：`hover:-translate-y-0.5 hover:shadow-lg`
-- **Click Scale**：`active:scale-95`
-- **Fade In**：`transition-opacity duration-200`
+**Common Animations**:
+- **Hover Lift**: `hover:-translate-y-0.5 hover:shadow-lg`
+- **Click Scale**: `active:scale-95`
+- **Fade In**: `transition-opacity duration-200`
 
-### 5.3 动效原则
+### 5.3 Animation Principles
 
-- ✅ 所有交互元素应有过渡效果
-- ✅ 时长控制在 150-300ms
-- ✅ 使用 `ease-out` 或 `ease-in-out`
-- ❌ 避免过长的动画（> 500ms）
-- ❌ 避免生硬的瞬间变化（无 transition）
+- ✅ All interactive elements should have transition effects
+- ✅ Keep duration between 150-300ms
+- ✅ Use `ease-out` or `ease-in-out`
+- ❌ Avoid excessively long animations (> 500ms)
+- ❌ Avoid abrupt changes without transitions
 
 ---
 
-## 6. 组件规范 (Components)
+## 7. Components
 
-### 6.1 按钮 (Button)
+### 6.1 Button
 
-**风格变体**：
+**Style Variants**:
 
-| 变体 | 样式类名 | 使用场景 |
+| Variant | Class Names | Usage |
 | :--- | :--- | :--- |
-| **Primary** | `bg-primary text-primary-foreground` | 主要行动点 |
-| **Secondary** | `bg-secondary text-secondary-foreground` | 次要行动点 |
-| **Ghost** | `bg-transparent text-foreground hover:bg-secondary` | 轻量操作 |
-| **Outline** | `border border-primary text-primary bg-transparent` | 取消操作 |
+| **Primary** | `bg-primary text-primary-foreground` | Primary action |
+| **Secondary** | `bg-secondary text-secondary-foreground` | Secondary action |
+| **Ghost** | `bg-transparent text-foreground hover:bg-secondary` | Lightweight action |
+| **Outline** | `border border-primary text-primary bg-transparent` | Cancel action |
 
-**尺寸变体**：
+**Size Variants**:
 
-| 尺寸 | 类名 | Padding | 字号 |
+| Size | Class Name | Padding | Font Size |
 | :--- | :--- | :--- | :--- |
 | **Small** | `btn-sm` | `px-3 py-1.5` | `text-sm` |
 | **Medium** | `btn` | `px-4 py-2` | `text-base` |
 | **Large** | `btn-lg` | `px-6 py-3` | `text-lg` |
 
-**状态**：
-- Normal: 默认样式
-- Hover: 背景色加深 10%, 轻微上浮
-- Active: 背景色加深 20%, 轻微缩小
+**States**:
+- Normal: Default styles
+- Hover: Background darkened 10%, slight lift
+- Active: Background darkened 20%, slight scale down
 - Disabled: `opacity-50 cursor-not-allowed`
 
-**代码示例**：
+**Code Example**:
 ```tsx
 <button className="bg-primary text-white px-4 py-2 rounded-lg hover:-translate-y-0.5 hover:shadow-lg transition-all active:scale-95">
   Primary Button
@@ -216,114 +267,114 @@ transition: all 0.3s ease-out; /* 较慢，适用于大型元素 */
 
 ---
 
-### 6.2 表单组件 (Form Controls)
+### 6.2 Form Controls
 
-#### Input（输入框）
+#### Input
 
-**基础样式**：
+**Base Styles**:
 ```tsx
 className="bg-white border border-gray-300 rounded-lg px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
 ```
 
-**状态**：
+**States**:
 - Normal: `border-gray-300`
 - Focus: `ring-2 ring-primary`
 - Error: `border-red-500 ring-2 ring-red-500`
 - Disabled: `bg-gray-100 text-gray-400 cursor-not-allowed`
 
-#### Select（下拉选择）
+#### Select
 
-与 Input 保持一致的样式，右侧添加箭头图标。
+Maintains the same styles as Input, with an arrow icon on the right side.
 
 #### Checkbox / Radio
 
-**样式**：
-- 尺寸：16x16px 或 20x20px
-- 圆角：Checkbox 使用 `rounded`, Radio 使用 `rounded-full`
-- 选中态：背景色使用 `primary`
-- Focus 态：外围 ring
+**Styles**:
+- Size: 16x16px or 20x20px
+- Border radius: Checkbox uses `rounded`, Radio uses `rounded-full`
+- Checked state: Background uses `primary`
+- Focus state: Outer ring
 
 ---
 
-### 6.3 反馈组件 (Feedback)
+### 6.3 Feedback Components
 
-#### Toast（轻提示）
+#### Toast
 
-**位置**：右上角或顶部居中
+**Position**: Top-right or top-center
 
-**样式**：
+**Styles**:
 ```tsx
-className="bg-white rounded-lg shadow-lg px-4 py-3 border-l-4 border-[功能色]"
+className="bg-white rounded-lg shadow-lg px-4 py-3 border-l-4 border-[functional-color]"
 ```
 
-**类型**：
-- Success: 左边框绿色
-- Error: 左边框红色
-- Warning: 左边框黄色
-- Info: 左边框蓝色
+**Types**:
+- Success: Green left border
+- Error: Red left border
+- Warning: Yellow left border
+- Info: Blue left border
 
-**动画**：从右侧滑入，停留 3-5 秒后淡出
+**Animation**: Slides in from the right, stays for 3-5 seconds, then fades out
 
-#### Alert（警告提示）
+#### Alert
 
-**样式**：
+**Styles**:
 ```tsx
-className="bg-[功能色]-50 border border-[功能色]-200 rounded-lg px-4 py-3 text-[功能色]-800"
+className="bg-[functional-color]-50 border border-[functional-color]-200 rounded-lg px-4 py-3 text-[functional-color]-800"
 ```
 
-#### Modal（模态框）
+#### Modal
 
-**遮罩**：`bg-black/50 backdrop-blur-sm`
-**容器**：`bg-white rounded-2xl shadow-2xl p-6`
-**动画**：淡入 + 缩放（从 0.95 到 1）
+**Overlay**: `bg-black/50 backdrop-blur-sm`
+**Container**: `bg-white rounded-2xl shadow-2xl p-6`
+**Animation**: Fade in + scale (from 0.95 to 1)
 
 ---
 
-### 6.4 卡片 (Card)
+### 6.4 Card
 
-**基础样式**：
+**Base Styles**:
 ```tsx
 className="bg-white rounded-2xl shadow p-6"
 ```
 
-**Hover 效果**：
+**Hover Effect**:
 ```tsx
 className="hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
 ```
 
-**变体**：
-- 无边框阴影：`shadow`
-- 带边框：`border border-gray-200`
-- 扁平：`bg-gray-50`（无阴影）
+**Variants**:
+- Borderless with shadow: `shadow`
+- With border: `border border-gray-200`
+- Flat: `bg-gray-50` (no shadow)
 
 ---
 
-### 6.5 导航组件 (Navigation)
+### 6.5 Navigation Components
 
-#### Tabs（标签页）
+#### Tabs
 
-**容器**：`border-b border-gray-200`
-**Tab**：
-- 未激活：`text-gray-600 hover:text-gray-900`
-- 激活：`text-primary border-b-2 border-primary`
+**Container**: `border-b border-gray-200`
+**Tab**:
+- Inactive: `text-gray-600 hover:text-gray-900`
+- Active: `text-primary border-b-2 border-primary`
 
-#### Breadcrumb（面包屑）
+#### Breadcrumb
 
-**样式**：`text-sm text-gray-600`
-**分隔符**：`/` 或 `>` 或箭头图标
-**当前页**：`text-foreground font-medium`
+**Styles**: `text-sm text-gray-600`
+**Separator**: `/` or `>` or arrow icon
+**Current Page**: `text-foreground font-medium`
 
-#### Pagination（分页）
+#### Pagination
 
-**样式**：
-- 按钮：与 Secondary Button 一致
-- 当前页：使用 Primary Button 样式
+**Styles**:
+- Buttons: Same as Secondary Button
+- Current page: Uses Primary Button style
 
 ---
 
-### 6.6 其他组件
+### 6.6 Other Components
 
-#### 自定义滚动条
+#### Custom Scrollbar
 
 ```css
 ::-webkit-scrollbar {
@@ -345,65 +396,69 @@ className="hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
 }
 ```
 
-#### Loading（加载中）
+#### Loading
 
-**Spinner**：
-- 尺寸：16px（小）, 24px（中）, 32px（大）
-- 颜色：`primary`
-- 动画：旋转，1s linear infinite
+**Spinner**:
+- Size: 16px (small), 24px (medium), 32px (large)
+- Color: `primary`
+- Animation: Rotate, 1s linear infinite
 
-**Skeleton（骨架屏）**：
-- 背景：`bg-gray-200`
-- 动画：从左到右的渐变扫过效果
+**Skeleton**:
+- Background: `bg-gray-200`
+- Animation: Left-to-right gradient sweep effect
 
-#### Progress Bar（进度条）
+#### Progress Bar
 
-- 背景：`bg-gray-200 rounded-full`
-- 进度条：`bg-primary rounded-full`
-- 高度：4-8px
-
----
-
-## 7. 禁用清单 (Don'ts)
-
-以下是应该**避免**的做法：
-
-### 颜色
-- ❌ 使用过多颜色（超过 3 种主色）
-- ❌ 颜色对比度不足（文本与背景对比度 < 4.5:1）
-- ❌ 在非功能性场景使用功能色（如用红色做装饰）
-
-### 排版
-- ❌ 字号过小（< 12px）
-- ❌ 行高过小（< 1.2）
-- ❌ 使用超过 4 种字重
-- ❌ 全大写文本（降低可读性）
-
-### 间距
-- ❌ 使用不符合栅格的间距值（如 7px, 13px）
-- ❌ 间距过小，元素拥挤
-- ❌ 间距不一致（相同层级的元素间距不同）
-
-### 圆角
-- ❌ 圆角过小（< 4px）
-- ❌ 同类组件圆角不一致
-- ❌ 混用方角和圆角（保持统一风格）
-
-### 动效
-- ❌ 动画时长过长（> 500ms）
-- ❌ 没有过渡效果（生硬跳变）
-- ❌ 过度使用动画（影响性能）
-
-### 其他
-- ❌ 点击区域过小（< 32x32px）
-- ❌ 缺少焦点状态
-- ❌ 缺少 Hover 反馈
+- Background: `bg-gray-200 rounded-full`
+- Progress bar: `bg-primary rounded-full`
+- Height: 4-8px
 
 ---
 
-## 8. 代码示例 (Code Examples)
+## 8. Don'ts
 
-### 完整的按钮组件示例
+The following practices should be **avoided**:
+
+### Colors
+- ❌ Using too many colors (more than 3 primary colors)
+- ❌ Insufficient color contrast (text-to-background contrast ratio < 4.5:1)
+- ❌ Using functional colors in non-functional contexts (e.g., red as decoration)
+
+### Typography
+- ❌ Font size too small (< 12px)
+- ❌ Line height too small (< 1.2)
+- ❌ Using more than 4 font weights
+- ❌ All-caps text (reduces readability)
+
+### Spacing
+- ❌ Using spacing values that don't conform to the grid (e.g., 7px, 13px)
+- ❌ Spacing too small, causing crowded elements
+- ❌ Inconsistent spacing (different spacing between elements at the same level)
+
+### Border Radius
+- ❌ Border radius too small (< 4px)
+- ❌ Inconsistent border radius for components of the same type
+- ❌ Mixing sharp and rounded corners (maintain a unified style)
+
+### Animations
+- ❌ Animation duration too long (> 500ms)
+- ❌ No transition effects (abrupt changes)
+- ❌ Overusing animations (impacts performance)
+
+### Other
+- ❌ Click/tap target too small (< 32x32px)
+- ❌ Missing focus states
+- ❌ Missing hover feedback
+
+---
+
+## 9. Code Examples
+
+> **Note**: The examples below vary depending on the project's component solution.
+> - **Custom solution**: Uses native HTML + Tailwind CSS (as shown below)
+> - **Component library solution**: Uses library components + project theme (refer to import paths in the component mapping table)
+
+### Complete Button Component Example
 
 ```tsx
 // Primary Button
@@ -422,7 +477,7 @@ className="hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
 </button>
 ```
 
-### 完整的卡片组件示例
+### Complete Card Component Example
 
 ```tsx
 <div className="bg-white rounded-2xl shadow p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
@@ -438,7 +493,7 @@ className="hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
 </div>
 ```
 
-### 完整的表单示例
+### Complete Form Example
 
 ```tsx
 <form className="space-y-4">
@@ -472,50 +527,50 @@ className="hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
 
 ---
 
-## 9. 响应式适配 (Responsive Design)
+## 10. Responsive Design
 
-### 断点定义
+### Breakpoint Definitions
 
-| 断点 | 屏幕宽度 | 设备类型 |
+| Breakpoint | Screen Width | Device Type |
 | :--- | :--- | :--- |
-| `sm` | ≥ 640px | 大手机 |
-| `md` | ≥ 768px | 平板 |
-| `lg` | ≥ 1024px | 笔记本 |
-| `xl` | ≥ 1280px | 桌面 |
-| `2xl` | ≥ 1536px | 大屏 |
+| `sm` | >= 640px | Large phones |
+| `md` | >= 768px | Tablets |
+| `lg` | >= 1024px | Laptops |
+| `xl` | >= 1280px | Desktops |
+| `2xl` | >= 1536px | Large screens |
 
-### 响应式规则
+### Responsive Rules
 
-- 移动端优先（Mobile First）
-- 使用 Tailwind 的响应式前缀（如 `md:text-lg`）
-- 关键断点：`md`（768px）和 `lg`（1024px）
-
----
-
-## 10. 可访问性 (Accessibility)
-
-### 必须遵守的规则
-
-- ✅ 文本与背景对比度 ≥ 4.5:1
-- ✅ 所有交互元素有明显的焦点状态
-- ✅ 点击区域 ≥ 44x44px（移动端）或 ≥ 32x32px（桌面端）
-- ✅ 使用语义化 HTML（button, input, nav, header, main）
-- ✅ 图片添加 alt 属性
-- ✅ 表单输入添加 label
-- ✅ 支持键盘导航
+- Mobile First
+- Use Tailwind's responsive prefixes (e.g., `md:text-lg`)
+- Key breakpoints: `md` (768px) and `lg` (1024px)
 
 ---
 
-## 11. 更新日志 (Changelog)
+## 11. Accessibility
 
-### v1.0 (当前日期)
-- 初始版本
-- 基于 UI Demo 提取并生成规范
-- 定义了颜色、排版、间距、圆角、组件等完整规范
+### Mandatory Rules
+
+- ✅ Text-to-background contrast ratio >= 4.5:1
+- ✅ All interactive elements must have a visible focus state
+- ✅ Tap/click targets >= 44x44px (mobile) or >= 32x32px (desktop)
+- ✅ Use semantic HTML (button, input, nav, header, main)
+- ✅ Add alt attributes to images
+- ✅ Add labels to form inputs
+- ✅ Support keyboard navigation
 
 ---
 
-**规范维护**：
-- 定期审查和更新（建议每季度一次）
-- 新增组件或样式需更新本文档
-- 使用 `/ui-design-workflow iterate` 进行规范迭代
+## 12. Changelog
+
+### v1.0 (Current Date)
+- Initial version
+- Spec extracted and generated from UI Demo
+- Defined complete specs for colors, typography, spacing, border radius, components, etc.
+
+---
+
+**Spec Maintenance**:
+- Review and update regularly (recommended quarterly)
+- This document must be updated when new components or styles are added
+- Use `/ui-design-workflow iterate` for spec iterations

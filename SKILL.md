@@ -2,155 +2,200 @@
 name: ui-design-workflow
 description: >
   MUST use when implementing UI components or frontend pages in this project.
-  Triggers: 实现页面, 开发UI, 写组件, 前端开发, button, form, modal, toast,
-  card, input, 样式, 界面, designing UI, implement page, create component.
+  Triggers: 实现页面, 开发UI, 写组件, 前端开发, designing UI, implement page,
+  create component, build interface, style page, frontend development,
+  button, form, modal, toast, card, input, 样式, 界面,
+  shadcn, ant design, antd, element plus, 组件库, UI库, component library.
   Before writing any UI code, load this skill to read the project's design spec.
 ---
 
 # UI Design Workflow
 
-管理 UI 设计工作流：Demo → 规范 → 实现 → 检查 → 迭代。
+Manage the full UI design workflow: Demo → Spec → Implement → Check → Iterate.
+Supports both custom components and component libraries (shadcn/ui, Ant Design, Element Plus, etc.).
 
-## 命令速查
+## Command Reference
 
-| 命令 | 用途 | 触发场景 |
-|------|------|---------|
-| `demo` | 生成 UI 展示页面 | 项目初期确定风格 |
-| `spec` | 生成规范文档 | Demo 确认后 |
-| `implement` | 按规范实现功能 | 日常开发 |
-| `check` | 检查规范遵守 | PR 前检查 |
-| `iterate` | 迭代更新规范 | 发现规范缺失 |
+| Command | Purpose | When to Use |
+|---------|---------|-------------|
+| `demo` | Analyze project + generate UI showcase | Early stage: establish style & component solution |
+| `spec` | Generate spec document | After Demo is confirmed |
+| `implement` | Build features per spec | Daily development |
+| `check` | Audit spec compliance | Before PR, periodic review |
+| `iterate` | Update the spec | When gaps are discovered |
 
 ---
 
-## 命令详情
+## Command Details
 
-### demo - 生成 UI 展示页面
+### demo - Generate UI Showcase Page
 
-**输入**: 用户描述的 UI 风格需求（如"简约现代"、"科技感"）
+**Input**: User's UI style requirements (e.g., "minimal modern", "techy")
 
-**输出**: 单页面包含两个 Tab：
-- **Tab 1: 成品展示** - 完整官网 Demo
-- **Tab 2: 组件库** - 所有组件的各种状态
+**Output**: Single page with two tabs:
+- **Tab 1: Finished Product** - Complete landing page demo
+- **Tab 2: Component Library** - All components in various states
 
-**流程**:
-1. 与用户确认：主题模式（单一/明暗切换）、风格偏好
-2. 设计颜色系统、排版、组件样式
-3. 生成 UI 展示页面
-4. 与用户迭代调整
+**Flow**:
+1. **Project Analysis**:
+   - Read `package.json` to identify framework and existing dependencies
+   - Scan code directory to identify existing patterns and tech stack
+   - Determine project type (landing page, admin panel, SaaS, e-commerce, etc.)
+2. **Recommend Component Solution**:
+   - Suggest a solution based on analysis (custom / shadcn/ui / Ant Design / other)
+   - Auto-detect existing library dependencies and suggest continuing with them
+   - User can accept the recommendation or specify another
+   - If user already specified a library in the command, skip recommendation
+3. Confirm with user: theme mode (single / light-dark toggle), style preferences
+4. Design color system, typography, component styles
+5. Generate UI showcase based on the component solution:
+   - **Custom components**: Hand-write all component implementations
+   - **Component library**: Use library components + project theme configuration
+6. Iterate with user
 
-**输出位置**:
+**Output location**:
 - Next.js: `app/ui-showcase/page.tsx`
 - Vite: `src/pages/UIShowcase.tsx`
 
-**详细模板**: 见 [assets/website.md](assets/website.md) 和 [assets/components.md](assets/components.md)
+**Templates**: See [assets/website.md](assets/website.md) and [assets/components.md](assets/components.md)
+**Library guide**: See [assets/library-guide.md](assets/library-guide.md)
 
 ---
 
-### spec - 生成规范文档
+### spec - Generate Spec Document
 
-**前提**: 已有确认的 Demo
+**Prerequisite**: Confirmed Demo exists
 
-**输出**:
-1. 规范文档: `doc/UI设计规范.md`
-2. 项目集成: 更新 CLAUDE.md 引用规范
+**Output**:
+1. Spec document: `doc/UI设计规范.md`
+2. Project integration: Update CLAUDE.md with spec reference
 
-**流程**:
-1. 读取 Demo 代码，提取设计决策
-2. 生成结构化规范文档
-3. 更新 CLAUDE.md 添加规范引用
-
----
-
-### implement - 按规范实现功能
-
-**前提**: 项目已有 UI 规范
-
-**流程**:
-1. **必须**先读取项目的 UI 规范文档
-2. 按规范实现用户请求的功能
-3. 确保颜色、间距、组件样式符合规范
-
-**关键**: 实现前必须加载规范，不要凭记忆实现。
+**Flow**:
+1. Read Demo code, extract design decisions
+2. **Record component solution**: Document the chosen solution in the spec
+   - Solution type (custom / library name)
+   - Library version (if applicable)
+   - Theme configuration method and file path
+   - Custom component list and component mapping table
+3. Generate structured spec document
+4. Update CLAUDE.md with spec reference
 
 ---
 
-### check - 检查规范遵守
+### implement - Build Features Per Spec
 
-**输入**: 要检查的文件或目录
+**Prerequisite**: Project has a UI spec
 
-**流程**:
-1. 读取项目 UI 规范
-2. 扫描指定代码
-3. 输出违规报告
+**Flow**:
+1. **Must** read the project's UI spec document first
+2. **Identify component solution**: Read the component solution section in the spec
+   - If library: prefer library components, do not hand-write equivalents
+   - If a component not in the library is needed: build following the library's extension patterns
+   - Theme customization goes through the library's configuration system
+3. Implement the user's requested feature per spec
+4. Ensure colors, spacing, and component styles comply with the spec
 
-**输出格式**:
+**Key**: Always load the spec before implementing. Never rely on memory. When using a library, use the library's component API.
+
+---
+
+### check - Audit Spec Compliance
+
+**Input**: File or directory to check
+
+**Flow**:
+1. Read the project's UI spec
+2. Identify the component solution type
+3. Scan the specified code
+4. **Library-specific checks** (only when using a component library):
+   - Hand-written components that duplicate library components
+   - Theme customization bypassing the library's configuration system
+   - Incorrect library component prop usage
+5. Output violation report
+
+**Output format**:
 ```
-## 检查结果
+## Check Results
 
-### 违规项
-- [文件:行号] 问题描述
+### Violations
+- [file:line] Issue description
 
-### 建议修复
-- 具体修复建议
+### Library Violations (if applicable)
+- [file:line] Hand-wrote a component available in the library
+- [file:line] Directly overrode component styles; should use theme config
+
+### Suggested Fixes
+- Specific fix recommendations
 ```
 
 ---
 
-### iterate - 迭代更新规范
+### iterate - Update the Spec
 
-**触发场景**: 发现规范缺失或需要新增组件
+**Trigger**: Missing spec coverage, new component needed, or switching component solution
 
-**流程**:
-1. 与用户确认需要补充的内容
-2. 更新规范文档
-3. 更新 Demo 展示页面
-4. 同步更新相关实现代码
-
----
-
-## 设计原则（通用）
-
-### 颜色系统
-- **主色调**: Primary, Secondary, Background
-- **文本色**: Heading, Body, Muted（多层级）
-- **品牌强调色**: 用于业务场景的正面/负面对比
-- **系统反馈色**: Success, Error, Warning, Info
-
-### 排版
-- 标题使用 Serif 字体，正文使用 Sans-serif
-- 建立清晰的字号层级（Display → H1 → H2 → Body → Small）
-
-### 组件样式
-- 统一的圆角体系（如 xl, 2xl, 3xl, full）
-- 统一的间距规律（4px 倍数）
-- 一致的过渡动画
-
-### 响应式
-- Mobile-first 设计
-- 关键断点：sm(640px), md(768px), lg(1024px)
+**Flow**:
+1. Confirm with user what needs to be added/modified
+2. If switching component solution, flag components that need migration
+3. Update spec document
+4. Update Demo showcase page
+5. Sync related implementation code
 
 ---
 
-## 文件结构
+## Design Principles (General)
+
+### Component Solution
+- **Custom components**: Hand-write all UI components, full control
+- **Component library**: Use an existing library (shadcn/ui, Ant Design, Element Plus, etc.)
+- Choice is made during demo stage, recorded in the spec document
+- All subsequent stages automatically follow this choice
+
+### Color System
+- **Primary colors**: Primary, Secondary, Background
+- **Text colors**: Heading, Body, Muted (multiple levels)
+- **Brand accent**: For positive/negative business comparisons
+- **System feedback**: Success, Error, Warning, Info
+
+### Typography
+- Headings use Serif fonts, body uses Sans-serif
+- Clear type scale hierarchy (Display → H1 → H2 → Body → Small)
+
+### Component Styles
+- Unified border radius system (e.g., xl, 2xl, 3xl, full)
+- Consistent spacing rhythm (multiples of 4px)
+- Consistent transition animations
+
+### Responsive
+- Mobile-first design
+- Key breakpoints: sm(640px), md(768px), lg(1024px)
+
+---
+
+## File Structure
 
 ```
 ui-design-workflow/
-├── SKILL.md              # 本文件（概览）
-├── README.md             # 用户文档
+├── SKILL.md              # This file (overview)
+├── README.md             # User documentation
 ├── assets/
-│   ├── website.md        # 官网模板结构
-│   └── components.md     # 组件库模板
+│   ├── website.md        # Landing page template structure
+│   ├── components.md     # Component library template
+│   ├── design-principles.md  # UI design principles
+│   ├── spec-template.md  # Spec document template
+│   └── library-guide.md  # Component library integration guide
 └── references/
-    └── modes.md          # 各模式详细说明
+    └── modes.md          # Detailed mode specifications
 ```
 
 ---
 
-## 快速决策
+## Quick Decision Guide
 
-**用户说"设计 UI"** → 用 `demo`
-**用户说"生成规范"** → 用 `spec`
-**用户说"实现某功能"** → 用 `implement`（先读规范）
-**用户说"检查代码"** → 用 `check`
-**用户说"新增组件规范"** → 用 `iterate`
+**User says "design UI"** → Use `demo` (analyze project, recommend component solution)
+**User says "use shadcn/ui"** → Use `demo` (skip recommendation, use specified library)
+**User says "generate spec"** → Use `spec`
+**User says "implement feature"** → Use `implement` (read spec first, identify component solution)
+**User says "check code"** → Use `check`
+**User says "add component spec"** → Use `iterate`
+**User says "switch to Ant Design"** → Use `iterate` (switch component solution)

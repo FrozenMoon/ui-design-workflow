@@ -1,57 +1,57 @@
-# 官网模板结构
+# Website Template Structure
 
-Demo 模式 Tab 1（成品展示）的模板结构。
+Template structure for Demo mode Tab 1 (Final Preview).
 
-## 页面结构
+## Page Structure
 
 ```
-1. Navigation（导航栏）
-   - Logo + 产品名
-   - 导航链接
-   - CTA 按钮（可选）
+1. Navigation (Navbar)
+   - Logo + Product name
+   - Navigation links
+   - CTA button (optional)
 
-2. Hero Section（英雄区）
-   - 大标题：产品名 + 核心价值主张
-   - 副标题：一句话说明产品是什么
-   - CTA 按钮
-   - 可选：产品截图或演示动画占位
+2. Hero Section
+   - Main heading: Product name + core value proposition
+   - Subheading: One-line description of what the product is
+   - CTA button
+   - Optional: Product screenshot or demo animation placeholder
 
-3. Why Needed Section（为什么需要）
-   - 对比传统方式 vs 本产品
-   - 左右两列对比卡片
+3. Why Needed Section
+   - Compare traditional approach vs. this product
+   - Side-by-side comparison cards
 
-4. Features Section（核心特性）
-   - 左右交替布局（文字 + 插图）
-   - 3-4 个特性，每个包含：
-     - 标题
-     - 描述
-     - 右侧配图/动画
+4. Features Section (Core Features)
+   - Alternating left-right layout (text + illustration)
+   - 3-4 features, each including:
+     - Title
+     - Description
+     - Accompanying image/animation on the opposite side
 
-5. Use Cases Section（使用场景）
-   - 3-4 个场景卡片
-   - 每个：图标 + 标题 + 简短描述
+5. Use Cases Section
+   - 3-4 use case cards
+   - Each: Icon + Title + Brief description
 
-6. CTA Section（行动号召）
-   - 标题：鼓励用户行动
-   - CTA 按钮
+6. CTA Section (Call to Action)
+   - Heading: Encourage users to take action
+   - CTA button
 
-7. Footer（页脚）
-   - 多列链接布局
-   - 版权信息
+7. Footer
+   - Multi-column link layout
+   - Copyright information
 ```
 
-## 内容填充策略
+## Content Strategy
 
-根据项目类型调整文案风格：
+Adjust the copy style based on project type:
 
-| 项目类型 | 文案风格 |
-|---------|---------|
-| B2B 工具 | 强调效率、专业、ROI |
-| C2C 应用 | 强调易用、体验、情感 |
-| 开发者工具 | 强调技术细节、集成简单 |
-| 内容网站 | 强调内容质量、阅读体验 |
+| Project Type | Copy Style |
+|-------------|------------|
+| B2B tool | Emphasize efficiency, professionalism, ROI |
+| C2C application | Emphasize ease of use, experience, emotion |
+| Developer tool | Emphasize technical details, easy integration |
+| Content website | Emphasize content quality, reading experience |
 
-## 示例代码结构
+## Example Code Structure
 
 ```tsx
 export default function ProductDemo() {
@@ -69,9 +69,9 @@ export default function ProductDemo() {
 }
 ```
 
-## 注意事项
+## Important Notes
 
-- Hero 标题不超过 10 个字
-- 每个 Feature 描述不超过 2 行
-- CTA 按钮文案要有行动感（"立即开始"而非"了解更多"）
-- 保持视觉层级清晰，避免信息过载
+- Hero heading should not exceed 10 words
+- Each Feature description should not exceed 2 lines
+- CTA button copy should be action-oriented ("Get Started" rather than "Learn More")
+- Maintain clear visual hierarchy; avoid information overload
