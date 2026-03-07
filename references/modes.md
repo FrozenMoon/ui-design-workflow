@@ -135,7 +135,7 @@ Confirmed Demo code
 
 ### Output
 
-1. **Spec Document**: `doc/UI设计规范.md` (includes component solution section)
+1. **Spec Document**: `doc/ui-design-spec.md` (includes component solution section)
 2. **Project Integration**: Update CLAUDE.md
 
 ### Spec Document Structure
@@ -182,7 +182,7 @@ Add the following content:
 ```markdown
 ## UI Design Spec
 
-This project follows the design spec defined in `doc/UI设计规范.md`.
+This project follows the design spec defined in `doc/ui-design-spec.md`.
 
 When developing UI-related features, you must:
 1. Read the UI Design Spec first
@@ -319,6 +319,6 @@ Changes:
 - [Added/Modified/Migrated] Component Name: Details
 
 Files updated:
-- doc/UI设计规范.md
+- doc/ui-design-spec.md
 - app/ui-showcase/page.tsx (if applicable)
 ```

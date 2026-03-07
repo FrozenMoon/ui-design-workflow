@@ -2,10 +2,10 @@
 name: ui-design-workflow
 description: >
   MUST use when implementing UI components or frontend pages in this project.
-  Triggers: 实现页面, 开发UI, 写组件, 前端开发, designing UI, implement page,
-  create component, build interface, style page, frontend development,
-  button, form, modal, toast, card, input, 样式, 界面,
-  shadcn, ant design, antd, element plus, 组件库, UI库, component library.
+  Triggers: designing UI, implement page, develop UI, write component, frontend development,
+  create component, build interface, style page,
+  button, form, modal, toast, card, input, styling, interface,
+  shadcn, ant design, antd, element plus, component library, UI library.
   Before writing any UI code, load this skill to read the project's design spec.
 ---
 
@@ -76,7 +76,7 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
 **Prerequisite**: Confirmed Demo exists
 
 **Output**:
-1. Spec document: `doc/UI设计规范.md`
+1. Spec document: `doc/ui-design-spec.md`
 2. Project integration: Update CLAUDE.md with spec reference
 
 **Flow**:
