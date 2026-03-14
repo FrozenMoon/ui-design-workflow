@@ -212,10 +212,11 @@ After design direction is confirmed, create real component files:
 
 After component files are created, build **two separate pages** that import them:
 
-1. **Landing Page Demo** (`/ui-showcase`): A real product page built with the components. Include a subtle "View Component Library →" link (e.g., in footer or corner).
-2. **Component Library** (`/ui-components`): Import and render each component in all variants/states. Include a "← Back to Demo" link at the top.
-3. Both pages use the **same real components** — no separate inline implementations
-4. Do NOT use tabs — these are independent pages with mutual navigation links
+1. **Landing Page Demo** (`/ui-showcase`): A real product page built with the components.
+2. **Component Library** (`/ui-components`): Import and render each component in all variants/states.
+3. Both pages share a **navigation bar** with links to each other (e.g., "Demo" / "Components" nav items). The nav bar should match the project's design style.
+4. Both pages use the **same real components** — no separate inline implementations
+5. Do NOT use tabs — these are independent pages
 
 ### Output Completion Prompt
 

@@ -83,8 +83,9 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
    - Components support all variants, states, transitions, and accessibility
    - Skip components that already exist in the project
 6. **Create two showcase pages** (separate pages, NOT tabs):
-   - **Landing Page Demo** (`/ui-showcase`): Product page built with real components. Subtle link to Component Library in footer.
-   - **Component Library** (`/ui-components`): All components in every variant/state. Link back to Landing Page Demo.
+   - **Landing Page Demo** (`/ui-showcase`): Product page built with real components.
+   - **Component Library** (`/ui-components`): All components in every variant/state.
+   - Both pages share a **navigation bar** with links to each other.
    - **Include existing project components** in Component Library page (do not modify them)
    - **Apply motion**: Orchestrate page load animations with staggered reveals
    - **Apply atmosphere**: Add background textures, gradients, or visual depth

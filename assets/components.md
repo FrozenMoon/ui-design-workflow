@@ -78,8 +78,8 @@ The demo phase produces **two separate pages** (NOT tabs on a single page):
   - Component Library: `src/pages/UIComponents.tsx`
 
 **Navigation between pages**:
-- Landing Page Demo → Component Library: Place a "View Component Library →" link (e.g., in the footer or a floating corner button). Keep it subtle — do NOT break the landing page design with a prominent nav bar.
-- Component Library → Landing Page Demo: Place a "← Back to Demo" link at the top of the page.
+- Both pages share a **navigation bar** with links to each other (e.g., "Demo" / "Components" nav items)
+- The nav bar should match the project's design style — it is part of the design, not a generic browser-style bar
 
 ---
 
@@ -148,7 +148,6 @@ The showcase page itself should reflect the chosen aesthetic direction — it is
 
 ```tsx
 // Landing page demo — a real product page built with the components
-// Include a subtle link to the Component Library page
 import Link from 'next/link' // or use <a> / router for Vite
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -158,15 +157,16 @@ import { Input } from '@/components/ui/input'
 export default function UIShowcase() {
   return (
     <>
-      <Navigation />
+      {/* Shared nav bar with link to Component Library */}
+      <nav>
+        <Link href="/ui-showcase">Demo</Link>
+        <Link href="/ui-components">Components</Link>
+      </nav>
       <HeroSection />
       <FeaturesSection />
       <UseCasesSection />
       <CTASection />
-      <Footer>
-        {/* Subtle link to Component Library */}
-        <Link href="/ui-components">View Component Library →</Link>
-      </Footer>
+      <Footer />
     </>
   )
 }
@@ -190,8 +190,11 @@ import { Skeleton } from '@/components/ui/skeleton'
 export default function UIComponents() {
   return (
     <div>
-      {/* Back navigation */}
-      <Link href="/ui-showcase">← Back to Demo</Link>
+      {/* Shared nav bar with link back to Demo */}
+      <nav>
+        <Link href="/ui-showcase">Demo</Link>
+        <Link href="/ui-components">Components</Link>
+      </nav>
 
       <section>
         <h2>Color System</h2>
