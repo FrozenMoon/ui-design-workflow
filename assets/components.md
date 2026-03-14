@@ -48,13 +48,11 @@ src/components/ui/
 ├── modal.tsx         # Modal with overlay and animation
 ├── toast.tsx         # Toast notification system
 ├── select.tsx        # Dropdown select
-├── checkbox.tsx      # Custom styled checkbox
-├── radio.tsx         # Custom styled radio
 ├── switch.tsx        # Animated toggle switch
-├── alert.tsx         # Alert with semantic colors
-├── skeleton.tsx      # Loading skeleton
-└── spinner.tsx       # Loading spinner
+└── skeleton.tsx      # Loading skeleton
 ```
+
+> **These 8 components are the required core set.** All 8 MUST be created during the demo phase. Additional components (checkbox, radio, alert, spinner, etc.) can be added later via `iterate`.
 
 **Each component file must**:
 - Export a reusable component with typed props
@@ -76,7 +74,7 @@ The showcase page **imports** the components from Output 1 and renders them in a
 
 ## Showcase Sections
 
-The following sections define the **minimum set** for a complete showcase. Skip any section where the project already has an equivalent component.
+The following sections correspond to the 8 core components. **All sections are required.** Skip only if the project already has an equivalent component.
 
 ### 1. Color System
 - Background colors (main background, surface/card backgrounds)
@@ -101,13 +99,12 @@ The following sections define the **minimum set** for a complete showcase. Skip 
 - Show icon variants
 
 ### 4. Form Components
-- Import `Input`, `Select`, `Checkbox`, `Radio`, `Switch` from real component files
+- Import `Input`, `Select`, `Switch` from real component files
 - Show all states: Normal, Focus, Error, Disabled
 
 ### 5. Feedback Components
-- Import `Toast`, `Alert`, `Modal` from real component files
+- Import `Toast`, `Modal` from real component files
 - Toast: Trigger buttons to show each type (Success, Error, Warning, Info)
-- Alert: Display all types inline
 - Modal: Trigger button to open
 
 ### 6. Cards
@@ -116,8 +113,8 @@ The following sections define the **minimum set** for a complete showcase. Skip 
 - Show interactive hover effects
 
 ### 7. Loading States
-- Import `Spinner`, `Skeleton` from real component files
-- Show size variants
+- Import `Skeleton` from real component files
+- Show size variants and different shapes (text line, avatar, card)
 
 ---
 
@@ -138,16 +135,14 @@ The showcase page itself should reflect the chosen aesthetic direction — it is
 
 ```tsx
 // Showcase page IMPORTS real components — does NOT rewrite them
+// All 8 core components MUST be imported and displayed
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { Modal } from '@/components/ui/modal'
 import { Toast } from '@/components/ui/toast'
 import { Select } from '@/components/ui/select'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Switch } from '@/components/ui/switch'
-import { Alert } from '@/components/ui/alert'
-import { Spinner } from '@/components/ui/spinner'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export default function UIShowcase() {
@@ -191,14 +186,11 @@ export default function UIShowcase() {
         <Input label="Error" error="This field is required" />
         <Input label="Disabled" disabled />
         <Select options={[...]} />
-        <Checkbox label="Option A" />
         <Switch label="Enable notifications" />
       </section>
 
       <section>
         <h2>Feedback</h2>
-        <Alert variant="success" message="Operation completed" />
-        <Alert variant="error" message="Something went wrong" />
         <Button onClick={() => toast.success('Saved!')}>Show Toast</Button>
         <Button onClick={() => setModalOpen(true)}>Open Modal</Button>
       </section>
@@ -212,10 +204,9 @@ export default function UIShowcase() {
 
       <section>
         <h2>Loading</h2>
-        <Spinner size="sm" />
-        <Spinner size="md" />
-        <Spinner size="lg" />
         <Skeleton width="100%" height="20px" />
+        <Skeleton width="60%" height="20px" />
+        <Skeleton variant="avatar" />
       </section>
     </div>
   )
