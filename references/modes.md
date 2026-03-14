@@ -208,13 +208,14 @@ After design direction is confirmed, create real component files:
 3. **Skip components that already exist** in the project (found during scan)
 4. **For component library mode**: Install/add library components, apply theme configuration
 
-### Showcase Page Creation Step
+### Showcase Pages Creation Step
 
-After component files are created, build the showcase page that imports them:
+After component files are created, build **two separate pages** that import them:
 
-1. **Tab 1 (Landing Page)**: Build using the real components created above
-2. **Tab 2 (Component Library)**: Import and render each component in all variants/states
-3. Both tabs use the **same components** — no separate inline implementations
+1. **Landing Page Demo** (`/ui-showcase`): A real product page built with the components. Include a subtle "View Component Library →" link (e.g., in footer or corner).
+2. **Component Library** (`/ui-components`): Import and render each component in all variants/states. Include a "← Back to Demo" link at the top.
+3. Both pages use the **same real components** — no separate inline implementations
+4. Do NOT use tabs — these are independent pages with mutual navigation links
 
 ### Output Completion Prompt
 
@@ -230,23 +231,28 @@ Files created:
 - src/components/ui/card.tsx
 - ... (N total)
 
-📄 Showcase Page: [app/ui-showcase/page.tsx]
+📄 Pages:
+- [app/ui-showcase/page.tsx] — Landing Page Demo
+- [app/ui-components/page.tsx] — Component Library
 
-Contents:
-📱 Tab 1: Finished Product (Landing Page)
+📱 Landing Page Demo (/ui-showcase):
 - Hero, Features, Use Cases, CTA, Footer
 - Built with the real components above
+- Link to Component Library in footer
 
-🎨 Tab 2: Component Library
+🎨 Component Library (/ui-components):
 - Color system, Typography
-- All components in all variants/states
+- All 8 core components in all variants/states
 - Existing project components: [list from scan]
+- Link back to Landing Page Demo
 
 Existing Components:
-- [N] components found and included in showcase
+- [N] components found and included in Component Library
 - [Assessment summary: consistent / needs attention]
 
-Preview: Visit /ui-showcase after starting the dev server
+Preview:
+- Landing Page: Visit /ui-showcase
+- Component Library: Visit /ui-components
 
 You can continue adjusting colors, border radius, spacing, etc.
 When satisfied, use /ui-design-workflow spec to generate the spec document.

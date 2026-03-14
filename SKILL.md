@@ -37,9 +37,9 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
 
 **Output**:
 - **Real component files** in `src/components/ui/` (reusable across the project)
-- **Showcase page** with two tabs that imports and displays the components:
-  - **Tab 1: Finished Product** - Complete landing page built with the real components
-  - **Tab 2: Component Library** - All components rendered in various states
+- **Two showcase pages** (separate pages, NOT tabs):
+  - **Landing Page Demo** (`/ui-showcase`) - Complete product page built with the real components
+  - **Component Library** (`/ui-components`) - All components rendered in various states, independently iterable
 
 **Flow selection** (auto-detect):
 - Project has existing spec → **Flow B** (import existing components, generate demo)
@@ -82,10 +82,10 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
    - Create each component as a real file in `src/components/ui/`
    - Components support all variants, states, transitions, and accessibility
    - Skip components that already exist in the project
-6. **Create showcase page** that imports the components:
-   - Tab 1: Landing page built with the real components
-   - Tab 2: All components rendered in every variant/state
-   - **Include existing project components** in Tab 2 (do not modify them)
+6. **Create two showcase pages** (separate pages, NOT tabs):
+   - **Landing Page Demo** (`/ui-showcase`): Product page built with real components. Subtle link to Component Library in footer.
+   - **Component Library** (`/ui-components`): All components in every variant/state. Link back to Landing Page Demo.
+   - **Include existing project components** in Component Library page (do not modify them)
    - **Apply motion**: Orchestrate page load animations with staggered reveals
    - **Apply atmosphere**: Add background textures, gradients, or visual depth
 7. **Run anti-AI-slop checklist** (see [references/frontend-aesthetics.md](references/frontend-aesthetics.md))
@@ -98,8 +98,8 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
 
 **Output locations**:
 - Components: `src/components/ui/*.tsx`
-- Showcase (Next.js): `app/ui-showcase/page.tsx`
-- Showcase (Vite): `src/pages/UIShowcase.tsx`
+- Landing Page Demo (Next.js): `app/ui-showcase/page.tsx` | (Vite): `src/pages/UIShowcase.tsx`
+- Component Library (Next.js): `app/ui-components/page.tsx` | (Vite): `src/pages/UIComponents.tsx`
 
 **Templates**: See [assets/website.md](assets/website.md) and [assets/components.md](assets/components.md)
 **Library guide**: See [assets/library-guide.md](assets/library-guide.md)

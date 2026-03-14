@@ -62,13 +62,24 @@ src/components/ui/
 - Include appropriate transitions and animations
 - Be accessible (keyboard navigation, ARIA attributes, focus states)
 
-### Output 2: Showcase Page
+### Output 2: Two Showcase Pages
 
-The showcase page **imports** the components from Output 1 and renders them in all variants/states.
+The demo phase produces **two separate pages** (NOT tabs on a single page):
 
-**Showcase file location**:
-- Next.js: `app/ui-showcase/page.tsx`
-- Vite: `src/pages/UIShowcase.tsx`
+1. **Landing Page Demo** — A real product landing page built with the components. Looks and feels like a finished product. Includes a subtle navigation link to the Component Library page.
+2. **Component Library** — All components rendered in every variant/state. A standalone reference page that can be iterated on independently. Includes a link back to the Landing Page Demo.
+
+**Page locations**:
+- Next.js:
+  - Landing Page Demo: `app/ui-showcase/page.tsx`
+  - Component Library: `app/ui-components/page.tsx`
+- Vite:
+  - Landing Page Demo: `src/pages/UIShowcase.tsx`
+  - Component Library: `src/pages/UIComponents.tsx`
+
+**Navigation between pages**:
+- Landing Page Demo → Component Library: Place a "View Component Library →" link (e.g., in the footer or a floating corner button). Keep it subtle — do NOT break the landing page design with a prominent nav bar.
+- Component Library → Landing Page Demo: Place a "← Back to Demo" link at the top of the page.
 
 ---
 
@@ -131,11 +142,42 @@ The showcase page itself should reflect the chosen aesthetic direction — it is
 
 ---
 
-## Code Structure Example (Showcase Page)
+## Code Structure Examples
+
+### Landing Page Demo (`/ui-showcase`)
 
 ```tsx
-// Showcase page IMPORTS real components — does NOT rewrite them
-// All 8 core components MUST be imported and displayed
+// Landing page demo — a real product page built with the components
+// Include a subtle link to the Component Library page
+import Link from 'next/link' // or use <a> / router for Vite
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+// ... import other components as needed
+
+export default function UIShowcase() {
+  return (
+    <>
+      <Navigation />
+      <HeroSection />
+      <FeaturesSection />
+      <UseCasesSection />
+      <CTASection />
+      <Footer>
+        {/* Subtle link to Component Library */}
+        <Link href="/ui-components">View Component Library →</Link>
+      </Footer>
+    </>
+  )
+}
+```
+
+### Component Library (`/ui-components`)
+
+```tsx
+// Component Library page — all 8 core components in all variants/states
+// All 8 MUST be imported and displayed
+import Link from 'next/link' // or use <a> / router for Vite
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
@@ -145,11 +187,11 @@ import { Select } from '@/components/ui/select'
 import { Switch } from '@/components/ui/switch'
 import { Skeleton } from '@/components/ui/skeleton'
 
-export default function UIShowcase() {
+export default function UIComponents() {
   return (
     <div>
-      {/* Tab 1: Landing Page Demo (uses the same components) */}
-      {/* Tab 2: Component Library */}
+      {/* Back navigation */}
+      <Link href="/ui-showcase">← Back to Demo</Link>
 
       <section>
         <h2>Color System</h2>
@@ -163,28 +205,17 @@ export default function UIShowcase() {
 
       <section>
         <h2>Buttons</h2>
-        <div>
-          <Button variant="primary">Primary</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="ghost">Ghost</Button>
-          <Button variant="outline">Outline</Button>
-        </div>
-        <div>
-          <Button size="sm">Small</Button>
-          <Button size="default">Medium</Button>
-          <Button size="lg">Large</Button>
-        </div>
-        <div>
-          <Button disabled>Disabled</Button>
-          <Button loading>Loading</Button>
-        </div>
+        <Button variant="primary">Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="ghost">Ghost</Button>
+        <Button variant="outline">Outline</Button>
+        {/* sizes, states, icon variants */}
       </section>
 
       <section>
         <h2>Form Components</h2>
         <Input label="Email" placeholder="your@email.com" />
         <Input label="Error" error="This field is required" />
-        <Input label="Disabled" disabled />
         <Select options={[...]} />
         <Switch label="Enable notifications" />
       </section>
@@ -199,19 +230,19 @@ export default function UIShowcase() {
         <h2>Cards</h2>
         <Card variant="shadow">Shadow Card</Card>
         <Card variant="bordered">Bordered Card</Card>
-        <Card variant="flat">Flat Card</Card>
       </section>
 
       <section>
         <h2>Loading</h2>
         <Skeleton width="100%" height="20px" />
-        <Skeleton width="60%" height="20px" />
         <Skeleton variant="avatar" />
       </section>
     </div>
   )
 }
 ```
+
+> **CRITICAL**: Landing Page Demo and Component Library are **two separate pages** with mutual navigation links. Do NOT use tabs. Do NOT merge them into a single page.
 
 ---
 
