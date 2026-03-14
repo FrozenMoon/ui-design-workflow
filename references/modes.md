@@ -133,32 +133,54 @@ Atmosphere: [e.g., "Subtle grain texture, soft radial highlights, staggered entr
 Please confirm this direction, or tell me what you'd like to adjust.
 ```
 
-### Confirmation Round 1: Style Preferences (BLOCKING — Interactive)
+### Confirmation Round 1: Style Preferences (BLOCKING)
 
-> ⛔ **BLOCKING CHECKPOINT**: You MUST ask the following questions **one at a time** using the `AskUserQuestion` tool (interactive selection UI). DO NOT dump all questions in a single text message. DO NOT assume defaults. DO NOT skip. DO NOT proceed to design thinking or code generation without the user's answers.
+> ⛔ **BLOCKING CHECKPOINT**: You MUST ask the following questions and WAIT for the user's answers. DO NOT assume defaults. DO NOT skip. DO NOT proceed to design thinking or code generation without the user's answers.
 
 **Component solution is NOT asked here** — it is auto-determined from the project analysis in Step 2. Do NOT ask users to choose a component solution.
 
-**Question sequence** (ask each using `AskUserQuestion`, wait for answer, then ask the next):
+**How to ask**: Use whichever method is available in your environment:
+- If you have an interactive question tool (e.g., `AskUserQuestion`): ask questions **one at a time** using the interactive UI with selectable options.
+- If you do NOT have an interactive tool: output all questions in a **single structured text message** (see text fallback template below), then STOP and WAIT for the user to reply.
+
+**Question sequence**:
 
 #### Q1: Aesthetic Style Direction
-- Use `AskUserQuestion` with 3 dynamically generated style options
-- Each option label: style name (e.g., "Editorial")
-- Each option description: one-sentence vibe description (e.g., "Magazine-like typographic tension, bold headlines with refined body text, content-driven visual rhythm")
+- Provide 3 dynamically generated style options
+- Each option: style name + one-sentence vibe description (e.g., "Editorial — Magazine-like typographic tension, bold headlines with refined body text")
 - Options are generated from project type and context. Offer 3 **diverse** directions (don't offer 3 variants of the same style)
-- The user can always pick "Other" to describe their own direction
+- The user can always describe their own direction
 
 #### Q2: Theme Mode
-- Use `AskUserQuestion` with fixed options:
-  - "Single theme (light)" — "Clean, bright interface with one color scheme"
-  - "Single theme (dark)" — "Dark background with light text, modern feel"
-  - "Light + Dark toggle" — "User can switch between light and dark modes"
+- Fixed options:
+  - Single theme (light) — Clean, bright interface with one color scheme
+  - Single theme (dark) — Dark background with light text, modern feel
+  - Light + Dark toggle — User can switch between light and dark modes
 
 #### Q3: Specific Preferences (optional)
-- Use `AskUserQuestion` with options like:
-  - "No specific preferences" — "Let you decide based on the style direction"
-  - "I have preferences" — "I'll describe my preferred colors, fonts, mood, or reference sites"
-- If user picks "I have preferences" or "Other", they can type their details
+- Ask if user has any preferences for colors, fonts, mood, or reference websites
+- User can say "none" or provide details
+
+**Text fallback template** (for agents without interactive UI):
+
+```
+🎯 Before I start designing, I need to confirm your style preferences:
+
+1️⃣ Aesthetic Style Direction
+   A. [Style A] — [One-sentence vibe description]
+   B. [Style B] — [Description]
+   C. [Style C] — [Description]
+   D. Or describe your own direction
+
+2️⃣ Theme Mode
+   A. Single theme (light)
+   B. Single theme (dark)
+   C. Light + Dark toggle
+
+3️⃣ Any specific preferences? (colors, fonts, mood, reference websites, etc.)
+
+Please reply with your choices (e.g., "1A, 2C, 3: no preferences").
+```
 
 After collecting all answers, proceed to Design Thinking (Step 4) and then Confirmation Round 2.
 
@@ -168,10 +190,10 @@ After collecting all answers, proceed to Design Thinking (Step 4) and then Confi
 
 After receiving the user's answers from Round 1, execute the Design Thinking process (see above) and present the result. The design direction MUST be informed by the user's chosen aesthetic style from Round 1.
 
-Use `AskUserQuestion` to present the design direction for confirmation. Put the full design direction in the question text:
+Present the design direction and ask for confirmation:
 
 ```
-Based on your chosen style "[User's style choice]", here's the design direction:
+🎨 Design Direction (based on your chosen style: "[User's style choice]"):
 
 Aesthetic: [Specific direction]
 Memorable Element: [The ONE thing people will remember]
@@ -181,12 +203,11 @@ Color Mood: [Palette description that matches the chosen aesthetic]
 Border Radius: [Inferred from style]
 Atmosphere: [Background treatments, motion, visual depth]
 
-Does this direction work for you?
+Does this direction work for you? Reply "OK" to proceed, or tell me what to adjust.
 ```
 
-Options:
-- "Looks good, proceed" — "Start creating components with this direction"
-- "Adjust some aspects" — "I'll tell you what to change"
+- If using interactive UI: present as a question with "Looks good, proceed" / "Adjust some aspects" options.
+- If using text: output the block above and STOP. WAIT for user reply before writing any code.
 
 **Rules for generating content**:
 - ALL choices (fonts, colors, atmosphere) must be coherent with the user's aesthetic style from Round 1

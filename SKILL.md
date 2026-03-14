@@ -69,14 +69,14 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
    - Auto-detect existing library dependencies and continue with them
    - If user already specified a library in the command, use it directly
    - **Do NOT ask the user to choose** — use the recommended solution by default. Advanced users will override if needed.
-3. **⛔ Confirmation Round 1 (BLOCKING — Interactive)** — Ask the user **one question at a time** using the `AskUserQuestion` tool (interactive selection UI). DO NOT dump all questions in a single text message. Questions: aesthetic style direction → theme mode → specific preferences. Options are dynamically generated. See [references/modes.md](references/modes.md) for the exact question sequence.
+3. **⛔ Confirmation Round 1 (BLOCKING)** — Ask the user about: aesthetic style direction → theme mode → specific preferences. Use interactive UI if available, otherwise use structured text with selectable options. WAIT for user answers. See [references/modes.md](references/modes.md) for question details and text fallback template.
 4. **Design Thinking** (CRITICAL — read [references/frontend-aesthetics.md](references/frontend-aesthetics.md)):
    - Based on **user's confirmed style direction from Round 1**, choose a bold aesthetic direction
    - Define the memorable element — what makes this design unforgettable?
    - Select distinctive typography (NEVER Inter/Roboto/Arial as primary font)
    - Build an emotional color palette (dominant + accent model, avoid AI cliches)
    - Plan atmospheric backgrounds and visual details — all coherent with the user's chosen style
-   - **⛔ Confirmation Round 2 (BLOCKING)** — Use `AskUserQuestion` to present the design direction (fonts, colors, atmosphere) for confirmation. All choices informed by Round 1. **DO NOT write code until user confirms.** See [references/modes.md](references/modes.md).
+   - **⛔ Confirmation Round 2 (BLOCKING)** — Present the design direction (fonts, colors, atmosphere) for confirmation. All choices informed by Round 1. **DO NOT write code until user confirms.** See [references/modes.md](references/modes.md).
 5. **Create real component files** (the single source of truth):
    - Set up design tokens as CSS variables
    - Create each component as a real file in `src/components/ui/`
