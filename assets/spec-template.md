@@ -8,11 +8,18 @@ This document defines the visual and interaction standards for [Project Name]. A
 
 > **Core principle — Less is More**: This spec defines the minimum viable set of design tokens. Each dimension (spacing, border-radius, shadows, etc.) uses the fewest levels necessary. Additional levels can be added through the `iterate` workflow when a genuine need arises. Do not add tokens "just in case."
 
+> **Single source of truth**: Design tokens and rules live in this spec. Component implementations live in the project code. This spec does NOT duplicate component code — use the Component Registry to find and read actual component files.
+
 ---
 
 ## 1. Design Philosophy
 
 [Core design language extracted from the Demo]
+
+### Aesthetic Direction
+- **Tone**: [Chosen aesthetic direction — e.g., "Editorial luxury with warm undertones"]
+- **Memorable Element**: [The ONE thing that makes this design distinctive — e.g., "Dramatic serif typography with oversized display text"]
+- **Mood**: [The emotion the design evokes — e.g., "Sophisticated warmth, refined craftsmanship"]
 
 ### Core Keywords
 - **[Keyword 1]**: [Description]
@@ -20,9 +27,15 @@ This document defines the visual and interaction standards for [Project Name]. A
 - **[Keyword 3]**: [Description]
 
 ### Design Goals
-- [Goal 1: e.g., Provide a clean and intuitive user experience]
-- [Goal 2: e.g., Maintain visual consistency and brand recognition]
-- [Goal 3: e.g., Ensure accessibility and inclusive design]
+- [Goal 1: e.g., Create a distinctive, memorable visual identity]
+- [Goal 2: e.g., Maintain cohesive aesthetic across all pages]
+- [Goal 3: e.g., Ensure accessibility without compromising creative vision]
+
+### Anti-patterns (Do NOT)
+- Use generic fonts (Inter, Roboto, Arial, Helvetica) as primary choices
+- Default to purple-on-white gradients or cliched AI color schemes
+- Create uniform centered-container layouts with no variation
+- Produce a design that could belong to any product
 
 ---
 
@@ -41,6 +54,7 @@ This document defines the visual and interaction standards for [Project Name]. A
 | Property | Value |
 | :--- | :--- |
 | **Config File** | [Path, e.g., "tailwind.config.ts"; enter "N/A" for custom] |
+| **CSS Variables File** | [Path, e.g., "src/styles/globals.css"] |
 | **Configuration Method** | [CSS Variables / ConfigProvider / SCSS Variables / Hand-written styles] |
 
 ### Usage Rules
@@ -53,108 +67,93 @@ This document defines the visual and interaction standards for [Project Name]. A
 
 > The rules above do not apply when using a **custom solution**; all components are hand-written according to this spec.
 
-### Custom Component List
-
-The following components are not provided by the library and use custom implementations:
-
-| Component Name | Description | Reference Style |
-| :--- | :--- | :--- |
-| [Component Name] | [Purpose] | [Reference library component style] |
-
-### Component Mapping Table
-
-| Common Name | Library Component | Import Path |
-| :--- | :--- | :--- |
-| Button | [e.g., `<Button>`] | [e.g., `@/components/ui/button`] |
-| Input | [e.g., `<Input>`] | [e.g., `@/components/ui/input`] |
-| Card | [e.g., `<Card>`] | [e.g., `@/components/ui/card`] |
-| Modal | [e.g., `<Dialog>`] | [e.g., `@/components/ui/dialog`] |
-| Toast | [e.g., `<Sonner>`] | [e.g., `@/components/ui/sonner`] |
-| Select | [e.g., `<Select>`] | [e.g., `@/components/ui/select`] |
-| ... | ... | ... |
-
-> The mapping table is not required for **custom solutions**.
-
 ---
 
 ## 3. Color System
 
-### 2.1 Core Palette
+### Core Palette
 
-| Role | Variable Name | Value / CSS Class | Description |
-| :--- | :--- | :--- | :--- |
-| **Primary** | `primary` | `#000000` / `bg-primary` | Primary action points (buttons, links) |
-| **Secondary** | `secondary` | `#666666` / `bg-secondary` | Secondary action points |
-| **Background** | `background` | `#FFFFFF` / `bg-background` | Global background color |
-| **Card** | `card` | `#FAFAFA` / `bg-card` | Card/container background |
+| Role | Variable Name | Value | CSS Class | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| **Primary** | `--primary` | `[value]` | `bg-primary` | Primary brand color, CTAs |
+| **Primary Light** | `--primary-light` | `[value]` | `bg-primary-light` | Primary hover/light variant |
+| **Accent** | `--accent` | `[value]` | `bg-accent` | Sharp accent for emphasis |
+| **Background** | `--background` | `[value]` | `bg-background` | Global background |
+| **Surface** | `--surface` | `[value]` | `bg-surface` | Card/container background |
 
-### 2.2 Text Colors
+### Text Colors
 
-| Role | Variable Name | Value / CSS Class | Description |
-| :--- | :--- | :--- | :--- |
-| **Heading** | `foreground` | `#000000` / `text-foreground` | Headings, important text |
-| **Body** | `text-body` | `#333333` / `text-body` | Body content |
-| **Muted** | `muted-foreground` | `#999999` / `text-muted-foreground` | Supporting info, secondary text |
-| **Disabled** | `text-disabled` | `#CCCCCC` / `text-disabled` | Disabled state text |
+| Role | Variable Name | Value | CSS Class | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| **Primary Text** | `--foreground` | `[value]` | `text-foreground` | Headings, important text |
+| **Body Text** | `--text-body` | `[value]` | `text-body` | Body content |
+| **Muted Text** | `--text-muted` | `[value]` | `text-muted` | Supporting info |
 
-### 2.3 Functional Colors
+### Functional Colors
 
 Use sparingly; only for status feedback.
 
-| Role | Value / CSS Class | Description |
-| :--- | :--- | :--- |
-| **Success** | `#10B981` / `text-green-600` | Success state, confirmation actions |
-| **Error** | `#EF4444` / `text-red-600` | Error state, destructive actions |
-| **Warning** | `#F59E0B` / `text-amber-600` | Warning state, items requiring attention |
-| **Info** | `#3B82F6` / `text-blue-600` | Informational messages, general notifications |
+| Role | Value | CSS Class | Description |
+| :--- | :--- | :--- | :--- |
+| **Success** | `[value]` | `text-success` | Success state |
+| **Error** | `[value]` | `text-error` | Error state |
+| **Warning** | `[value]` | `text-warning` | Warning state |
+| **Info** | `[value]` | `text-info` | Informational |
 
-### 2.4 Color Usage Principles
+### Color Usage Principles
 
-- ✅ **Prefer** colors from the core palette
-- ✅ Use functional colors consistently (success = green, error = red)
-- ❌ **Do not** use bright colors in core UI (except functional colors)
-- ❌ **Do not** use more than 3 primary colors
+- ✅ All colors use CSS variables — never hardcode hex values in components
+- ✅ Dominant + accent model: primary establishes mood, accent creates focal points
+- ✅ Functional colors are used consistently (success = green, error = red)
+- ❌ Do not use more than 2 primary/accent colors
+- ❌ Do not use unmodified Tailwind gray scales — customize neutrals to match palette
 
 ---
 
 ## 4. Typography
 
-### 3.1 Font Families
+### Font Families
+
+> **Important**: Choose distinctive, characterful fonts. NEVER use generic fonts (Inter, Roboto, Arial, Helvetica) as primary choices.
 
 **Heading Font**:
-- Latin: [Font name, e.g., Inter, -apple-system, system-ui]
-- CJK: [Font name, e.g., PingFang SC, Microsoft YaHei]
+- Name: [Distinctive font name, e.g., Playfair Display, Clash Display, Fraunces]
+- Source: [Google Fonts / Adobe Fonts / Self-hosted]
+- CJK Fallback: [Font name, e.g., PingFang SC, Microsoft YaHei]
 - Font Stack: `[Full font-family definition]`
+- Character: [Why this font was chosen — e.g., "Strong serifs create editorial authority"]
 
 **Body Font**:
-- Latin: [Font name]
-- CJK: [Font name]
+- Name: [Refined body font, e.g., Source Serif Pro, Plus Jakarta Sans, DM Sans]
+- Source: [Google Fonts / Adobe Fonts / Self-hosted]
+- CJK Fallback: [Font name]
 - Font Stack: `[Full font-family definition]`
+- Character: [Why this font pairs well with the heading font]
 
-### 3.2 Type Scale
+### Type Scale
 
-| Level | Font Style | CSS Class | Size / Line Height | Weight | Usage |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Display** | Sans-serif | `text-4xl lg:text-6xl` | 48-60px / 1.1 | 700 | Landing page hero |
-| **H1** | Sans-serif | `text-3xl` | 30px / 1.2 | 600 | Page / section title |
-| **H2** | Sans-serif | `text-xl` | 20px / 1.4 | 600 | Card heading, sub-section |
-| **Body** | Sans-serif | `text-base` | 16px / 1.5 | 400 | Default body text |
-| **Small** | Sans-serif | `text-sm` | 14px / 1.5 | 400 | Buttons, inputs, secondary info |
+| Level | CSS Class | Size / Line Height | Weight | Usage |
+| :--- | :--- | :--- | :--- | :--- |
+| **Display** | `text-4xl lg:text-6xl` | 48-60px / 1.1 | 700 | Landing page hero |
+| **H1** | `text-3xl` | 30px / 1.2 | 600 | Page / section title |
+| **H2** | `text-xl` | 20px / 1.4 | 600 | Card heading, sub-section |
+| **Body** | `text-base` | 16px / 1.5 | 400 | Default body text |
+| **Small** | `text-sm` | 14px / 1.5 | 400 | Buttons, inputs, secondary info |
 
 > Add more levels (e.g., H3, Caption) through the `iterate` workflow when needed.
 
-### 3.3 Font Weight Standards
+### Font Weight Standards
 
 | Weight Name | Value | Usage |
 | :--- | :--- | :--- |
 | Regular | 400 | Body text, descriptions |
 | Semibold | 600 | Headings, buttons, emphasis |
 
-### 3.4 Typography Principles
+### Typography Principles
 
 - ✅ Use heavier font weights (600+) for headings
 - ✅ Use Regular (400) for body text
-- ✅ Line height should be at least 1.5 (readability)
+- ✅ Customize letter-spacing and line-height per font (defaults are rarely optimal)
 - ❌ Avoid using more than 2 font weights by default
 - ❌ Avoid all-caps text (UPPERCASE); it reduces readability
 
@@ -162,7 +161,7 @@ Use sparingly; only for status feedback.
 
 ## 5. Spacing & Border Radius
 
-### 4.1 Spacing Scale
+### Spacing Scale
 
 Based on a **[4px / 8px] grid system**.
 
@@ -175,7 +174,7 @@ Based on a **[4px / 8px] grid system**.
 
 > Finer values (e.g., 4px for icon-text gaps) can be used directly from the grid without a named token. Add more levels through `iterate` when needed.
 
-### 4.2 Border Radius
+### Border Radius
 
 | Token | Value | Tailwind Class | Usage |
 | :--- | :--- | :--- | :--- |
@@ -185,19 +184,18 @@ Based on a **[4px / 8px] grid system**.
 
 > Most components should share a single border-radius. Add more levels through `iterate` only when needed.
 
-### 4.3 Spacing & Border Radius Principles
+### Principles
 
 - ✅ All spacing values should conform to the grid system (multiples of [4/8]px)
 - ✅ Use smaller spacing between related elements, larger spacing between unrelated ones
 - ✅ Maintain consistent border radius (same radius for components of the same type)
 - ❌ Avoid odd spacing values (e.g., 7px, 13px)
-- ❌ Avoid border radius too small (< 4px); visually insignificant
 
 ---
 
 ## 6. Shadows & Animations
 
-### 5.1 Shadow System
+### Shadow System
 
 | Level | Tailwind Class | Box Shadow Value | Usage |
 | :--- | :--- | :--- | :--- |
@@ -205,326 +203,131 @@ Based on a **[4px / 8px] grid system**.
 | **Default** | `shadow` | `0 4px 6px rgba(0,0,0,0.1)` | Cards, elevated surfaces |
 | **Large** | `shadow-lg` | `0 10px 15px rgba(0,0,0,0.1)` | Dropdown, Modal, Popover |
 
-> Avoid over-using shadows. Most elements need no shadow; reserve them for clear elevation changes.
+### Animation Standards
 
-### 5.2 Animation Standards
+**Transition Defaults**:
+- Duration: 200ms (micro-interactions), 300ms (larger elements), 500-800ms (page entrances)
+- Easing: `cubic-bezier(0.16, 1, 0.3, 1)` (preferred) or `ease-out`
+- Properties: Animate only `transform` and `opacity` for performance
 
-**Transition Configuration**:
-```css
-transition: all 0.2s ease-out; /* Default */
-transition: all 0.3s ease-out; /* Slower, for larger elements */
-```
+**Motion Priority** (from highest to lowest impact):
+1. Page load: Staggered reveals with `animation-delay`
+2. Scroll-triggered: Elements animate on viewport entry
+3. Hover / interaction: Tactile responses (lifts, scale, color shifts)
+4. State transitions: Modal opens, tab switches
 
-**Common Animations**:
-- **Hover Lift**: `hover:-translate-y-0.5 hover:shadow-lg`
-- **Click Scale**: `active:scale-95`
-- **Fade In**: `transition-opacity duration-200`
+### Animation Principles
 
-### 5.3 Animation Principles
-
-- ✅ All interactive elements should have transition effects
-- ✅ Keep duration between 150-300ms
-- ✅ Use `ease-out` or `ease-in-out`
-- ❌ Avoid excessively long animations (> 500ms)
-- ❌ Avoid abrupt changes without transitions
+- ✅ Orchestrate page load animations — elements enter with purpose
+- ✅ Hover states should surprise (not just color darkening)
+- ✅ Use custom easing curves
+- ❌ Avoid everything animating at once (no orchestration)
+- ❌ Avoid animations that delay content readability
 
 ---
 
-## 7. Components
+## 7. Component Registry
 
-### 6.1 Button
+> **Key concept**: Component implementations live in the project code, not in this spec. This registry tells you WHAT exists and WHERE to find it. To understand HOW a component works, read its source file directly.
 
-**Style Variants**:
+### How to Use This Registry
 
-| Variant | Class Names | Usage |
+1. **Before implementing a feature**: Check this registry for existing components that can be reused
+2. **When you need a component**: Read its source file at the listed path to understand its API (props, variants, states)
+3. **When creating a new component**: Follow the design tokens from this spec, then add the new component to this registry via `iterate`
+4. **Do not duplicate**: If a component is listed here, import and use it — do not hand-write a new version
+
+### Registry
+
+| Component | Path | Variants | States | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| **Button** | `src/components/ui/button.tsx` | primary, secondary, ghost, outline; sm, default, lg | hover, active, disabled, loading | [Icon support: leading/trailing] |
+| **Input** | `src/components/ui/input.tsx` | default | focus, error, disabled | [Includes label and error message] |
+| **Card** | `src/components/ui/card.tsx` | shadow, bordered, flat | hover | [Composable: CardHeader, CardContent] |
+| **Modal** | `src/components/ui/modal.tsx` | default | open/closed | [Overlay + scale animation] |
+| **Toast** | `src/components/ui/toast.tsx` | success, error, warning, info | entering, visible, exiting | [Auto-dismiss 3-5s] |
+| **Select** | `src/components/ui/select.tsx` | default | focus, error, disabled, open | [Dropdown with search] |
+| **Checkbox** | `src/components/ui/checkbox.tsx` | default | checked, unchecked, disabled | [Custom styled] |
+| **Radio** | `src/components/ui/radio.tsx` | default | checked, unchecked, disabled | [Custom styled] |
+| **Switch** | `src/components/ui/switch.tsx` | default | on, off, disabled | [Animated toggle] |
+| **Alert** | `src/components/ui/alert.tsx` | success, error, warning, info | — | [Icon + dismissible] |
+| ... | ... | ... | ... | ... |
+
+> This is a living document. Add new components via `iterate` whenever a new reusable component is created.
+
+### Library Component Mapping (only for component library solutions)
+
+| Common Name | Library Component | Import Path |
 | :--- | :--- | :--- |
-| **Primary** | `bg-primary text-primary-foreground` | Primary action |
-| **Secondary** | `bg-secondary text-secondary-foreground` | Secondary action |
-| **Ghost** | `bg-transparent text-foreground hover:bg-secondary` | Lightweight action |
-| **Outline** | `border border-primary text-primary bg-transparent` | Cancel action |
+| Button | [e.g., `<Button>`] | [e.g., `@/components/ui/button`] |
+| Input | [e.g., `<Input>`] | [e.g., `@/components/ui/input`] |
+| ... | ... | ... |
 
-**Size Variants**:
-
-| Size | Class Name | Padding | Font Size |
-| :--- | :--- | :--- | :--- |
-| **Small** | `btn-sm` | `px-3 py-1.5` | `text-sm` |
-| **Default** | `btn` | `px-4 py-2` | `text-sm` |
-| **Large** | `btn-lg` | `px-6 py-3` | `text-base` |
-
-**States**:
-- Normal: Default styles
-- Hover: Background darkened 10%, slight lift
-- Active: Background darkened 20%, slight scale down
-- Disabled: `opacity-50 cursor-not-allowed`
-
-**Code Example**:
-```tsx
-<button className="bg-primary text-white px-4 py-2 rounded-lg hover:-translate-y-0.5 hover:shadow-lg transition-all active:scale-95">
-  Primary Button
-</button>
-```
+> Not required for **custom solutions**.
 
 ---
 
-### 6.2 Form Controls
+## 8. Atmosphere & Visual Details
 
-#### Input
+### Background Treatments
 
-**Base Styles**:
-```tsx
-className="bg-white border border-gray-300 rounded-lg px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-```
+Document the atmospheric techniques used in this project:
 
-**States**:
-- Normal: `border-gray-300`
-- Focus: `ring-2 ring-primary`
-- Error: `border-red-500 ring-2 ring-red-500`
-- Disabled: `bg-gray-100 text-gray-400 cursor-not-allowed`
+| Technique | Implementation | Where Used |
+| :--- | :--- | :--- |
+| [e.g., Grain texture] | [e.g., CSS pseudo-element with SVG noise] | [e.g., Page backgrounds] |
+| [e.g., Gradient mesh] | [e.g., Multi-point radial gradients] | [e.g., Hero section] |
+| [e.g., Radial highlight] | [e.g., Radial gradient as ambient light] | [e.g., Dark theme backgrounds] |
 
-#### Select
+### Shared Visual Utilities
 
-Maintains the same styles as Input, with an arrow icon on the right side.
-
-#### Checkbox / Radio
-
-**Styles**:
-- Size: 16x16px or 20x20px
-- Border radius: Checkbox uses `rounded`, Radio uses `rounded-full`
-- Checked state: Background uses `primary`
-- Focus state: Outer ring
+| Utility | Path / Class | Description |
+| :--- | :--- | :--- |
+| [e.g., Grain overlay] | [e.g., `src/components/ui/grain.tsx` or `.grain-overlay` class] | [e.g., Adds subtle noise texture] |
+| [e.g., Section divider] | [e.g., `src/components/ui/divider.tsx`] | [e.g., Gradient line between sections] |
 
 ---
 
-### 6.3 Feedback Components
-
-#### Toast
-
-**Position**: Top-right or top-center
-
-**Styles**:
-```tsx
-className="bg-white rounded-lg shadow-lg px-4 py-3 border-l-4 border-[functional-color]"
-```
-
-**Types**:
-- Success: Green left border
-- Error: Red left border
-- Warning: Yellow left border
-- Info: Blue left border
-
-**Animation**: Slides in from the right, stays for 3-5 seconds, then fades out
-
-#### Alert
-
-**Styles**:
-```tsx
-className="bg-[functional-color]-50 border border-[functional-color]-200 rounded-lg px-4 py-3 text-[functional-color]-800"
-```
-
-#### Modal
-
-**Overlay**: `bg-black/50 backdrop-blur-sm`
-**Container**: `bg-white rounded-2xl shadow-2xl p-6`
-**Animation**: Fade in + scale (from 0.95 to 1)
-
----
-
-### 6.4 Card
-
-**Base Styles**:
-```tsx
-className="bg-white rounded-2xl shadow p-6"
-```
-
-**Hover Effect**:
-```tsx
-className="hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
-```
-
-**Variants**:
-- Borderless with shadow: `shadow`
-- With border: `border border-gray-200`
-- Flat: `bg-gray-50` (no shadow)
-
----
-
-### 6.5 Navigation Components
-
-#### Tabs
-
-**Container**: `border-b border-gray-200`
-**Tab**:
-- Inactive: `text-gray-600 hover:text-gray-900`
-- Active: `text-primary border-b-2 border-primary`
-
-#### Breadcrumb
-
-**Styles**: `text-sm text-gray-600`
-**Separator**: `/` or `>` or arrow icon
-**Current Page**: `text-foreground font-medium`
-
-#### Pagination
-
-**Styles**:
-- Buttons: Same as Secondary Button
-- Current page: Uses Primary Button style
-
----
-
-### 6.6 Other Components
-
-#### Custom Scrollbar
-
-```css
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-```
-
-#### Loading
-
-**Spinner**:
-- Size: 16px (small), 24px (medium), 32px (large)
-- Color: `primary`
-- Animation: Rotate, 1s linear infinite
-
-**Skeleton**:
-- Background: `bg-gray-200`
-- Animation: Left-to-right gradient sweep effect
-
-#### Progress Bar
-
-- Background: `bg-gray-200 rounded-full`
-- Progress bar: `bg-primary rounded-full`
-- Height: 4-8px
-
----
-
-## 8. Don'ts
+## 9. Don'ts
 
 The following practices should be **avoided**:
 
 ### Colors
-- ❌ Using too many colors (more than 3 primary colors)
+- ❌ Hardcoding hex values instead of using CSS variables
 - ❌ Insufficient color contrast (text-to-background contrast ratio < 4.5:1)
 - ❌ Using functional colors in non-functional contexts (e.g., red as decoration)
+- ❌ Using generic AI color schemes (purple-on-white, teal/coral)
 
 ### Typography
+- ❌ Using generic fonts (Inter, Roboto, Arial, Helvetica) as primary choices
 - ❌ Font size too small (< 12px)
 - ❌ Line height too small (< 1.2)
-- ❌ Using more than 4 font weights
-- ❌ All-caps text (reduces readability)
+- ❌ Using more than 2 font weights by default
 
 ### Spacing
 - ❌ Using spacing values that don't conform to the grid (e.g., 7px, 13px)
-- ❌ Spacing too small, causing crowded elements
-- ❌ Inconsistent spacing (different spacing between elements at the same level)
+- ❌ Inconsistent spacing between elements at the same level
 - ❌ Over-specifying: defining more than 4 named spacing tokens when fewer suffice
 
-### Border Radius
-- ❌ Border radius too small (< 4px)
-- ❌ Inconsistent border radius for components of the same type
-- ❌ Mixing sharp and rounded corners (maintain a unified style)
-- ❌ Over-specifying: defining more than 3 border-radius levels when fewer suffice
+### Components
+- ❌ Duplicating a component that already exists in the registry
+- ❌ Overriding library component styles with raw CSS (use theme system)
+- ❌ Writing inline styles instead of using design tokens
+
+### Layout
+- ❌ Every section using the same centered-container + equal-column layout
+- ❌ No variation in section spacing or visual rhythm
+- ❌ Plain solid backgrounds for every section (add atmosphere)
 
 ### Animations
-- ❌ Animation duration too long (> 500ms)
 - ❌ No transition effects (abrupt changes)
-- ❌ Overusing animations (impacts performance)
+- ❌ Everything animating at once with no orchestration
+- ❌ Animations that delay critical content
 
-### Other
-- ❌ Click/tap target too small (< 32x32px)
-- ❌ Missing focus states
+### Accessibility
+- ❌ Click/tap target too small (< 32x32px desktop, < 44x44px mobile)
+- ❌ Missing focus states on interactive elements
 - ❌ Missing hover feedback
-
----
-
-## 9. Code Examples
-
-> **Note**: The examples below vary depending on the project's component solution.
-> - **Custom solution**: Uses native HTML + Tailwind CSS (as shown below)
-> - **Component library solution**: Uses library components + project theme (refer to import paths in the component mapping table)
-
-### Complete Button Component Example
-
-```tsx
-// Primary Button
-<button className="bg-primary text-white px-4 py-2 rounded-lg font-medium hover:-translate-y-0.5 hover:shadow-lg active:scale-95 transition-all duration-200">
-  Primary Button
-</button>
-
-// Secondary Button
-<button className="bg-gray-100 text-gray-900 px-4 py-2 rounded-lg font-medium hover:bg-gray-200 active:scale-95 transition-all duration-200">
-  Secondary Button
-</button>
-
-// Ghost Button
-<button className="bg-transparent text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 active:scale-95 transition-all duration-200">
-  Ghost Button
-</button>
-```
-
-### Complete Card Component Example
-
-```tsx
-<div className="bg-white rounded-2xl shadow p-6 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-  <h3 className="text-xl font-semibold text-foreground mb-2">
-    Card Title
-  </h3>
-  <p className="text-sm text-body mb-4">
-    Card description goes here.
-  </p>
-  <button className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all">
-    Action
-  </button>
-</div>
-```
-
-### Complete Form Example
-
-```tsx
-<form className="space-y-4">
-  <div>
-    <label className="block text-sm font-medium text-foreground mb-1">
-      Email
-    </label>
-    <input
-      type="email"
-      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-      placeholder="your@email.com"
-    />
-  </div>
-
-  <div>
-    <label className="block text-sm font-medium text-foreground mb-1">
-      Password
-    </label>
-    <input
-      type="password"
-      className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-      placeholder="••••••••"
-    />
-  </div>
-
-  <button type="submit" className="w-full bg-primary text-white px-4 py-3 rounded-lg font-medium hover:shadow-lg transition-all">
-    Sign In
-  </button>
-</form>
-```
 
 ---
 
@@ -545,6 +348,7 @@ The following practices should be **avoided**:
 - Mobile First
 - Use Tailwind's responsive prefixes (e.g., `md:text-lg`)
 - Key breakpoints: `md` (768px) and `lg` (1024px)
+- Minimum tap target: 44x44px on mobile
 
 ---
 
@@ -567,11 +371,11 @@ The following practices should be **avoided**:
 ### v1.0 (Current Date)
 - Initial version
 - Spec extracted and generated from UI Demo
-- Defined complete specs for colors, typography, spacing, border radius, components, etc.
+- Component Registry created with [N] components
 
 ---
 
 **Spec Maintenance**:
 - Review and update regularly (recommended quarterly)
-- This document must be updated when new components or styles are added
+- When new components are created, add them to the Component Registry via `iterate`
 - Use `/ui-design-workflow iterate` for spec iterations

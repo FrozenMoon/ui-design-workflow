@@ -1,10 +1,12 @@
 # Component Library Template
 
-Template structure for Demo mode Tab 2 (Component Library). Applicable to both custom components and component library approaches.
+Template structure for Demo mode Tab 2 (Component Library).
+
+> **Key principle**: The showcase page imports and displays **real project components** — it does NOT write separate inline implementations. Components are created as real files first, then the showcase page renders them.
 
 ## Existing Project Components
 
-For projects that already have components, **scan and include them first** before adding template components.
+For projects that already have components, **scan and include them first** before creating new components.
 
 ### Scan Strategy
 
@@ -16,9 +18,9 @@ For projects that already have components, **scan and include them first** befor
 
 - **Preserve existing components as-is** — do not modify their code during the demo phase
 - Display existing components in a dedicated "Project Components" section at the top of Tab 2
-- Label each as "Existing" to distinguish from newly generated template components
-- If an existing component overlaps with a template component below (e.g., project already has a Button), show the existing version and skip the template version
-- New template components should match the existing project's visual style
+- Label each as "Existing" to distinguish from newly created components
+- If an existing component overlaps with a template component below (e.g., project already has a Button), show the existing version and skip creating a new one
+- New components should match the existing project's visual style
 
 ### Assessment Notes
 
@@ -29,175 +31,218 @@ After displaying existing components, include a brief assessment:
 
 ---
 
-## Template Component Sections
+## Demo Phase: Create Components Then Showcase
 
-The following sections define the **minimum set** of components for a complete showcase. Skip any section where the project already has an equivalent component (shown above).
+The demo phase produces TWO outputs:
 
+### Output 1: Real Component Files
 
-### 1. Color System
-- Primary colors (Primary, Secondary, Background)
-- Text color hierarchy (Heading, Body, Muted)
-- Brand accent colors (Positive/Negative, used for business comparisons)
-- System feedback colors (Success, Error, Warning, Info)
+Create actual reusable component files in the project. These are the **single source of truth** for each component's implementation.
 
-### 2. Typography System
-- Display / H1 / H2 / H3 / Body / Small / Caption
-- Font weight variants
-- Line height examples
-
-### 3. Buttons
-- Styles: Primary, Secondary, Ghost, Outline
-- Sizes: Small, Medium, Large
-- States: Normal, Hover, Active, Disabled
-- Icon variants
-
-### 4. Form Components
-- Input (text input)
-- Textarea (multiline text)
-- Select (dropdown)
-- Checkbox - custom styled
-- Radio - custom styled
-- Switch (toggle)
-- States: Normal, Focus, Error, Disabled
-
-### 5. Feedback Components
-- Toast (brief notification) - Success, Error variants
-- Alert (alert message) - Success, Error, Warning, Info
-- Modal (dialog)
-
-### 6. Cards
-- Basic card (bordered)
-- Shadow card
-- Interactive card
-
-### 7. Loading States
-- Spinner (loading indicator)
-- Skeleton (placeholder)
-- Progress Bar
-
-## Component Display Principles
-
-Each component should display:
-1. All variants (styles, sizes)
-2. All states (normal, hover, disabled, etc.)
-3. Interactive examples (e.g., a button to open a Modal)
-
-## Code Structure Example
-
-```tsx
-<section className="component-section">
-  <h2>3. Buttons</h2>
-
-  <div className="subsection">
-    <h3>Style Variants</h3>
-    <div className="examples">
-      <button className="primary">Primary</button>
-      <button className="secondary">Secondary</button>
-      <button className="ghost">Ghost</button>
-      <button className="outline">Outline</button>
-    </div>
-  </div>
-
-  <div className="subsection">
-    <h3>Sizes</h3>
-    <div className="examples">
-      <button className="small">Small</button>
-      <button className="medium">Medium</button>
-      <button className="large">Large</button>
-    </div>
-  </div>
-
-  <div className="subsection">
-    <h3>States</h3>
-    <div className="examples">
-      <button>Normal</button>
-      <button className="hover">Hover</button>
-      <button disabled>Disabled</button>
-    </div>
-  </div>
-</section>
+**File location** (adapt to project structure):
+```
+src/components/ui/
+├── button.tsx        # Button with variants and states
+├── input.tsx         # Text input with label and error
+├── card.tsx          # Card with composable sub-components
+├── modal.tsx         # Modal with overlay and animation
+├── toast.tsx         # Toast notification system
+├── select.tsx        # Dropdown select
+├── checkbox.tsx      # Custom styled checkbox
+├── radio.tsx         # Custom styled radio
+├── switch.tsx        # Animated toggle switch
+├── alert.tsx         # Alert with semantic colors
+├── skeleton.tsx      # Loading skeleton
+└── spinner.tsx       # Loading spinner
 ```
 
-## Custom Form Controls
+**Each component file must**:
+- Export a reusable component with typed props
+- Support all defined variants (via `variant` prop or similar)
+- Support all defined states (disabled, loading, error, etc.)
+- Use design tokens (CSS variables) — never hardcode colors/spacing
+- Include appropriate transitions and animations
+- Be accessible (keyboard navigation, ARIA attributes, focus states)
 
-Checkbox and Radio should use custom styles with the native controls hidden:
+### Output 2: Showcase Page
+
+The showcase page **imports** the components from Output 1 and renders them in all variants/states.
+
+**Showcase file location**:
+- Next.js: `app/ui-showcase/page.tsx`
+- Vite: `src/pages/UIShowcase.tsx`
+
+---
+
+## Showcase Sections
+
+The following sections define the **minimum set** for a complete showcase. Skip any section where the project already has an equivalent component.
+
+### 1. Color System
+- Background colors (main background, surface/card backgrounds)
+- Primary brand color with light/dark variants
+- Accent colors (1-2 sharp accents for CTAs and emphasis)
+- Text color hierarchy (Primary, Secondary, Muted)
+- System feedback colors (Success, Error, Warning, Info)
+- Show colors with their CSS variable names
+
+### 2. Typography System
+- Display the chosen font pairing (heading + body font names and sources)
+- Type scale: Display / H1 / H2 / H3 / Body / Small / Caption
+- Font weight variants
+- Letter spacing and line height examples
+- Show the font pairing in action (heading + body text together)
+
+### 3. Buttons
+- Import `Button` from the real component file
+- Show all style variants: Primary, Secondary, Ghost, Outline
+- Show all sizes: Small, Medium, Large
+- Show all states: Normal, Hover, Active, Disabled, Loading
+- Show icon variants
+
+### 4. Form Components
+- Import `Input`, `Select`, `Checkbox`, `Radio`, `Switch` from real component files
+- Show all states: Normal, Focus, Error, Disabled
+
+### 5. Feedback Components
+- Import `Toast`, `Alert`, `Modal` from real component files
+- Toast: Trigger buttons to show each type (Success, Error, Warning, Info)
+- Alert: Display all types inline
+- Modal: Trigger button to open
+
+### 6. Cards
+- Import `Card` from real component file
+- Show all variants: shadow, bordered, flat
+- Show interactive hover effects
+
+### 7. Loading States
+- Import `Spinner`, `Skeleton` from real component files
+- Show size variants
+
+---
+
+## Aesthetic Requirements
+
+The showcase page itself should reflect the chosen aesthetic direction — it is a design artifact, not just a catalogue.
+
+- **Typography**: Use the project's distinctive font choices throughout. Section headings should feel designed.
+- **Layout**: Visual interest — varied section backgrounds, interesting spacing rhythms, creative grouping.
+- **Interactions**: Components should demonstrate their motion/animation design live. Hover states should be visible and interesting.
+- **Atmosphere**: Subtle background treatments (gradient, noise, pattern) matching the project's aesthetic.
+
+> **Anti-pattern**: A showcase page with a plain white background, Inter font, and components laid out in a boring grid with no visual personality.
+
+---
+
+## Code Structure Example (Showcase Page)
 
 ```tsx
-// Checkbox example
-<label className="flex items-center gap-3 cursor-pointer">
-  <div className="relative w-5 h-5">
-    <input type="checkbox" className="peer sr-only" />
-    <div className="absolute inset-0 bg-zinc-100 rounded-lg
-                    peer-checked:bg-zinc-900 transition-all" />
-    <Check className="absolute inset-0 w-3.5 h-3.5 m-auto text-white
-                      opacity-0 peer-checked:opacity-100" />
-  </div>
-  <span>Option text</span>
-</label>
+// Showcase page IMPORTS real components — does NOT rewrite them
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Card } from '@/components/ui/card'
+import { Modal } from '@/components/ui/modal'
+import { Toast } from '@/components/ui/toast'
+import { Select } from '@/components/ui/select'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Switch } from '@/components/ui/switch'
+import { Alert } from '@/components/ui/alert'
+import { Spinner } from '@/components/ui/spinner'
+import { Skeleton } from '@/components/ui/skeleton'
 
-// Radio example
-<label className="flex items-center gap-3 cursor-pointer">
-  <div className="relative w-5 h-5">
-    <input type="radio" className="peer sr-only" />
-    <div className="absolute inset-0 bg-zinc-100 rounded-full
-                    peer-checked:bg-zinc-900 transition-all" />
-    <div className="absolute inset-0 w-2 h-2 m-auto bg-white rounded-full
-                    opacity-0 peer-checked:opacity-100" />
-  </div>
-  <span>Option text</span>
-</label>
+export default function UIShowcase() {
+  return (
+    <div>
+      {/* Tab 1: Landing Page Demo (uses the same components) */}
+      {/* Tab 2: Component Library */}
+
+      <section>
+        <h2>Color System</h2>
+        {/* Color palette swatches with CSS variable names */}
+      </section>
+
+      <section>
+        <h2>Typography</h2>
+        {/* Font pairing display + type scale */}
+      </section>
+
+      <section>
+        <h2>Buttons</h2>
+        <div>
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="outline">Outline</Button>
+        </div>
+        <div>
+          <Button size="sm">Small</Button>
+          <Button size="default">Medium</Button>
+          <Button size="lg">Large</Button>
+        </div>
+        <div>
+          <Button disabled>Disabled</Button>
+          <Button loading>Loading</Button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Form Components</h2>
+        <Input label="Email" placeholder="your@email.com" />
+        <Input label="Error" error="This field is required" />
+        <Input label="Disabled" disabled />
+        <Select options={[...]} />
+        <Checkbox label="Option A" />
+        <Switch label="Enable notifications" />
+      </section>
+
+      <section>
+        <h2>Feedback</h2>
+        <Alert variant="success" message="Operation completed" />
+        <Alert variant="error" message="Something went wrong" />
+        <Button onClick={() => toast.success('Saved!')}>Show Toast</Button>
+        <Button onClick={() => setModalOpen(true)}>Open Modal</Button>
+      </section>
+
+      <section>
+        <h2>Cards</h2>
+        <Card variant="shadow">Shadow Card</Card>
+        <Card variant="bordered">Bordered Card</Card>
+        <Card variant="flat">Flat Card</Card>
+      </section>
+
+      <section>
+        <h2>Loading</h2>
+        <Spinner size="sm" />
+        <Spinner size="md" />
+        <Spinner size="lg" />
+        <Skeleton width="100%" height="20px" />
+      </section>
+    </div>
+  )
+}
 ```
 
 ---
 
 ## Display Adjustments When Using a Component Library
 
-When a component library is selected (e.g., shadcn/ui, Ant Design, Element Plus), the display strategy for Tab 2 changes as follows:
+When a component library is selected (e.g., shadcn/ui, Ant Design, Element Plus):
 
-### Display Content
+### What Changes
 
-1. **Library components**: Use the library's actual components with the project theme applied
-2. **Theme comparison**: Show library default styles vs. project-themed styles
-3. **Custom components**: Components not available in the library are still hand-coded, labeled as "Custom"
-4. **Same component sections**: All sections listed above (colors, typography, buttons, forms, etc.) are still displayed
+1. **Component files may be library-generated**: e.g., `npx shadcn@latest add button` creates the file
+2. **Theme configuration** replaces custom styling: colors/radius defined in `tailwind.config.ts` or `ConfigProvider`
+3. **Showcase imports library components**: same pattern, just different source components
+4. **Components not in the library** are still custom-built, labeled as "Custom" in the showcase
 
-### Code Structure Example (Component Library Mode)
+### What Stays the Same
 
-```tsx
-// Example using shadcn/ui (similar pattern for other libraries, with corresponding imports)
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Switch } from "@/components/ui/switch"
-import { Checkbox } from "@/components/ui/checkbox"
-
-<section className="component-section">
-  <h2>3. Buttons</h2>
-
-  <div className="subsection">
-    <h3>Style Variants</h3>
-    <div className="examples">
-      <Button variant="default">Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="outline">Outline</Button>
-    </div>
-  </div>
-
-  <div className="subsection">
-    <h3>Sizes</h3>
-    <div className="examples">
-      <Button size="sm">Small</Button>
-      <Button size="default">Medium</Button>
-      <Button size="lg">Large</Button>
-    </div>
-  </div>
-</section>
-```
+- Showcase still imports real component files (library or custom)
+- All sections (colors, typography, buttons, forms, etc.) are still displayed
+- The aesthetic requirements still apply to the showcase page itself
 
 ### Important Notes
 
-- Import paths should match the actual paths in the project
+- Import paths must match the actual paths in the project
 - Use the library's defined variant / size props; do not override with custom className
-- Components not included in the library (e.g., certain loading animations) should be custom-built and labeled as "Custom"
-- Display the library's theme configuration file contents (e.g., color/border-radius definitions in tailwind.config.ts)
+- Display the library's theme configuration (e.g., color/border-radius in tailwind.config.ts)
