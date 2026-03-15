@@ -19,9 +19,9 @@ Detailed execution flows and output formats for each command.
 - **Step 1**: Analyze the project (package.json, code structure, tech stack, project type)
 - **Step 1.5**: Scan existing components (see "Existing Component Scan" below)
 - **Step 2**: Auto-select a component solution based on the analysis
-- **Step 3**: ⛔ **Confirmation Round 1** — Ask user style preferences one at a time using `AskUserQuestion` (see below). DO NOT proceed without answers.
-- **Step 4**: Design Thinking — choose aesthetic direction based on user's answers from Step 3
-- **Step 4.5**: ⛔ **Confirmation Round 2** — Present design direction to user and WAIT for confirmation
+- **Step 3**: ⛔ **Visual Style Preview** — Generate `style-preview.html` with 3 style previews. User opens in browser, picks one (see "Style Confirmation" below). DO NOT proceed without choice.
+- **Step 3.5**: Ask theme mode (light / dark / toggle)
+- **Step 4**: Design Thinking — refine the user's chosen direction with detailed tokens
 - **Step 5**: Create real component files
 - **Step 6**: Create showcase page that imports and displays the components
 - **Step 7**: Tab 1 Landing Page also uses the same components
@@ -133,89 +133,70 @@ Atmosphere: [e.g., "Subtle grain texture, soft radial highlights, staggered entr
 Please confirm this direction, or tell me what you'd like to adjust.
 ```
 
-### Confirmation Round 1: Style Preferences (BLOCKING)
+### Style Confirmation: Visual Preview Page (BLOCKING)
 
-> ⛔ **BLOCKING CHECKPOINT**: You MUST ask the following questions and WAIT for the user's answers. DO NOT assume defaults. DO NOT skip. DO NOT proceed to design thinking or code generation without the user's answers.
+> ⛔ **BLOCKING CHECKPOINT**: You MUST generate a visual preview page and WAIT for the user to pick a style. DO NOT assume defaults. DO NOT skip. DO NOT proceed to component creation without the user's confirmed choice.
 
-**Component solution is NOT asked here** — it is auto-determined from the project analysis in Step 2. Do NOT ask users to choose a component solution.
+**Component solution is NOT asked here** — it is auto-determined from the project analysis in Step 2.
 
-**How to ask**: Use whichever method is available in your environment:
-- If you have an interactive question tool (e.g., `AskUserQuestion`): ask questions **one at a time** using the interactive UI with selectable options.
-- If you do NOT have an interactive tool: output all questions in a **single structured text message** (see text fallback template below), then STOP and WAIT for the user to reply.
+#### Step 1: Generate Preview Page
 
-**Question sequence**:
+Read the [style preview template](../assets/style-preview-template.md) and generate `style-preview.html` in the project root. The file contains 3 style direction previews, each with:
+- Real fonts loaded from Google Fonts CDN
+- Actual color palette rendered as color blocks
+- A mini Hero section (headline + body text + CTA button) rendered in the real fonts and colors
+- Background atmosphere (gradient, texture, etc.)
+- Border radius shown on buttons and card edges
 
-#### Q1: Aesthetic Style Direction
-- Provide 3 dynamically generated style options
-- Each option: style name + one-sentence vibe description (e.g., "Editorial — Magazine-like typographic tension, bold headlines with refined body text")
-- Options are generated from project type and context. Offer 3 **diverse** directions (don't offer 3 variants of the same style)
-- The user can always describe their own direction
+**Rules for generating the 3 options**:
+- 3 **diverse** directions — don't offer 3 variants of the same style
+- Real Google Fonts — NEVER Inter, Roboto, Arial, or Helvetica as primary heading fonts
+- Context-aware — options should make sense for the project type
+- Use the actual project name in sample headlines if available
 
-#### Q2: Theme Mode
-- Fixed options:
-  - Single theme (light) — Clean, bright interface with one color scheme
-  - Single theme (dark) — Dark background with light text, modern feel
-  - Light + Dark toggle — User can switch between light and dark modes
-
-#### Q3: Specific Preferences (optional)
-- Ask if user has any preferences for colors, fonts, mood, or reference websites
-- User can say "none" or provide details
-
-**Text fallback template** (for agents without interactive UI):
+#### Step 2: Tell User to Open Preview
 
 ```
-🎯 Before I start designing, I need to confirm your style preferences:
+🎨 Style preview generated! Open in your browser to compare 3 directions:
+   [file path to style-preview.html]
 
-1️⃣ Aesthetic Style Direction
-   A. [Style A] — [One-sentence vibe description]
-   B. [Style B] — [Description]
-   C. [Style C] — [Description]
-   D. Or describe your own direction
+   A. [Style Name] — [One-sentence description]
+   B. [Style Name] — [Description]
+   C. [Style Name] — [Description]
 
-2️⃣ Theme Mode
-   A. Single theme (light)
-   B. Single theme (dark)
-   C. Light + Dark toggle
-
-3️⃣ Any specific preferences? (colors, fonts, mood, reference websites, etc.)
-
-Please reply with your choices (e.g., "1A, 2C, 3: no preferences").
+Reply with your choice:
+- A / B / C to select a direction
+- "new batch" to regenerate 3 new options
+- Or describe your own style direction
 ```
 
-After collecting all answers, proceed to Design Thinking (Step 4) and then Confirmation Round 2.
+STOP and WAIT for user response.
 
----
+#### Step 3: Handle User Response
 
-### Confirmation Round 2: Design Direction (BLOCKING)
+| User says | Action |
+|-----------|--------|
+| "A" / "B" / "C" | Use that direction. Proceed to theme mode question. |
+| "new batch" / "换一批" | Regenerate 3 new options, overwrite `style-preview.html`, show again. |
+| "A but with darker colors" | Adjust the selected option, regenerate preview, show again. |
+| Describes a custom style | Generate 1 targeted preview based on description, show for confirmation. |
 
-After receiving the user's answers from Round 1, execute the Design Thinking process (see above) and present the result. The design direction MUST be informed by the user's chosen aesthetic style from Round 1.
+#### Step 4: Theme Mode (after style is confirmed)
 
-Present the design direction and ask for confirmation:
+Ask about theme mode separately (functional choice, no visual preview needed):
+- Single theme (light)
+- Single theme (dark)
+- Light + Dark toggle
 
-```
-🎨 Design Direction (based on your chosen style: "[User's style choice]"):
+Use interactive UI if available, or ask via text.
 
-Aesthetic: [Specific direction]
-Memorable Element: [The ONE thing people will remember]
-Heading Font: [Font name] — [Why this font fits the chosen style]
-Body Font: [Font name] — [Why this font pairs well]
-Color Mood: [Palette description that matches the chosen aesthetic]
-Border Radius: [Inferred from style]
-Atmosphere: [Background treatments, motion, visual depth]
+#### Step 5: Clean Up
 
-Does this direction work for you? Reply "OK" to proceed, or tell me what to adjust.
-```
+After user confirms both style direction and theme mode:
+1. Delete `style-preview.html` from project root
+2. Proceed to component creation with the confirmed direction
 
-- If using interactive UI: present as a question with "Looks good, proceed" / "Adjust some aspects" options.
-- If using text: output the block above and STOP. WAIT for user reply before writing any code.
-
-**Rules for generating content**:
-- ALL choices (fonts, colors, atmosphere) must be coherent with the user's aesthetic style from Round 1
-- Typography must be distinctive — NEVER Inter, Roboto, Arial, or Helvetica as primary choices
-- Color palette must evoke a specific emotion — if you can't name the feeling, it's too generic
-- Atmosphere must complement the aesthetic, not feel pasted on
-
-**DO NOT write any component code until the user confirms the direction.**
+**DO NOT write any component code until the user confirms both the style direction and theme mode.**
 
 ### Component Creation Step
 

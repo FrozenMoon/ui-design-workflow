@@ -69,14 +69,11 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
    - Auto-detect existing library dependencies and continue with them
    - If user already specified a library in the command, use it directly
    - **Do NOT ask the user to choose** — use the recommended solution by default. Advanced users will override if needed.
-3. **⛔ Confirmation Round 1 (BLOCKING)** — Ask the user about: aesthetic style direction → theme mode → specific preferences. Use interactive UI if available, otherwise use structured text with selectable options. WAIT for user answers. See [references/modes.md](references/modes.md) for question details and text fallback template.
-4. **Design Thinking** (CRITICAL — read [references/frontend-aesthetics.md](references/frontend-aesthetics.md)):
-   - Based on **user's confirmed style direction from Round 1**, choose a bold aesthetic direction
+3. **⛔ Visual Style Preview (BLOCKING)** — Generate `style-preview.html` (standalone HTML, opens in any browser) with 3 diverse style direction previews. Each preview shows real fonts (Google Fonts), actual color palette, a mini Hero section, and atmosphere effects. User opens in browser, picks A/B/C, asks for a new batch, or describes their own direction. Then ask theme mode (light/dark/toggle). **DO NOT proceed without user's confirmed choice.** See [assets/style-preview-template.md](assets/style-preview-template.md) for the HTML template.
+4. **Design Thinking** (read [references/frontend-aesthetics.md](references/frontend-aesthetics.md)):
+   - Refine the user's chosen style direction into detailed design tokens
    - Define the memorable element — what makes this design unforgettable?
-   - Select distinctive typography (NEVER Inter/Roboto/Arial as primary font)
-   - Build an emotional color palette (dominant + accent model, avoid AI cliches)
-   - Plan atmospheric backgrounds and visual details — all coherent with the user's chosen style
-   - **⛔ Confirmation Round 2 (BLOCKING)** — Present the design direction (fonts, colors, atmosphere) for confirmation. All choices informed by Round 1. **DO NOT write code until user confirms.** See [references/modes.md](references/modes.md).
+   - Finalize typography, color palette, atmospheric details — all coherent with the confirmed visual preview
 5. **Create real component files** (the single source of truth):
    - Set up design tokens as CSS variables
    - Create each component as a real file in `src/components/ui/`
