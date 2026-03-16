@@ -38,7 +38,7 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
 **Output**:
 - **Real component files** in `src/components/ui/` (reusable across the project)
 - **Two showcase pages** (separate pages, NOT tabs):
-  - **Landing Page Demo** (`/ui-showcase`) - Complete product page built with the real components
+  - **Product Demo** (`/ui-showcase`) - Realistic demo of the actual product, adapts to project type (see below)
   - **Component Library** (`/ui-components`) - All components rendered in various states, independently iterable
 
 **Flow selection** (auto-detect):
@@ -57,11 +57,20 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
 7. **Update agent config**: Write spec reference to CLAUDE.md / AGENTS.md
 - See [references/modes.md](references/modes.md) for detailed steps.
 
+**Product Demo adapts to project type**:
+- **Website / Landing Page** → Demo shows the actual website (hero, features, CTA, etc.)
+- **Web App / SaaS / Dashboard** → Demo shows main app screens (dashboard, list page, detail page, etc.)
+- **E-commerce** → Demo shows product listing, product detail, cart overview
+- **Blog / Content site** → Demo shows article list, article detail
+- **Portfolio** → Demo shows portfolio grid, project detail
+- If project type is unclear from code analysis, **ask the user** what they are building
+
 **Flow A (from scratch):**
-1. **Project Analysis**:
+1. **Project Analysis + Product Understanding**:
    - Read `package.json` to identify framework and existing dependencies
    - Scan code directory to identify existing patterns and tech stack
-   - Determine project type (landing page, admin panel, SaaS, e-commerce, etc.)
+   - Determine project type (website, web app, SaaS, e-commerce, blog, etc.)
+   - **⛔ If project type is unclear**: Ask the user what they are building (e.g., "Is this a website, a web app, a dashboard...? What are the main pages/features?"). This determines what the demo page will show.
    - **Scan existing components**: Find all components in the project, assess their consistency
 2. **Present findings and auto-select component solution**:
    - Show existing component inventory and consistency assessment to user
@@ -80,7 +89,7 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
    - Components support all variants, states, transitions, and accessibility
    - Skip components that already exist in the project
 6. **Create two showcase pages** (separate pages, NOT tabs):
-   - **Landing Page Demo** (`/ui-showcase`): Product page built with real components.
+   - **Product Demo** (`/ui-showcase`): Realistic demo adapted to the project type — website shows the website, app shows main app screens, etc. Built with real components.
    - **Component Library** (`/ui-components`): All components in every variant/state.
    - Both pages share a **navigation bar** with links to each other.
    - **Include existing project components** in Component Library page (do not modify them)
@@ -96,10 +105,10 @@ Supports both custom components and component libraries (shadcn/ui, Ant Design, 
 
 **Output locations**:
 - Components: `src/components/ui/*.tsx`
-- Landing Page Demo (Next.js): `app/ui-showcase/page.tsx` | (Vite): `src/pages/UIShowcase.tsx`
+- Product Demo (Next.js): `app/ui-showcase/page.tsx` | (Vite): `src/pages/UIShowcase.tsx`
 - Component Library (Next.js): `app/ui-components/page.tsx` | (Vite): `src/pages/UIComponents.tsx`
 
-**Templates**: See [assets/website.md](assets/website.md) and [assets/components.md](assets/components.md)
+**Templates**: See [assets/components.md](assets/components.md) for component library structure
 **Library guide**: See [assets/library-guide.md](assets/library-guide.md)
 
 ---
@@ -223,8 +232,9 @@ ui-design-workflow/
 ├── SKILL.md              # This file (overview)
 ├── README.md             # User documentation
 ├── assets/
-│   ├── website.md        # Landing page template structure
+│   ├── website.md        # Landing page reference (NOT used in demo flow — AI designs freely)
 │   ├── components.md     # Component library template
+│   ├── style-preview-template.md  # Visual style preview page (HTML + server)
 │   ├── design-principles.md  # UI design principles (references aesthetics guide)
 │   ├── spec-template.md  # Spec document template
 │   └── library-guide.md  # Component library integration guide

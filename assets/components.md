@@ -66,15 +66,15 @@ src/components/ui/
 
 The demo phase produces **two separate pages** (NOT tabs on a single page):
 
-1. **Landing Page Demo** — A real product landing page built with the components. Looks and feels like a finished product. Includes a subtle navigation link to the Component Library page.
-2. **Component Library** — All components rendered in every variant/state. A standalone reference page that can be iterated on independently. Includes a link back to the Landing Page Demo.
+1. **Product Demo** — A realistic demo adapted to the project type (website → website demo, app → main app screens, dashboard → dashboard UI, etc.). Looks and feels like a finished product. Includes a navigation link to the Component Library page.
+2. **Component Library** — All components rendered in every variant/state. A standalone reference page that can be iterated on independently. Includes a link back to the Product Demo.
 
 **Page locations**:
 - Next.js:
-  - Landing Page Demo: `app/ui-showcase/page.tsx`
+  - Product Demo: `app/ui-showcase/page.tsx`
   - Component Library: `app/ui-components/page.tsx`
 - Vite:
-  - Landing Page Demo: `src/pages/UIShowcase.tsx`
+  - Product Demo: `src/pages/UIShowcase.tsx`
   - Component Library: `src/pages/UIComponents.tsx`
 
 **Navigation between pages**:
@@ -144,10 +144,14 @@ The showcase page itself should reflect the chosen aesthetic direction — it is
 
 ## Code Structure Examples
 
-### Landing Page Demo (`/ui-showcase`)
+### Product Demo (`/ui-showcase`)
 
 ```tsx
-// Landing page demo — a real product page built with the components
+// Product Demo — adapts to project type:
+// Website → hero, features, CTA, footer
+// Web App → dashboard, list page, detail page
+// E-commerce → product listing, product detail, cart
+// Blog → article list, article detail
 import Link from 'next/link' // or use <a> / router for Vite
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -162,6 +166,8 @@ export default function UIShowcase() {
         <Link href="/ui-showcase">Demo</Link>
         <Link href="/ui-components">Components</Link>
       </nav>
+      {/* Content below adapts to project type */}
+      {/* Website example: */}
       <HeroSection />
       <FeaturesSection />
       <UseCasesSection />
@@ -245,7 +251,7 @@ export default function UIComponents() {
 }
 ```
 
-> **CRITICAL**: Landing Page Demo and Component Library are **two separate pages** with mutual navigation links. Do NOT use tabs. Do NOT merge them into a single page.
+> **CRITICAL**: Product Demo and Component Library are **two separate pages** with mutual navigation links. Do NOT use tabs. Do NOT merge them into a single page.
 
 ---
 

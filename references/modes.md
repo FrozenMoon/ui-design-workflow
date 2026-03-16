@@ -16,15 +16,14 @@ Detailed execution flows and output formats for each command.
 
 **Flow A: From Scratch**
 - User has no existing spec, project has little or no existing UI code
-- **Step 1**: Analyze the project (package.json, code structure, tech stack, project type)
+- **Step 1**: Analyze the project (package.json, code structure, tech stack, project type). **If project type is unclear, ask the user** what they are building and what the main pages/features are. This determines what the Product Demo will show.
 - **Step 1.5**: Scan existing components (see "Existing Component Scan" below)
 - **Step 2**: Auto-select a component solution based on the analysis
 - **Step 3**: ⛔ **Visual Style Preview** — Generate `style-preview.html` with 3 style previews. User opens in browser, picks one (see "Style Confirmation" below). DO NOT proceed without choice.
 - **Step 3.5**: Ask theme mode (light / dark / toggle)
 - **Step 4**: Design Thinking — refine the user's chosen direction with detailed tokens
 - **Step 5**: Create real component files
-- **Step 6**: Create showcase page that imports and displays the components
-- **Step 7**: Tab 1 Landing Page also uses the same components
+- **Step 6**: Create two showcase pages (Product Demo + Component Library)
 
 **Flow B: Based on Existing Spec**
 - User has an existing spec document
@@ -53,7 +52,8 @@ Analyze the user's project and present the results:
 Tech Stack: [Next.js 14 / Vite + React / Vue 3 / ...]
 Styling Solution: [Tailwind CSS / CSS Modules / SCSS / ...]
 Existing UI Library: [None / shadcn/ui / Ant Design / ...]
-Project Type: [Landing Page / Admin Dashboard / SaaS / E-commerce / ...]
+Project Type: [Website / Web App / SaaS / Dashboard / E-commerce / Blog / ...]
+Product Description: [Brief description of what this product does]
 
 Recommended Component Solution: [Solution Name]
 Recommendation Reason: [One-sentence explanation]
@@ -62,9 +62,13 @@ Other Available Options:
 1. [Option A] - [Description]
 2. [Option B] - [Description]
 3. Custom Components - Fully hand-written, maximum flexibility
-
-Please select a component solution:
 ```
+
+⛔ **If project type is unclear from code analysis** (e.g., new project with no existing pages, or code doesn't reveal intent), **ask the user**:
+- "What are you building?" (website, web app, mobile app, dashboard, e-commerce, etc.)
+- "What are the main pages or features?" (this determines what the Product Demo will show)
+
+The project type directly determines what the Product Demo page (`/ui-showcase`) will demonstrate. **Do NOT default to a landing page** — the demo must reflect the actual product.
 
 Analysis criteria can be found in [assets/library-guide.md](../assets/library-guide.md).
 
@@ -101,7 +105,7 @@ Recommendation:
 
 **Key principles**:
 - **Do not modify existing components** during the demo phase
-- Include all existing components in the Tab 2 showcase alongside new components
+- Include all existing components in the Component Library page alongside new components
 - Only suggest modifications for severe issues (accessibility violations, broken layouts); present as recommendations, not automatic changes
 - Record existing component inventory for the spec phase to reference
 - New components should match the existing project's visual patterns (not the other way around)
@@ -220,7 +224,13 @@ After design direction is confirmed, create real component files:
 
 After component files are created, build **two separate pages** that import them:
 
-1. **Landing Page Demo** (`/ui-showcase`): A real product page built with the components.
+1. **Product Demo** (`/ui-showcase`): A realistic demo of the actual product, adapted to the project type:
+   - **Website / Landing Page** → Demo the actual website (hero, features, use cases, CTA, footer, etc.). AI designs freely — no fixed template.
+   - **Web App / SaaS / Dashboard** → Demo the main app screens (e.g., dashboard overview, list/table page, detail page). Show real layout with sidebar/topbar navigation, data displays, and interactive elements.
+   - **E-commerce** → Demo product listing grid, product detail page, cart overview.
+   - **Blog / Content site** → Demo article list, article detail with rich typography.
+   - **Portfolio** → Demo portfolio grid, project detail page.
+   - The demo should feel like a **real product**, not a generic showcase. Use realistic placeholder content that matches the product domain.
 2. **Component Library** (`/ui-components`): Import and render each component in all variants/states.
 3. Both pages share a **navigation bar** with links to each other (e.g., "Demo" / "Components" nav items). The nav bar should match the project's design style.
 4. Both pages use the **same real components** — no separate inline implementations
@@ -232,6 +242,7 @@ After component files are created, build **two separate pages** that import them
 ✅ UI Demo generated:
 
 Component Solution: [Custom / shadcn/ui / ...]
+Project Type: [Website / Web App / Dashboard / E-commerce / ...]
 
 Files created:
 📦 Components:
@@ -241,26 +252,26 @@ Files created:
 - ... (N total)
 
 📄 Pages:
-- [app/ui-showcase/page.tsx] — Landing Page Demo
+- [app/ui-showcase/page.tsx] — Product Demo
 - [app/ui-components/page.tsx] — Component Library
 
-📱 Landing Page Demo (/ui-showcase):
-- Hero, Features, Use Cases, CTA, Footer
+📱 Product Demo (/ui-showcase):
+- [Describe what the demo shows based on project type]
+  e.g., "Dashboard overview + user list page + detail page"
+  e.g., "Landing page with hero, features, CTA, and footer"
 - Built with the real components above
-- Link to Component Library in footer
 
 🎨 Component Library (/ui-components):
 - Color system, Typography
 - All 8 core components in all variants/states
 - Existing project components: [list from scan]
-- Link back to Landing Page Demo
 
 Existing Components:
 - [N] components found and included in Component Library
 - [Assessment summary: consistent / needs attention]
 
 Preview:
-- Landing Page: Visit /ui-showcase
+- Product Demo: Visit /ui-showcase
 - Component Library: Visit /ui-components
 
 You can continue adjusting colors, border radius, spacing, etc.
