@@ -139,14 +139,18 @@ Please confirm this direction, or tell me what you'd like to adjust.
 
 **Component solution is NOT asked here** — it is auto-determined from the project analysis in Step 2.
 
-#### Step 1: Generate Preview Page
+#### Step 1: Generate Preview Page + Start Server
 
-Read the [style preview template](../assets/style-preview-template.md) and generate `style-preview.html` in the project root. The file contains 3 style direction previews, each with:
-- Real fonts loaded from Google Fonts CDN
-- Actual color palette rendered as color blocks
-- A mini Hero section (headline + body text + CTA button) rendered in the real fonts and colors
-- Background atmosphere (gradient, texture, etc.)
-- Border radius shown on buttons and card edges
+1. Read the [style preview template](../assets/style-preview-template.md) and generate `style-preview.html` in the project root. The file contains 3 style direction previews, each with:
+   - Real fonts loaded from Google Fonts CDN
+   - Actual color palette rendered as color blocks
+   - A mini Hero section (headline + body text + CTA button) rendered in the real fonts and colors
+   - Background atmosphere (gradient, texture, etc.)
+   - Border radius shown on buttons and card edges
+
+2. Start the local Node.js preview server in background (see server script in the template). The server:
+   - Serves `style-preview.html` at `http://localhost:19836`
+   - Receives user's selection via POST `/choose` and writes `.style-choice` file
 
 **Rules for generating the 3 options**:
 - 3 **diverse** directions — don't offer 3 variants of the same style
@@ -157,44 +161,46 @@ Read the [style preview template](../assets/style-preview-template.md) and gener
 #### Step 2: Tell User to Open Preview
 
 ```
-🎨 Style preview generated! Open in your browser to compare 3 directions:
-   [file path to style-preview.html]
+🎨 Style preview ready! Open in your browser:
+   http://localhost:19836
 
    A. [Style Name] — [One-sentence description]
    B. [Style Name] — [Description]
    C. [Style Name] — [Description]
 
-Reply with your choice:
-- A / B / C to select a direction
-- "new batch" to regenerate 3 new options
-- Or describe your own style direction
+Click a card and press "Confirm Selection" — I'll know your choice automatically.
+Or tell me: "new batch" to regenerate / describe your own direction.
 ```
 
-STOP and WAIT for user response.
+#### Step 3: Wait for User Choice
 
-#### Step 3: Handle User Response
+Poll for `.style-choice` file (check every 2 seconds). When it appears, read the JSON content:
+```json
+{"choice": "B", "name": "Editorial"}
+```
 
-| User says | Action |
-|-----------|--------|
-| "A" / "B" / "C" | Use that direction. Proceed to theme mode question. |
-| "new batch" / "换一批" | Regenerate 3 new options, overwrite `style-preview.html`, show again. |
-| "A but with darker colors" | Adjust the selected option, regenerate preview, show again. |
-| Describes a custom style | Generate 1 targeted preview based on description, show for confirmation. |
+Alternatively, the user may reply in chat instead of clicking — handle both:
+
+| Source | Action |
+|--------|--------|
+| `.style-choice` file detected | Read choice, proceed to theme mode question. |
+| User says "A" / "B" / "C" in chat | Use that direction. Proceed to theme mode question. |
+| User says "new batch" / "换一批" | Regenerate 3 new options, overwrite `style-preview.html`. Tell user to refresh browser. |
+| User describes a custom direction | Proceed with that direction. |
 
 #### Step 4: Theme Mode (after style is confirmed)
 
-Ask about theme mode separately (functional choice, no visual preview needed):
+Ask about theme mode (functional choice, no visual preview needed):
 - Single theme (light)
 - Single theme (dark)
 - Light + Dark toggle
 
-Use interactive UI if available, or ask via text.
-
 #### Step 5: Clean Up
 
 After user confirms both style direction and theme mode:
-1. Delete `style-preview.html` from project root
-2. Proceed to component creation with the confirmed direction
+1. Kill the preview server process
+2. Delete `style-preview.html` and `.style-choice` from project root
+3. Proceed to component creation with the confirmed direction
 
 **DO NOT write any component code until the user confirms both the style direction and theme mode.**
 

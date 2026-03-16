@@ -6,11 +6,12 @@ Generate a standalone HTML file (`style-preview.html` in project root) that lets
 
 ## File Requirements
 
-- **Pure static HTML** — no framework, no build tools, no dependencies
-- **Inline CSS** — everything in one file, opens with double-click in any browser
+- **Pure static HTML** — no framework dependency, served by a lightweight Node.js server
+- **Inline CSS** — everything in one file
 - **Google Fonts CDN** — load the actual fonts so users see real typography
 - **Responsive** — 3 columns on desktop, stack vertically on mobile
 - **Temporary file** — deleted after user confirms a style direction (already in .gitignore)
+- **Agent communication** — user clicks "Confirm Selection" → POST to local server → agent auto-detects
 
 ## Page Structure
 
@@ -263,7 +264,7 @@ Generate a standalone HTML file (`style-preview.html` in project root) that lets
   <!-- Sticky status bar at bottom -->
   <div class="status-bar" id="statusBar">
     <span class="status-text" id="statusText">Click a style card to select</span>
-    <button class="copy-btn" id="copyBtn" onclick="copySelection()">Copy to Clipboard</button>
+    <button class="copy-btn" id="confirmBtn">Confirm Selection</button>
   </div>
 
   <script>
@@ -271,36 +272,46 @@ Generate a standalone HTML file (`style-preview.html` in project root) that lets
     const cards = document.querySelectorAll('.preview-card');
     const statusBar = document.getElementById('statusBar');
     const statusText = document.getElementById('statusText');
-    const copyBtn = document.getElementById('copyBtn');
+    const confirmBtn = document.getElementById('confirmBtn');
     let selected = null;
     let selectedName = '';
 
     cards.forEach(card => {
       card.addEventListener('click', () => {
-        // Remove previous selection
         cards.forEach(c => c.classList.remove('selected'));
-        // Select clicked card
         card.classList.add('selected');
         selected = card.getAttribute('data-option');
         selectedName = card.querySelector('.name').textContent;
-        // Update status bar
         statusBar.classList.add('has-selection');
-        copyBtn.textContent = 'Copy to Clipboard';
-        copyBtn.classList.remove('copied');
+        confirmBtn.textContent = 'Confirm Selection';
+        confirmBtn.classList.remove('copied');
         statusText.innerHTML =
           'Selected: <span class="status-selection">' + selected + ' — ' + selectedName + '</span>';
       });
     });
 
-    // Copy selection to clipboard — user pastes into agent
-    function copySelection() {
+    // Confirm selection — POST to local server, agent picks it up automatically
+    confirmBtn.addEventListener('click', async () => {
       if (!selected) return;
-      const text = 'I choose ' + selected + ' — ' + selectedName;
-      navigator.clipboard.writeText(text).then(() => {
-        copyBtn.textContent = 'Copied! Paste to your agent';
-        copyBtn.classList.add('copied');
-      });
-    }
+      confirmBtn.textContent = 'Sending...';
+      try {
+        const res = await fetch('/choose', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ choice: selected, name: selectedName })
+        });
+        if (res.ok) {
+          confirmBtn.textContent = '✓ Agent notified!';
+          confirmBtn.classList.add('copied');
+          statusText.innerHTML =
+            '<span class="status-selection">✓ ' + selected + ' — ' + selectedName + '</span>' +
+            ' &nbsp;·&nbsp; Your agent is continuing...';
+        }
+      } catch (e) {
+        confirmBtn.textContent = 'Error — tell agent: "' + selected + '"';
+        confirmBtn.classList.add('copied');
+      }
+    });
   </script>
 
 </body>
@@ -328,18 +339,77 @@ Each card renders a **real visual preview**, not just text descriptions:
 4. **Context-aware** — options should make sense for the project type (e.g., don't suggest "playful toy-like" for a B2B analytics dashboard)
 5. **Sample text** — use the actual project name/product in the hero preview headline if available
 
-## User Interaction Flow
+## Local Server for Agent Communication
+
+The agent starts a lightweight Node.js server that serves the preview page and receives the user's selection via POST.
+
+### Server Script
+
+The agent runs this inline (no external file needed):
+
+```bash
+node -e "
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const PORT = 19836;
+const ROOT = process.cwd();
+
+http.createServer((req, res) => {
+  // Serve the preview page
+  if (req.method === 'GET' && (req.url === '/' || req.url === '/index.html')) {
+    const html = fs.readFileSync(path.join(ROOT, 'style-preview.html'), 'utf8');
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(html);
+    return;
+  }
+
+  // Receive the user's choice
+  if (req.method === 'POST' && req.url === '/choose') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      fs.writeFileSync(path.join(ROOT, '.style-choice'), body);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ status: 'ok' }));
+    });
+    return;
+  }
+
+  res.writeHead(404);
+  res.end('Not found');
+}).listen(PORT, () => {
+  console.log('Style preview server running at http://localhost:' + PORT);
+});
+"
+```
+
+### Agent Flow
 
 ```
 1. Agent generates `style-preview.html` with 3 options
-2. Agent tells user to open the file in browser
-3. User responds:
-   - "A" / "B" / "C" → Agent proceeds with that direction
-   - "new batch" / "换一批" → Agent regenerates 3 new options, overwrites the file
-   - "I want [description]" → Agent generates 1 targeted option based on description
-   - "A but with darker colors" → Agent adjusts option A and regenerates
-4. After user confirms, Agent DELETES style-preview.html and proceeds to create components
+2. Agent starts the local server in background (port 19836)
+3. Agent tells user: "Open http://localhost:19836 to preview and select a style"
+4. Agent polls for `.style-choice` file (check every 2 seconds)
+5. When `.style-choice` appears:
+   - Read the choice: {"choice": "B", "name": "Editorial"}
+   - Kill the server process
+   - Delete `style-preview.html` and `.style-choice`
+   - Proceed with the selected direction
+6. If user says "new batch" / "换一批" in chat instead:
+   - Regenerate `style-preview.html` with 3 new options
+   - Tell user to refresh the browser
+7. If user describes a custom direction in chat:
+   - Kill the server, delete temp files
+   - Proceed with the described direction
 ```
+
+### Important Notes
+
+- Port `19836` is used to avoid conflicts with common dev server ports (3000, 5173, 8080, etc.)
+- The server MUST be killed after the user confirms (or after timeout)
+- Both `style-preview.html` and `.style-choice` MUST be deleted after use
+- If the server fails to start (port in use), fall back to asking the user to open `style-preview.html` directly and reply with their choice in chat
 
 ## Theme Mode Question
 
