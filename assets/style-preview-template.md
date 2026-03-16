@@ -57,13 +57,24 @@ Generate a standalone HTML file (`style-preview.html` in project root) that lets
 
     /* Each preview card */
     .preview-card {
-      border: 1px solid #333;
+      border: 2px solid #333;
       border-radius: 12px;
       overflow: hidden;
       background: #111;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
     .preview-card:hover {
       border-color: #555;
+      transform: translateY(-2px);
+    }
+    .preview-card.selected {
+      border-color: #fff;
+      box-shadow: 0 0 0 1px #fff, 0 8px 32px rgba(255,255,255,0.1);
+    }
+    .preview-card.selected .card-label .letter {
+      background: #22c55e;
+      color: #fff;
     }
 
     /* Card header (option label) */
@@ -120,10 +131,62 @@ Generate a standalone HTML file (`style-preview.html` in project root) that lets
     }
     .font-info span { color: #ccc; }
 
+    /* Selection status bar (sticky bottom) */
+    .status-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #111;
+      border-top: 1px solid #333;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      z-index: 100;
+      transition: background 0.2s;
+    }
+    .status-bar.has-selection {
+      background: #0a1a0a;
+      border-top-color: #22c55e;
+    }
+    .status-text {
+      color: #888;
+      font-size: 0.9rem;
+    }
+    .status-bar.has-selection .status-text {
+      color: #fafafa;
+    }
+    .status-selection {
+      color: #22c55e;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .copy-btn {
+      display: none;
+      padding: 0.5rem 1.25rem;
+      background: #22c55e;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .copy-btn:hover { background: #16a34a; }
+    .copy-btn.copied {
+      background: #666;
+      color: #fff;
+    }
+    .status-bar.has-selection .copy-btn { display: inline-block; }
+
     /* Footer instructions */
     .instructions {
       text-align: center;
       margin-top: 3rem;
+      margin-bottom: 5rem; /* space for sticky status bar */
       padding: 2rem;
       border: 1px dashed #333;
       border-radius: 8px;
@@ -142,7 +205,7 @@ Generate a standalone HTML file (`style-preview.html` in project root) that lets
   <div class="preview-grid">
 
     <!-- Option A -->
-    <div class="preview-card">
+    <div class="preview-card" data-option="A">
       <div class="card-label">
         <div class="letter">A</div>
         <div>
@@ -189,13 +252,56 @@ Generate a standalone HTML file (`style-preview.html` in project root) that lets
   </div>
 
   <div class="instructions">
-    <p><strong>Tell your agent your choice:</strong></p>
+    <p><strong>Click a card above to select, then tell your agent:</strong></p>
     <p style="margin-top: 0.5rem;">
       Reply <strong>A</strong>, <strong>B</strong>, or <strong>C</strong> &nbsp;|&nbsp;
-      Say <strong>"new batch"</strong> to regenerate &nbsp;|&nbsp;
+      Say <strong>"new batch"</strong> to regenerate 3 new options &nbsp;|&nbsp;
       Or <strong>describe</strong> your own style direction
     </p>
   </div>
+
+  <!-- Sticky status bar at bottom -->
+  <div class="status-bar" id="statusBar">
+    <span class="status-text" id="statusText">Click a style card to select</span>
+    <button class="copy-btn" id="copyBtn" onclick="copySelection()">Copy to Clipboard</button>
+  </div>
+
+  <script>
+    // Card selection interaction
+    const cards = document.querySelectorAll('.preview-card');
+    const statusBar = document.getElementById('statusBar');
+    const statusText = document.getElementById('statusText');
+    const copyBtn = document.getElementById('copyBtn');
+    let selected = null;
+    let selectedName = '';
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        // Remove previous selection
+        cards.forEach(c => c.classList.remove('selected'));
+        // Select clicked card
+        card.classList.add('selected');
+        selected = card.getAttribute('data-option');
+        selectedName = card.querySelector('.name').textContent;
+        // Update status bar
+        statusBar.classList.add('has-selection');
+        copyBtn.textContent = 'Copy to Clipboard';
+        copyBtn.classList.remove('copied');
+        statusText.innerHTML =
+          'Selected: <span class="status-selection">' + selected + ' — ' + selectedName + '</span>';
+      });
+    });
+
+    // Copy selection to clipboard — user pastes into agent
+    function copySelection() {
+      if (!selected) return;
+      const text = 'I choose ' + selected + ' — ' + selectedName;
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.textContent = 'Copied! Paste to your agent';
+        copyBtn.classList.add('copied');
+      });
+    }
+  </script>
 
 </body>
 </html>
