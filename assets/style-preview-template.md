@@ -89,39 +89,12 @@ Generate a standalone HTML file (`style-preview.html` in project root) that lets
     .card-label .name { font-weight: 600; }
     .card-label .desc { color: #888; font-size: 0.875rem; }
 
-    /* Mini hero preview area */
-    .hero-preview {
+    /* Product preview area — the main visual showcase */
+    .product-preview {
       /* Each option sets its own background, fonts, colors inline */
-      padding: 3rem 2rem;
-      min-height: 280px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      padding: 2rem;
+      min-height: 360px;
     }
-
-    /* Color palette strip */
-    .color-strip {
-      display: flex;
-      height: 3rem;
-    }
-    .color-strip div {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.625rem;
-      font-family: monospace;
-      color: rgba(255,255,255,0.7);
-    }
-
-    /* Font info */
-    .font-info {
-      padding: 1rem 1.5rem;
-      border-top: 1px solid #222;
-      font-size: 0.75rem;
-      color: #888;
-    }
-    .font-info span { color: #ccc; }
 
     /* Footer instructions */
     .instructions {
@@ -146,7 +119,7 @@ Generate a standalone HTML file (`style-preview.html` in project root) that lets
   <div class="preview-grid">
 
     <!-- Option A -->
-    <div class="preview-card" data-option="A">
+    <div class="preview-card">
       <div class="card-label">
         <div class="letter">A</div>
         <div>
@@ -154,41 +127,28 @@ Generate a standalone HTML file (`style-preview.html` in project root) that lets
           <div class="desc">[One-sentence vibe description]</div>
         </div>
       </div>
-      <div class="hero-preview" style="
+      <div class="product-preview" style="
         background: [background color/gradient];
         font-family: '[Heading Font A]', serif;
       ">
-        <h2 style="font-size: 2rem; margin-bottom: 0.5rem; color: [heading color];">
-          [Sample headline using this style]
-        </h2>
-        <p style="font-family: '[Body Font A]', sans-serif; color: [body color]; margin-bottom: 1.5rem;">
-          [One line of body text showing the font pairing]
-        </p>
-        <div>
-          <span style="
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            background: [CTA color];
-            color: [CTA text color];
-            border-radius: [border-radius for this style];
-            font-family: '[Body Font A]', sans-serif;
-            font-weight: 600;
-          ">Get Started</span>
-        </div>
-      </div>
-      <div class="color-strip">
-        <div style="background: [primary color]">[primary]</div>
-        <div style="background: [accent color]">[accent]</div>
-        <div style="background: [background color]">[bg]</div>
-        <div style="background: [text color]">[text]</div>
-      </div>
-      <div class="font-info">
-        Heading: <span>[Heading Font A]</span> &nbsp;|&nbsp; Body: <span>[Body Font A]</span> &nbsp;|&nbsp; Radius: <span>[value]</span>
+        <!--
+          Render a MINI VERSION of the user's actual product UI here.
+          The content adapts to project type:
+
+          Website → mini landing page (nav + hero headline + CTA + feature cards)
+          Dashboard → mini app layout (sidebar + top bar + stat cards + table rows)
+          E-commerce → mini product grid (product cards with prices + search bar)
+          Blog → mini article list (featured post + article cards with titles)
+
+          Use the real fonts, colors, border-radius, and atmosphere of this style.
+          Show enough UI elements (buttons, cards, inputs, nav) to convey the feel.
+          Use realistic placeholder content matching the product domain.
+        -->
       </div>
     </div>
 
-    <!-- Option B — same structure, different style -->
-    <!-- Option C — same structure, different style -->
+    <!-- Option B — same structure, different style + product preview -->
+    <!-- Option C — same structure, different style + product preview -->
 
   </div>
 
@@ -207,16 +167,29 @@ Generate a standalone HTML file (`style-preview.html` in project root) that lets
 
 ## What Each Preview Card Must Show
 
-Each card renders a **real visual preview**, not just text descriptions:
+Each card renders a **mini version of the user's actual product**, not abstract design tokens:
 
-| Element | What to render | How |
-|---------|---------------|-----|
-| **Typography** | Actual fonts from Google Fonts | `<link>` to Google Fonts CDN, apply via `font-family` |
-| **Color palette** | 4 color blocks (primary, accent, background, text) | Colored `<div>` strip at bottom of card |
-| **Mini Hero** | Headline + body text + CTA button | Rendered in the actual fonts and colors of this style |
-| **Atmosphere** | Background treatment (gradient, texture, etc.) | Applied as CSS background on the hero area |
-| **Border radius** | Shown on the CTA button and card edges | Applied via `border-radius` |
-| **Font info** | Font names + border-radius value | Text line below the color strip |
+| Element | What to show | How |
+|---------|-------------|-----|
+| **Product UI mockup** | A miniature of the real product interface | Adapt to project type (see below) |
+| **Typography** | Actual fonts from Google Fonts applied to real UI elements | `<link>` to Google Fonts CDN, apply via `font-family` |
+| **Color & atmosphere** | Background, text colors, accents visible through the UI | Applied naturally through the UI elements, not as separate swatches |
+| **Components** | Buttons, cards, inputs, navigation rendered in this style | Show enough real UI pieces to convey the overall feel |
+| **Border radius & spacing** | Visible on buttons, cards, inputs | Applied naturally — users see the shape language without labels |
+
+**Do NOT show**: color hex codes, font name labels, border-radius values, or any other design parameters. Users should judge purely by visual impression.
+
+### Product preview adapts to project type
+
+| Project type | What to render in the preview |
+|-------------|------------------------------|
+| **Website / Landing Page** | Mini nav bar + hero headline + CTA button + 2-3 feature cards |
+| **Web App / Dashboard** | Mini sidebar + top bar + stat cards + a few table rows |
+| **E-commerce** | Mini search bar + product cards grid (image + price + button) |
+| **Blog / Content** | Featured article hero + article list cards with titles + dates |
+| **Portfolio** | Project thumbnail grid + project title overlays |
+
+The preview should make the user think: *"This is roughly what my product will look like in style A vs B vs C."*
 
 ## Rules for Generating Options
 
